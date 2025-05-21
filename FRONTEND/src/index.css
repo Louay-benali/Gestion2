@@ -1,0 +1,27 @@
+@import url("@fortawesome/fontawesome-free/css/all.min.css");
+@import "tailwindcss";
+
+body {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+main {
+  background-color: #f3f4f6;
+}
+
+a {
+  font-weight: 600;
+  font-size: larger;
+}
+#a-container {
+  padding-top: 3px;
+}
+
+table {
+  font-family: "outfit", sans-serif;
+  font-size: 14px;
+}
+
+.font-style {
+  font-family: "outfit", sans-serif;
+}

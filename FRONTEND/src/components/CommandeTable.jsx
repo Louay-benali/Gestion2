@@ -100,9 +100,15 @@ const CommandeTable = () => {
       // Convertir le statut du backend au format d'affichage
       const displayStatus = getDisplayStatus(commande.statut);
       
+      // Vérifier si le magasinier correspond au terme de recherche
+      const magasinierName = commande.magasinier 
+        ? `${commande.magasinier.nom} ${commande.magasinier.prenom}`.toLowerCase()
+        : "";
+      
       return (statusFilter === "all" || displayStatus === statusFilter) &&
         (commande._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-         commande.fournisseur.toLowerCase().includes(searchTerm.toLowerCase()));
+         commande.fournisseur.toLowerCase().includes(searchTerm.toLowerCase()) ||
+         magasinierName.includes(searchTerm.toLowerCase()));
     }
   );
 
@@ -205,7 +211,7 @@ const CommandeTable = () => {
         <div className="relative w-full md:w-1/2">
           <SearchInput
             type="text"
-            placeholder="Rechercher une commande..."
+            placeholder="Rechercher par ID, fournisseur ou magasinier..."
             className="w-[400px] pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

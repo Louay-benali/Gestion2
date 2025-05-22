@@ -15,13 +15,13 @@ const mapInterventionStateToStatus = (status) => {
 const getStatusStyles = (status) => {
   switch (status) {
     case "Completé":
-      return "bg-emerald-50 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400";
+      return "bg-emerald-50 text-emerald-600";
     case "En cours":
-      return "bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400";
+      return "bg-blue-50 text-blue-600";
     case "Reporté":
-      return "bg-orange-50 dark:bg-orange-500/15 text-amber-700 dark:text-amber-400";
+      return "bg-orange-50 text-amber-700";
     default:
-      return "bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400";
+      return "bg-blue-50 text-blue-600";
   }
 };
 
@@ -142,7 +142,11 @@ const InterventionTable = () => {
               nom: `${tech.prenom} ${tech.nom}`,
             }))
           );
-        } else if (techData && techData.results && Array.isArray(techData.results)) {
+        } else if (
+          techData &&
+          techData.results &&
+          Array.isArray(techData.results)
+        ) {
           // Handle case where API returns {results: [...]} structure
           setTechniciensList(
             techData.results.map((tech) => ({
@@ -151,7 +155,7 @@ const InterventionTable = () => {
             }))
           );
         } else {
-          console.error('Unexpected techData format:', techData);
+          console.error("Unexpected techData format:", techData);
           setTechniciensList([]);
         }
       }
@@ -167,7 +171,11 @@ const InterventionTable = () => {
       if (machineResponse.ok) {
         const machineData = await machineResponse.json();
         // Check if machineData has the expected structure before using map
-        if (machineData && machineData.results && Array.isArray(machineData.results)) {
+        if (
+          machineData &&
+          machineData.results &&
+          Array.isArray(machineData.results)
+        ) {
           setMachinesList(
             machineData.results.map((machine) => ({
               id: machine._id,
@@ -183,7 +191,7 @@ const InterventionTable = () => {
             }))
           );
         } else {
-          console.error('Unexpected machineData format:', machineData);
+          console.error("Unexpected machineData format:", machineData);
           setMachinesList([]);
         }
       }
@@ -199,35 +207,50 @@ const InterventionTable = () => {
 
   // Filter interventions based on search and filters
   const filteredInterventions = interventions.filter((intervention) => {
-    const matchesSearch =
-      searchTerm === "" ||
-      (intervention._id &&
-        intervention._id.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (intervention.machineNom &&
-        intervention.machineNom
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())) ||
-      (intervention.technicienNom &&
-        intervention.technicienNom
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()));
-
-    const matchesTypeFilter =
-      filters.type === "" ||
-      (intervention.type &&
-        intervention.type.toLowerCase() === filters.type.toLowerCase());
-
-    const matchesTechFilter =
-      filters.technicien === "" ||
-      (intervention.technicien &&
-        intervention.technicien._id === filters.technicien);
-
-    return matchesSearch && matchesTypeFilter && matchesTechFilter;
+    // If there's a search term, check both machine name and technician name
+    if (searchTerm.trim() !== '') {
+      const search = searchTerm.toLowerCase().trim();
+      
+      // Check if machine name matches
+      const machineNameMatches = intervention.machineNom && 
+        intervention.machineNom.toLowerCase().includes(search);
+      
+      // Check if technician name matches
+      const technicianNameMatches = intervention.technicienNom && 
+        intervention.technicienNom.toLowerCase().includes(search);
+      
+      // If neither machine name nor technician name matches, exclude this intervention
+      if (!machineNameMatches && !technicianNameMatches) {
+        return false;
+      }
+    }
+    
+    // At this point, the intervention passes the machine name search filter
+    // Now check other filters
+    
+    // Check type filter
+    if (filters.type !== "" && intervention.type) {
+      if (intervention.type.toLowerCase() !== filters.type.toLowerCase()) {
+        return false; // Type doesn't match filter
+      }
+    }
+    
+    // Check technician filter
+    if (filters.technicien !== "" && intervention.technicien) {
+      if (intervention.technicien._id !== filters.technicien) {
+        return false; // Technician doesn't match filter
+      }
+    }
+    
+    // If we got here, the intervention passes all filters
+    return true;
   });
 
   // Handle search input change
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    console.log('Search term changed to:', value);
+    setSearchTerm(value);
   };
 
   // Handle pagination changes
@@ -279,17 +302,17 @@ const InterventionTable = () => {
       const formattedType = formatTypeForBackend(editValues.type);
 
       // Extract just the machine name from the full name (remove any ID or extra info)
-      const machineName = editValues.machine.split(' - ')[0];
-      
+      const machineName = editValues.machine.split(" - ")[0];
+
       // Extract just the last name from the full technician name
       // The backend expects just the 'nom' field, not the full name
-      const technicianName = editValues.technicien.split(' ').pop();
+      const technicianName = editValues.technicien.split(" ").pop();
 
-      console.log('Sending update with:', {
+      console.log("Sending update with:", {
         nomMachine: machineName,
         nomTechnicien: technicianName,
         type: formattedType,
-        status: editValues.status
+        status: editValues.status,
       });
 
       const response = await fetch(`http://localhost:3001/intervention/${id}`, {
@@ -309,7 +332,9 @@ const InterventionTable = () => {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(`API response error: ${response.status} - ${errorData.message || ''}`);
+        throw new Error(
+          `API response error: ${response.status} - ${errorData.message || ""}`
+        );
       }
 
       // Refresh the data
@@ -343,23 +368,23 @@ const InterventionTable = () => {
       return (
         <div
           key={intervention._id}
-          className="p-4 border rounded-lg mb-4 bg-white dark:bg-gray-800 shadow-sm"
+          className="p-4 border rounded-lg mb-4 bg-white shadow-sm"
         >
           <div className="flex justify-between items-start mb-3">
-            <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div className="text-sm font-medium text-gray-500">
               ID: {intervention._id}
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => saveEdit(intervention._id)}
-                className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
                 title="Enregistrer"
               >
                 <Save size={16} />
               </button>
               <button
                 onClick={cancelEdit}
-                className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
                 title="Annuler"
               >
                 <XCircle size={16} />
@@ -369,12 +394,12 @@ const InterventionTable = () => {
 
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-gray-500 mb-1">
                 Machine
               </label>
               <input
                 type="text"
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.machine}
                 onChange={(e) =>
                   setEditValues({ ...editValues, machine: e.target.value })
@@ -384,11 +409,9 @@ const InterventionTable = () => {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-                Type
-              </label>
+              <label className="block text-xs text-gray-500 mb-1">Type</label>
               <select
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.type}
                 onChange={(e) =>
                   setEditValues({ ...editValues, type: e.target.value })
@@ -400,12 +423,12 @@ const InterventionTable = () => {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-gray-500 mb-1">
                 Technicien
               </label>
               <input
                 type="text"
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.technicien}
                 onChange={(e) =>
                   setEditValues({ ...editValues, technicien: e.target.value })
@@ -415,11 +438,9 @@ const InterventionTable = () => {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-                Status
-              </label>
+              <label className="block text-xs text-gray-500 mb-1">Status</label>
               <select
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.status}
                 onChange={(e) =>
                   setEditValues({ ...editValues, status: e.target.value })
@@ -438,15 +459,15 @@ const InterventionTable = () => {
     return (
       <div
         key={intervention._id}
-        className="p-4 border rounded-lg mb-4 bg-white dark:bg-gray-800 shadow-sm"
+        className="p-4 border rounded-lg mb-4 bg-white shadow-sm"
       >
         <div className="flex justify-between items-start mb-3">
-          <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <div className="text-sm font-medium text-gray-500">
             ID: {intervention._id}
           </div>
           <button
             onClick={() => startEdit(intervention)}
-            className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+            className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
             title="Modifier"
           >
             <MdEdit size={18} />
@@ -455,33 +476,27 @@ const InterventionTable = () => {
 
         <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
           <div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
-              Machine
-            </div>
-            <div className="text-sm font-medium dark:text-gray-300">
-              {intervention.machineNom}
-            </div>
+            <div className="text-xs text-gray-500">Machine</div>
+            <div className="text-sm font-medium">{intervention.machineNom}</div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Date</div>
-            <div className="text-sm font-medium dark:text-gray-300">
+            <div className="text-xs text-gray-500">Date</div>
+            <div className="text-sm font-medium">
               {intervention.formattedDate}
             </div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Type</div>
-            <div className="flex items-center gap-2 text-sm font-medium dark:text-gray-300">
+            <div className="text-xs text-gray-500">Type</div>
+            <div className="flex items-center gap-2 text-sm font-medium">
               {getInterventionTypeIcon(intervention.type)}
               <span>{formatTypeDisplay(intervention.type)}</span>
             </div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
-              Status
-            </div>
+            <div className="text-xs text-gray-500">Status</div>
             <p
               className={`${getStatusStyles(
                 intervention.status
@@ -493,10 +508,8 @@ const InterventionTable = () => {
         </div>
 
         <div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
-            Technicien
-          </div>
-          <div className="text-sm font-medium dark:text-gray-300">
+          <div className="text-xs text-gray-500">Technicien</div>
+          <div className="text-sm font-medium">
             {intervention.technicienNom}
           </div>
         </div>
@@ -505,23 +518,21 @@ const InterventionTable = () => {
   };
 
   return (
-    <div className="border py-4 rounded-3xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <div className="border py-4 rounded-3xl border-gray-200 bg-white">
       <div className="px-4 md:px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-xl font-semibold dark:text-white">
-          Historique des Interventions
-        </h1>
+        <h1 className="text-xl font-semibold">Historique des Interventions</h1>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
           <SearchInput
             className="w-full sm:w-48 md:w-72"
-            placeholder="Rechercher..."
+            placeholder="Rechercher par machine ou technicien..."
             value={searchTerm}
             onChange={handleSearch}
           />
           <button
             className={`border p-2 rounded-lg flex flex-row gap-2 items-center justify-center transition-colors ${
               showFilters
-                ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
-                : "border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-200"
+                ? "bg-blue-100 border-blue-300 text-blue-700"
+                : "border-gray-300 hover:bg-gray-50"
             }`}
             onClick={() => setShowFilters(!showFilters)}
           >
@@ -533,14 +544,14 @@ const InterventionTable = () => {
 
       {/* Filter section */}
       {showFilters && (
-        <div className="px-4 md:px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <div className="px-4 md:px-5 pb-4 border-t border-gray-200 pt-4">
           <div className="flex flex-col md:flex-row flex-wrap gap-4 md:items-center">
             <div className="flex flex-col gap-1 w-full sm:w-auto">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
+              <label className="text-sm text-gray-600">
                 Type d'intervention
               </label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 value={filters.type}
                 onChange={(e) =>
                   setFilters({ ...filters, type: e.target.value })
@@ -553,11 +564,9 @@ const InterventionTable = () => {
             </div>
 
             <div className="flex flex-col gap-1 w-full sm:w-auto">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
-                Technicien
-              </label>
+              <label className="text-sm text-gray-600">Technicien</label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 value={filters.technicien}
                 onChange={(e) =>
                   setFilters({ ...filters, technicien: e.target.value })
@@ -574,7 +583,7 @@ const InterventionTable = () => {
 
             {isAnyFilterActive && (
               <button
-                className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 mt-2 md:mt-6"
+                className="flex items-center gap-1 text-sm text-red-600 hover:text-red-800 mt-2 md:mt-6"
                 onClick={resetFilters}
               >
                 <X size={14} />
@@ -585,10 +594,10 @@ const InterventionTable = () => {
         </div>
       )}
 
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-6 pb-3 px-4 md:px-7">
+      <div className="border-t border-gray-200 pt-6 pb-3 px-4 md:px-7">
         {loading ? (
           <div className="flex justify-center p-8">
-            <p className="dark:text-gray-300">Chargement des données...</p>
+            <p>Chargement des données...</p>
           </div>
         ) : error ? (
           <div className="flex justify-center p-8 text-red-500">
@@ -597,30 +606,30 @@ const InterventionTable = () => {
         ) : (
           <>
             {/* Desktop View - Table */}
-            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="overflow-x-auto custom-scrollbar">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-100 dark:border-gray-700">
-                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                    <tr className="border-b border-gray-100">
+                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                         ID Intervention
                       </th>
-                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                         Machine
                       </th>
-                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                         Type
                       </th>
-                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                         Technicien
                       </th>
-                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                         Date
                       </th>
-                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                         Status
                       </th>
-                      <th className="px-5 py-3 text-right sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-5 py-3 text-right sm:px-6 text-gray-600 text-theme-xs">
                         Actions
                       </th>
                     </tr>
@@ -630,16 +639,16 @@ const InterventionTable = () => {
                       filteredInterventions.map((intervention) => (
                         <tr
                           key={intervention._id}
-                          className="border-b border-gray-100 dark:border-gray-700"
+                          className="border-b border-gray-100"
                         >
-                          <td className="px-5 py-4 sm:px-6 text-theme-xs dark:text-gray-300">
+                          <td className="px-5 py-4 sm:px-6 text-theme-xs">
                             {intervention._id}
                           </td>
                           <td className="px-5 py-4 sm:px-6">
                             {editingId === intervention._id ? (
                               <input
                                 type="text"
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                 value={editValues.machine}
                                 onChange={(e) =>
                                   setEditValues({
@@ -651,7 +660,7 @@ const InterventionTable = () => {
                               />
                             ) : (
                               <div className="flex items-center gap-3">
-                                <span className="block text-theme-xs dark:text-gray-300">
+                                <span className="block text-theme-xs">
                                   {intervention.machineNom}
                                 </span>
                               </div>
@@ -660,7 +669,7 @@ const InterventionTable = () => {
                           <td className="px-5 py-4 sm:px-6">
                             {editingId === intervention._id ? (
                               <select
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                 value={editValues.type}
                                 onChange={(e) =>
                                   setEditValues({
@@ -675,7 +684,7 @@ const InterventionTable = () => {
                             ) : (
                               <div className="flex items-center gap-2">
                                 {getInterventionTypeIcon(intervention.type)}
-                                <span className="text-theme-sm dark:text-gray-300">
+                                <span className="text-theme-sm">
                                   {formatTypeDisplay(intervention.type)}
                                 </span>
                               </div>
@@ -685,7 +694,7 @@ const InterventionTable = () => {
                             {editingId === intervention._id ? (
                               <input
                                 type="text"
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                 value={editValues.technicien}
                                 onChange={(e) =>
                                   setEditValues({
@@ -696,18 +705,18 @@ const InterventionTable = () => {
                                 placeholder="Nom du technicien"
                               />
                             ) : (
-                              <span className="text-theme-sm dark:text-gray-300">
+                              <span className="text-theme-sm">
                                 {intervention.technicienNom}
                               </span>
                             )}
                           </td>
-                          <td className="px-5 py-4 sm:px-6 text-theme-sm dark:text-gray-300">
+                          <td className="px-5 py-4 sm:px-6 text-theme-sm">
                             {intervention.formattedDate}
                           </td>
                           <td className="px-5 py-4 sm:px-6">
                             {editingId === intervention._id ? (
                               <select
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                 value={editValues.status}
                                 onChange={(e) =>
                                   setEditValues({
@@ -737,14 +746,14 @@ const InterventionTable = () => {
                               <div className="flex justify-end gap-2">
                                 <button
                                   onClick={() => saveEdit(intervention._id)}
-                                  className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                                  className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
                                   title="Enregistrer"
                                 >
                                   <Save size={16} />
                                 </button>
                                 <button
                                   onClick={cancelEdit}
-                                  className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                                  className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
                                   title="Annuler"
                                 >
                                   <XCircle size={16} />
@@ -753,7 +762,7 @@ const InterventionTable = () => {
                             ) : (
                               <button
                                 onClick={() => startEdit(intervention)}
-                                className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+                                className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
                                 title="Modifier"
                               >
                                 <MdEdit size={18} />
@@ -766,7 +775,7 @@ const InterventionTable = () => {
                       <tr>
                         <td
                           colSpan="7"
-                          className="px-5 py-8 text-center text-gray-500 dark:text-gray-400"
+                          className="px-5 py-8 text-center text-gray-500"
                         >
                           Aucune intervention trouvée avec les critères
                           sélectionnés
@@ -785,14 +794,14 @@ const InterventionTable = () => {
                   renderInterventionCard(intervention)
                 )
               ) : (
-                <div className="p-6 text-center text-gray-500 dark:text-gray-400">
+                <div className="p-6 text-center text-gray-500">
                   Aucune intervention trouvée avec les critères sélectionnés
                 </div>
               )}
             </div>
 
             <div className="flex justify-between items-center mt-6">
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-gray-500">
                 Affichage de {filteredInterventions.length} sur{" "}
                 {pagination.totalInterventions} interventions
               </div>
@@ -802,13 +811,13 @@ const InterventionTable = () => {
                   disabled={pagination.page <= 1}
                   className={`p-2 rounded-md ${
                     pagination.page <= 1
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <FiChevronLeft size={18} />
                 </button>
-                <span className="text-sm dark:text-gray-300">
+                <span className="text-sm">
                   Page {pagination.page} sur {pagination.totalPages}
                 </span>
                 <button
@@ -816,8 +825,8 @@ const InterventionTable = () => {
                   disabled={pagination.page >= pagination.totalPages}
                   className={`p-2 rounded-md ${
                     pagination.page >= pagination.totalPages
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <FiChevronRight size={18} />

@@ -14,11 +14,11 @@ const EtatPieceEnum = {
 const getStatusStyle = (status) => {
   switch (status) {
     case EtatPieceEnum.Disponible:
-      return "bg-green-50 dark:bg-green-500/15 text-green-600 dark:text-green-400";
+      return "bg-green-50 text-green-600";
     case EtatPieceEnum.NonDisponible:
-      return "bg-gray-100 dark:bg-gray-500/15 text-gray-600 dark:text-gray-400";
+      return "bg-gray-100 text-gray-600";
     default:
-      return "bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400";
+      return "bg-blue-50 text-blue-600";
   }
 };
 
@@ -67,7 +67,7 @@ const PiecesStockTable = () => {
       }
 
       const data = await response.json();
-      
+
       setPieces(data.results || []);
       setPagination({
         ...pagination,
@@ -90,12 +90,14 @@ const PiecesStockTable = () => {
 
   // Filtrer les pièces selon la recherche et les filtres
   const filteredPieces = pieces.filter((piece) => {
-    const matchesSearch = searchTerm === "" || 
-      (piece.nomPiece && piece.nomPiece.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    const matchesEtatFilter = filters.etat === "" || 
-      (piece.etat && piece.etat === filters.etat);
-    
+    const matchesSearch =
+      searchTerm === "" ||
+      (piece.nomPiece &&
+        piece.nomPiece.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const matchesEtatFilter =
+      filters.etat === "" || (piece.etat && piece.etat === filters.etat);
+
     return matchesSearch && matchesEtatFilter;
   });
 
@@ -122,9 +124,9 @@ const PiecesStockTable = () => {
   };
 
   return (
-    <div className="border py-4 rounded-3xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <div className="border py-4 rounded-3xl border-gray-200 bg-white">
       <div className="px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-xl font-semibold dark:text-white">Pièces en Stock</h1>
+        <h1 className="text-xl font-semibold">Pièces en Stock</h1>
         <div className="flex gap-2 justify-end w-full sm:w-auto">
           <SearchInput
             className="w-full sm:w-48 md:w-72"
@@ -135,8 +137,8 @@ const PiecesStockTable = () => {
           <button
             className={`border p-2 rounded-lg sm:w-24 flex flex-row gap-2 items-center justify-center transition-colors ${
               showFilters
-                ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
-                : "border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-200"
+                ? "bg-blue-100 border-blue-300 text-blue-700"
+                : "border-gray-300 hover:bg-gray-50"
             }`}
             onClick={() => setShowFilters(!showFilters)}
           >
@@ -148,24 +150,30 @@ const PiecesStockTable = () => {
 
       {/* Section des filtres */}
       {showFilters && (
-        <div className="px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <div className="px-5 pb-4 border-t border-gray-200 pt-4">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex flex-col gap-1 min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">État</label>
+              <label className="text-sm text-gray-600">État</label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 value={filters.etat}
-                onChange={(e) => setFilters({ ...filters, etat: e.target.value })}
+                onChange={(e) =>
+                  setFilters({ ...filters, etat: e.target.value })
+                }
               >
                 <option value="">Tous les états</option>
-                <option value={EtatPieceEnum.Disponible}>{EtatPieceEnum.Disponible}</option>
-                <option value={EtatPieceEnum.NonDisponible}>{EtatPieceEnum.NonDisponible}</option>
+                <option value={EtatPieceEnum.Disponible}>
+                  {EtatPieceEnum.Disponible}
+                </option>
+                <option value={EtatPieceEnum.NonDisponible}>
+                  {EtatPieceEnum.NonDisponible}
+                </option>
               </select>
             </div>
 
             {isAnyFilterActive && (
               <button
-                className="mt-6 flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
+                className="mt-6 flex items-center gap-1 text-sm text-red-600 hover:text-red-800"
                 onClick={resetFilters}
               >
                 <X size={14} />
@@ -178,10 +186,10 @@ const PiecesStockTable = () => {
 
       {/* Vue Bureau */}
       {!isSmallScreen && (
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-6 pb-3 px-7">
+        <div className="border-t border-gray-200 pt-6 pb-3 px-7">
           {loading ? (
             <div className="flex justify-center p-8">
-              <p className="dark:text-gray-300">Chargement des données...</p>
+              <p>Chargement des données...</p>
             </div>
           ) : error ? (
             <div className="flex justify-center p-8 text-red-500">
@@ -189,21 +197,21 @@ const PiecesStockTable = () => {
             </div>
           ) : (
             <>
-              <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
                 <div className="max-w-full overflow-x-auto custom-scrollbar">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-gray-100 dark:border-gray-700">
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <tr className="border-b border-gray-100">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           ID Pièce
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           Nom
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           Quantité
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           État
                         </th>
                       </tr>
@@ -213,15 +221,15 @@ const PiecesStockTable = () => {
                         filteredPieces.map((piece) => (
                           <tr
                             key={piece._id}
-                            className="border-b border-gray-100 dark:border-gray-700"
+                            className="border-b border-gray-100"
                           >
-                            <td className="px-5 py-4 sm:px-6 text-theme-xs dark:text-gray-300">
+                            <td className="px-5 py-4 sm:px-6 text-theme-xs">
                               {piece._id}
                             </td>
-                            <td className="px-5 py-4 sm:px-6 text-theme-sm dark:text-gray-300">
+                            <td className="px-5 py-4 sm:px-6 text-theme-sm">
                               {piece.nomPiece}
                             </td>
-                            <td className="px-5 py-4 sm:px-6 text-theme-sm dark:text-gray-300">
+                            <td className="px-5 py-4 sm:px-6 text-theme-sm">
                               {piece.quantite}
                             </td>
                             <td className="px-5 py-4 sm:px-6">
@@ -239,7 +247,7 @@ const PiecesStockTable = () => {
                         <tr>
                           <td
                             colSpan="4"
-                            className="px-5 py-8 text-center text-gray-500 dark:text-gray-400"
+                            className="px-5 py-8 text-center text-gray-500"
                           >
                             Aucune pièce trouvée avec les critères sélectionnés
                           </td>
@@ -251,8 +259,9 @@ const PiecesStockTable = () => {
               </div>
 
               <div className="flex justify-between items-center mt-6">
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  Affichage de {filteredPieces.length} sur {pagination.totalPieces} pièces
+                <div className="text-sm text-gray-500">
+                  Affichage de {filteredPieces.length} sur{" "}
+                  {pagination.totalPieces} pièces
                 </div>
                 <div className="flex items-center gap-2">
                   <button
@@ -260,13 +269,13 @@ const PiecesStockTable = () => {
                     disabled={pagination.page <= 1}
                     className={`p-2 rounded-md ${
                       pagination.page <= 1
-                        ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        ? "text-gray-300 cursor-not-allowed"
+                        : "text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     <FiChevronLeft size={18} />
                   </button>
-                  <span className="text-sm dark:text-gray-300">
+                  <span className="text-sm">
                     Page {pagination.page} sur {pagination.totalPages}
                   </span>
                   <button
@@ -274,8 +283,8 @@ const PiecesStockTable = () => {
                     disabled={pagination.page >= pagination.totalPages}
                     className={`p-2 rounded-md ${
                       pagination.page >= pagination.totalPages
-                        ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        ? "text-gray-300 cursor-not-allowed"
+                        : "text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     <FiChevronRight size={18} />
@@ -289,10 +298,10 @@ const PiecesStockTable = () => {
 
       {/* Vue Mobile */}
       {isSmallScreen && (
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-4 pb-3 px-4">
+        <div className="border-t border-gray-200 pt-4 pb-3 px-4">
           {loading ? (
             <div className="flex justify-center p-8">
-              <p className="dark:text-gray-300">Chargement des données...</p>
+              <p>Chargement des données...</p>
             </div>
           ) : error ? (
             <div className="flex justify-center p-8 text-red-500">
@@ -305,10 +314,12 @@ const PiecesStockTable = () => {
                   filteredPieces.map((piece) => (
                     <div
                       key={piece._id}
-                      className="p-4 rounded-lg border border-gray-200 dark:border-gray-700"
+                      className="p-4 rounded-lg border border-gray-200"
                     >
                       <div className="flex justify-between items-start mb-2">
-                        <span className="font-medium text-sm dark:text-white">{piece.nomPiece}</span>
+                        <span className="font-medium text-sm">
+                          {piece.nomPiece}
+                        </span>
                         <span
                           className={`${getStatusStyle(
                             piece.etat
@@ -318,24 +329,24 @@ const PiecesStockTable = () => {
                         </span>
                       </div>
                       <div className="mt-2">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">ID</p>
-                        <p className="text-sm dark:text-gray-300">{piece._id}</p>
+                        <p className="text-xs text-gray-500">ID</p>
+                        <p className="text-sm">{piece._id}</p>
                       </div>
                       <div className="mt-2">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Quantité</p>
-                        <p className="text-sm dark:text-gray-300">{piece.quantite}</p>
+                        <p className="text-xs text-gray-500">Quantité</p>
+                        <p className="text-sm">{piece.quantite}</p>
                       </div>
                     </div>
                   ))
                 ) : (
-                  <div className="p-8 text-center text-gray-500 border border-gray-200 dark:border-gray-700 rounded-lg dark:text-gray-400">
+                  <div className="p-8 text-center text-gray-500 border border-gray-200 rounded-lg">
                     Aucune pièce trouvée avec les critères sélectionnés
                   </div>
                 )}
               </div>
 
               <div className="flex justify-between items-center mt-6">
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-gray-500">
                   Page {pagination.page} sur {pagination.totalPages}
                 </div>
                 <div className="flex items-center gap-2">
@@ -344,8 +355,8 @@ const PiecesStockTable = () => {
                     disabled={pagination.page <= 1}
                     className={`p-2 rounded-md ${
                       pagination.page <= 1
-                        ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        ? "text-gray-300 cursor-not-allowed"
+                        : "text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     <FiChevronLeft size={18} />
@@ -355,8 +366,8 @@ const PiecesStockTable = () => {
                     disabled={pagination.page >= pagination.totalPages}
                     className={`p-2 rounded-md ${
                       pagination.page >= pagination.totalPages
-                        ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        ? "text-gray-300 cursor-not-allowed"
+                        : "text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     <FiChevronRight size={18} />

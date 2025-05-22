@@ -18,13 +18,13 @@ const EtatEnum = {
 const getStatusStyles = (status) => {
   switch (status) {
     case EtatEnum.ouverte:
-      return "bg-red-50 dark:bg-red-500/15 text-red-600 dark:text-red-400";
+      return "bg-red-50 text-red-600";
     case EtatEnum.encours:
-      return "bg-orange-50 dark:bg-orange-500/15 text-amber-700 dark:text-amber-400";
+      return "bg-orange-50 text-amber-700";
     case EtatEnum.resolue:
-      return "bg-green-50 dark:bg-green-500/15 text-green-600 dark:text-green-400";
+      return "bg-green-50 text-green-600";
     default:
-      return "bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400";
+      return "bg-blue-50 text-blue-600";
   }
 };
 
@@ -149,14 +149,17 @@ const PanneTable = () => {
 
   // Filtrer les pannes en fonction de la recherche et des filtres
   const filteredPannes = pannes.filter((panne) => {
-    const matchesSearch =
-      searchTerm === "" ||
-      (panne._id &&
-        panne._id.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (panne.description &&
-        panne.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (panne.machineName &&
-        panne.machineName.toLowerCase().includes(searchTerm.toLowerCase()));
+    // Prioritize machine name search
+    const matchesMachineName = 
+      panne.machineName && 
+      panne.machineName.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Also search by ID and description as fallback
+    const matchesOtherFields =
+      (panne._id && panne._id.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (panne.description && panne.description.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const matchesSearch = searchTerm === "" || matchesMachineName || matchesOtherFields;
 
     const matchesMachineFilter =
       filters.machine === "" ||
@@ -294,23 +297,21 @@ const PanneTable = () => {
   };
 
   return (
-    <div className="border py-4 rounded-3xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <div className="border py-4 rounded-3xl border-gray-200 bg-white">
       <div className="px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-xl font-semibold dark:text-white">
-          Machines en Panne
-        </h1>
+        <h1 className="text-xl font-semibold">Machines en Panne</h1>
         <div className="flex gap-2 justify-end w-full sm:w-auto">
           <SearchInput
             className="w-full sm:w-48 md:w-72"
-            placeholder="Rechercher..."
+            placeholder="Rechercher par nom de machine..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
             className={`border p-2 rounded-lg sm:w-24 flex flex-row gap-2 items-center justify-center transition-colors ${
               showFilters
-                ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
-                : "border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-200"
+                ? "bg-blue-100 border-blue-300 text-blue-700"
+                : "border-gray-300 hover:bg-gray-50"
             }`}
             onClick={() => setShowFilters(!showFilters)}
           >
@@ -322,14 +323,12 @@ const PanneTable = () => {
 
       {/* Section des filtres */}
       {showFilters && (
-        <div className="px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <div className="px-5 pb-4 border-t border-gray-200 pt-4">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex flex-col gap-1 min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
-                Machine
-              </label>
+              <label className="text-sm text-gray-600">Machine</label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 value={filters.machine}
                 onChange={(e) =>
                   setFilters({ ...filters, machine: e.target.value })
@@ -345,11 +344,9 @@ const PanneTable = () => {
             </div>
 
             <div className="flex flex-col gap-1 min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
-                État
-              </label>
+              <label className="text-sm text-gray-600">État</label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 value={filters.etat}
                 onChange={(e) =>
                   setFilters({ ...filters, etat: e.target.value })
@@ -364,7 +361,7 @@ const PanneTable = () => {
 
             {isAnyFilterActive && (
               <button
-                className="mt-6 flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
+                className="mt-6 flex items-center gap-1 text-sm text-red-600 hover:text-red-800"
                 onClick={resetFilters}
               >
                 <XCircle size={14} />
@@ -375,10 +372,10 @@ const PanneTable = () => {
         </div>
       )}
 
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-6 pb-3 px-7">
+      <div className="border-t border-gray-200 pt-6 pb-3 px-7">
         {loading ? (
           <div className="flex justify-center p-8">
-            <p className="dark:text-gray-300">Chargement des données...</p>
+            <p>Chargement des données...</p>
           </div>
         ) : error ? (
           <div className="flex justify-center p-8 text-red-500">
@@ -388,27 +385,27 @@ const PanneTable = () => {
           <>
             {/* Vue de bureau */}
             {!isSmallScreen && (
-              <div className="overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
                 <div className="overflow-x-auto custom-scrollbar">
                   <table className="w-full min-w-[800px]">
                     <thead>
-                      <tr className="border-b border-gray-100 dark:border-gray-700">
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <tr className="border-b border-gray-100">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           Machine
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           Description
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           Signalé par
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           Date
                         </th>
-                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-left sm:px-6 text-gray-600 text-theme-xs">
                           État
                         </th>
-                        <th className="px-5 py-3 text-right sm:px-6 text-gray-600 dark:text-gray-300 text-theme-xs">
+                        <th className="px-5 py-3 text-right sm:px-6 text-gray-600 text-theme-xs">
                           Actions
                         </th>
                       </tr>
@@ -418,12 +415,12 @@ const PanneTable = () => {
                         filteredPannes.map((panne) => (
                           <tr
                             key={panne._id}
-                            className="border-b border-gray-100 dark:border-gray-700"
+                            className="border-b border-gray-100"
                           >
                             <td className="px-5 py-4 sm:px-6">
                               {editingId === panne._id ? (
                                 <select
-                                  className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                  className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                   value={editValues.machine}
                                   onChange={(e) =>
                                     setEditValues({
@@ -443,7 +440,7 @@ const PanneTable = () => {
                                 </select>
                               ) : (
                                 <div className="flex items-center gap-3">
-                                  <span className="block text-theme-xs dark:text-gray-300">
+                                  <span className="block text-theme-xs">
                                     {panne.machineName}
                                   </span>
                                 </div>
@@ -453,7 +450,7 @@ const PanneTable = () => {
                               {editingId === panne._id ? (
                                 <input
                                   type="text"
-                                  className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                  className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                   value={editValues.description}
                                   onChange={(e) =>
                                     setEditValues({
@@ -463,21 +460,21 @@ const PanneTable = () => {
                                   }
                                 />
                               ) : (
-                                <span className="text-theme-sm dark:text-gray-300">
+                                <span className="text-theme-sm">
                                   {panne.description}
                                 </span>
                               )}
                             </td>
-                            <td className="px-5 py-4 sm:px-6 text-theme-sm dark:text-gray-300">
+                            <td className="px-5 py-4 sm:px-6 text-theme-sm">
                               {panne.operateurName}
                             </td>
-                            <td className="px-5 py-4 sm:px-6 text-theme-sm dark:text-gray-300">
+                            <td className="px-5 py-4 sm:px-6 text-theme-sm">
                               {panne.formattedDate}
                             </td>
                             <td className="px-5 py-4 sm:px-6">
                               {editingId === panne._id ? (
                                 <select
-                                  className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                  className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                   value={editValues.etat}
                                   onChange={(e) =>
                                     setEditValues({
@@ -513,14 +510,14 @@ const PanneTable = () => {
                                     onClick={() =>
                                       updatePanne(panne._id, editValues)
                                     }
-                                    className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                                    className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
                                     title="Enregistrer"
                                   >
                                     <Save size={16} />
                                   </button>
                                   <button
                                     onClick={cancelEdit}
-                                    className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                                    className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
                                     title="Annuler"
                                   >
                                     <XCircle size={16} />
@@ -530,20 +527,12 @@ const PanneTable = () => {
                                 <div className="flex justify-end gap-2">
                                   <button
                                     onClick={() => startEdit(panne)}
-                                    className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+                                    className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
                                     title="Modifier"
                                   >
                                     <MdEdit size={18} />
                                   </button>
-                                  {panne.etat !== EtatEnum.resolue && (
-                                    <button
-                                      onClick={() => resolvePanne(panne._id)}
-                                      className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
-                                      title="Marquer comme résolu"
-                                    >
-                                      <FaRegCheckCircle size={18} />
-                                    </button>
-                                  )}
+                                  {/* FaRegCheckCircle supprimé */}
                                 </div>
                               )}
                             </td>
@@ -553,7 +542,7 @@ const PanneTable = () => {
                         <tr>
                           <td
                             colSpan="6"
-                            className="px-5 py-8 text-center text-gray-500 dark:text-gray-400"
+                            className="px-5 py-8 text-center text-gray-500"
                           >
                             Aucune panne trouvée avec les critères sélectionnés
                           </td>
@@ -572,10 +561,10 @@ const PanneTable = () => {
                   filteredPannes.map((panne) => (
                     <div
                       key={panne._id}
-                      className="p-4 rounded-lg border border-gray-200 dark:border-gray-700"
+                      className="p-4 rounded-lg border border-gray-200"
                     >
                       <div className="flex justify-between items-start mb-2">
-                        <span className="font-medium text-sm dark:text-white">
+                        <span className="font-medium text-sm">
                           {panne.machineName}
                         </span>
                         <div className="flex items-center gap-2">
@@ -586,42 +575,28 @@ const PanneTable = () => {
                           >
                             {panne.etat}
                           </p>
-                          {panne.etat !== EtatEnum.resolue && (
-                            <button
-                              onClick={() => resolvePanne(panne._id)}
-                              className="text-green-600 hover:text-green-800 transition-colors p-1 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30"
-                              title="Marquer comme résolu"
-                            >
-                              <FaRegCheckCircle size={18} />
-                            </button>
-                          )}
+                          {/* FaRegCheckCircle supprimé */}
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 gap-2 mb-3">
                         <div>
                           <p className="text-xs text-gray-500">Description</p>
-                          <p className="text-sm dark:text-gray-300">
-                            {panne.description}
-                          </p>
+                          <p className="text-sm">{panne.description}</p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500">Signalé par</p>
-                          <p className="text-sm dark:text-gray-300">
-                            {panne.operateurName}
-                          </p>
+                          <p className="text-sm">{panne.operateurName}</p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500">Date</p>
-                          <p className="text-sm dark:text-gray-300">
-                            {panne.formattedDate}
-                          </p>
+                          <p className="text-sm">{panne.formattedDate}</p>
                         </div>
                       </div>
                       <div className="flex justify-end">
                         <button
                           onClick={() => startEdit(panne)}
-                          className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+                          className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
                           title="Modifier"
                         >
                           <MdEdit size={18} />
@@ -630,7 +605,7 @@ const PanneTable = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="p-8 text-center text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="p-8 text-center text-gray-500 border border-gray-200 rounded-lg">
                     Aucune panne trouvée avec les critères sélectionnés
                   </div>
                 )}
@@ -638,7 +613,7 @@ const PanneTable = () => {
             )}
 
             <div className="flex justify-between items-center mt-6">
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-gray-500">
                 Affichage de {filteredPannes.length} sur{" "}
                 {pagination.totalPannes} pannes
               </div>
@@ -648,13 +623,13 @@ const PanneTable = () => {
                   disabled={pagination.page <= 1}
                   className={`p-2 rounded-md ${
                     pagination.page <= 1
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <FiChevronLeft size={18} />
                 </button>
-                <span className="text-sm dark:text-gray-300">
+                <span className="text-sm">
                   Page {pagination.page} sur {pagination.totalPages}
                 </span>
                 <button
@@ -662,8 +637,8 @@ const PanneTable = () => {
                   disabled={pagination.page >= pagination.totalPages}
                   className={`p-2 rounded-md ${
                     pagination.page >= pagination.totalPages
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <FiChevronRight size={18} />

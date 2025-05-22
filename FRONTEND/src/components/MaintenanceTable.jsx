@@ -115,6 +115,28 @@ const MaintenanceTable = () => {
   }, [pagination.page, pagination.limit, searchTerm, statusFilter, typeFilter]);
 
   // Check if any filter is active
+  // Filter maintenances based on search term and other filters
+  const filteredMaintenances = maintenances.filter((maintenance) => {
+    // Check if title matches search term
+    const matchesSearch =
+      searchTerm === "" ||
+      (maintenance.titre &&
+        maintenance.titre.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    // Check if status matches filter
+    const matchesStatusFilter =
+      statusFilter === "" ||
+      (maintenance.statut === statusFilter);
+
+    // Check if type matches filter
+    const matchesTypeFilter =
+      typeFilter === "" ||
+      (maintenance.typeIntervention === typeFilter);
+
+    // Maintenance must match all active filters
+    return matchesSearch && matchesStatusFilter && matchesTypeFilter;
+  });
+
   useEffect(() => {
     setIsAnyFilterActive(statusFilter !== "" || searchTerm !== "" || typeFilter !== "");
   }, [statusFilter, searchTerm, typeFilter]);
@@ -466,8 +488,8 @@ const MaintenanceTable = () => {
           <>
             {/* Mobile view with cards (shown on small screens) */}
             <div className="md:hidden">
-              {maintenances.length > 0 ? (
-                maintenances.map((maintenance) => renderMobileCard(maintenance))
+              {filteredMaintenances.length > 0 ? (
+                filteredMaintenances.map((maintenance) => renderMobileCard(maintenance))
               ) : (
                 <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                   Aucune maintenance ne correspond aux critères de recherche
@@ -505,8 +527,8 @@ const MaintenanceTable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {maintenances.length > 0 ? (
-                      maintenances.map((maintenance) => {
+                    {filteredMaintenances.length > 0 ? (
+                      filteredMaintenances.map((maintenance) => {
                         const status = mapMaintenanceStatusToDisplay(maintenance.statut);
                         return (
                           <tr
@@ -625,7 +647,7 @@ const MaintenanceTable = () => {
 
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 gap-3">
               <div className="text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
-                Affichage de {maintenances.length} sur{" "}
+                Affichage de {filteredMaintenances.length} sur{" "}
                 {pagination.totalMaintenances} maintenances
               </div>
               <div className="flex items-center justify-center sm:justify-end gap-2">

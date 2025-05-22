@@ -3,17 +3,17 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import SearchInput from "./SearchInput";
 
 const LeftBar = ({ onToggleSidebar, isSidebarCollapsed }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(!isSidebarCollapsed);
+  // Remove this local state as it's causing the issue
+   const [isSidebarOpen, setIsSidebarOpen] = useState(!isSidebarCollapsed);
   
-  // Synchroniser l'état local avec la prop isSidebarCollapsed
-  useEffect(() => {
-    setIsSidebarOpen(!isSidebarCollapsed);
-  }, [isSidebarCollapsed]);
+   //This useEffect is no longer needed
+   useEffect(() => {
+     setIsSidebarOpen(!isSidebarCollapsed);
+   }, [isSidebarCollapsed]);
 
   const toggleSidebar = () => {
-    const newState = !isSidebarOpen;
-    setIsSidebarOpen(newState);
-    // Call the parent function to update the sidebar state
+    // Simply call the parent function to update the sidebar state
+    // No need to maintain local state
     if (onToggleSidebar) {
       onToggleSidebar();
     }
@@ -24,7 +24,7 @@ const LeftBar = ({ onToggleSidebar, isSidebarCollapsed }) => {
       <button
         onClick={toggleSidebar}
         className="text-gray-600 hover:text-indigo-600 border border-gray-200 rounded-md p-1.5 sm:p-2"
-        aria-label={isSidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
+        aria-label={!isSidebarCollapsed ? "Collapse sidebar" : "Expand sidebar"}
       >
         <HiOutlineMenuAlt1 size={20} className="sm:w-6 sm:h-6" />
       </button>

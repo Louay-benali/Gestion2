@@ -26,14 +26,14 @@ const getStatusStyles = (status) => {
   switch (statusLower) {
     case "validée":
     case "validee":
-      return "bg-green-50 text-green-800 dark:bg-green-500/15 dark:text-green-700 py-1 px-2";
+      return "bg-green-50 text-green-600";
     case "rejetée":
     case "rejetee":
-      return "bg-red-50 text-red-800 dark:bg-red-500/15 dark:text-red-700 py-1 px-2";
+      return "bg-red-50 text-red-600";
     case "en attente":
-      return "bg-yellow-50 text-yellow-800 dark:bg-yellow-500/15 dark:text-yellow-700 py-1 px-2";
+      return "bg-yellow-50 text-yellow-700";
     default:
-      return "bg-gray-50 text-gray-800 dark:bg-gray-500/15 dark:text-gray-700 py-1 px-2";
+      return "bg-gray-50 text-gray-600";
   }
 };
 
@@ -77,108 +77,98 @@ const DemandePieceTech = () => {
   }
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Mes Demandes de Pièces</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full">
-          <thead>
-            <tr className="bg-gray-50">
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Description
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Pièces
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Statut
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {demandes.map((demande) => (
-              <tr key={demande.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(demande.dateDemande).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-900">
-                  {demande.description}
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-500">
-                  {demande.pieces
-                    .map((p) => `${p.nomPiece || p.reference} (${p.quantite})`)
-                    .join(", ")}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusStyles(
-                      demande.status
-                    )}`}
-                  >
-                    {mapStatusToDisplay(demande.status)}
-                  </span>
-                </td>
+    <div className="border py-4 rounded-3xl border-gray-200 bg-white">
+      <div className="px-5 pb-4">
+        <h2 className="text-xl font-semibold mb-4">Mes Demandes de Pièces</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-gray-100">
+                <th className="px-5 py-3 text-left text-gray-600 text-theme-xs">
+                  Date
+                </th>
+                <th className="px-5 py-3 text-left text-gray-600 text-theme-xs">
+                  Description
+                </th>
+                <th className="px-5 py-3 text-left text-gray-600 text-theme-xs">
+                  Pièces
+                </th>
+                <th className="px-5 py-3 text-left text-gray-600 text-theme-xs">
+                  Statut
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {demandes.map((demande) => (
+                <tr
+                  key={demande.id}
+                  className="border-b border-gray-100 hover:bg-gray-50"
+                >
+                  <td className="px-5 py-4 text-theme-xs text-gray-700">
+                    {new Date(demande.dateDemande).toLocaleDateString()}
+                  </td>
+                  <td className="px-5 py-4 text-theme-sm text-gray-800">
+                    {demande.description}
+                  </td>
+                  <td className="px-5 py-4 text-theme-sm text-gray-700">
+                    {demande.pieces
+                      .map(
+                        (p) => `${p.nomPiece || p.reference} (${p.quantite})`
+                      )
+                      .join(", ")}
+                  </td>
+                  <td className="px-5 py-4">
+                    <span
+                      className={`inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium ${getStatusStyles(
+                        demande.status
+                      )}`}
+                    >
+                      {mapStatusToDisplay(demande.status)}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Pagination Controls */}
-      <div className="mt-4 flex items-center justify-between px-4 py-3 sm:px-6">
-        <div className="flex flex-1 justify-between sm:hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-5 py-3 border-t border-gray-200 gap-2">
+        <div className="text-sm text-gray-500">
+          Affichage de{" "}
+          <span className="font-medium">{(page - 1) * limit + 1}</span> à{" "}
+          <span className="font-medium">
+            {Math.min(page * limit, totalDemandes)}
+          </span>{" "}
+          sur <span className="font-medium">{totalDemandes}</span> demandes
+        </div>
+        <div className="flex items-center gap-2">
           <button
-            onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
-            className={`relative inline-flex items-center rounded-md px-4 py-2 text-sm font-medium ${page === 1 ? 'bg-gray-100 text-gray-400' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+            className={`p-2 rounded-md ${
+              page === 1
+                ? "text-gray-300 cursor-not-allowed"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
           >
             Précédent
           </button>
+          <span className="text-sm">
+            Page {page} sur {totalPages}
+          </span>
           <button
-            onClick={() => setPage(prev => prev + 1)}
+            onClick={() => setPage((prev) => prev + 1)}
             disabled={page === totalPages}
-            className={`relative ml-3 inline-flex items-center rounded-md px-4 py-2 text-sm font-medium ${page === totalPages ? 'bg-gray-100 text-gray-400' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+            className={`p-2 rounded-md ${
+              page === totalPages
+                ? "text-gray-300 cursor-not-allowed"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
           >
             Suivant
           </button>
-        </div>
-        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm text-gray-700">
-              Affichage de <span className="font-medium">{((page - 1) * limit) + 1}</span> à{' '}
-              <span className="font-medium">{Math.min(page * limit, totalDemandes)}</span> sur{' '}
-              <span className="font-medium">{totalDemandes}</span> demandes
-            </p>
-          </div>
-          <div>
-            <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-              <button
-                onClick={() => setPage(prev => Math.max(prev - 1, 1))}
-                disabled={page === 1}
-                className={`relative inline-flex items-center rounded-l-md px-2 py-2 text-sm font-medium ${page === 1 ? 'bg-gray-100 text-gray-400' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
-              >
-                Précédent
-              </button>
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => setPage(index + 1)}
-                  className={`relative inline-flex items-center px-4 py-2 text-sm font-medium ${page === index + 1 ? 'bg-blue-50 text-blue-600 hover:bg-blue-100' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
-                >
-                  {index + 1}
-                </button>
-              ))}
-              <button
-                onClick={() => setPage(prev => prev + 1)}
-                disabled={page === totalPages}
-                className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-sm font-medium ${page === totalPages ? 'bg-gray-100 text-gray-400' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
-              >
-                Suivant
-              </button>
-            </nav>
-          </div>
         </div>
       </div>
     </div>

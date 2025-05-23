@@ -10,6 +10,8 @@ const utilisateurSchema = new Schema(
     prenom: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     motDePasse: { type: String, required: true },
+    telephone: { type: String },
+    adresse: { type: String },
     role: {
       type: String,
       enum: [RolesEnum.operateur, RolesEnum.technicien, RolesEnum.magasinier, RolesEnum.responsable, RolesEnum.admin],

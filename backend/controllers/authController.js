@@ -149,7 +149,7 @@ export const googleCallback = (req, res, next) => {
 };
 
 export async function register(req, res) {
-  const { nom, prenom, email, motDePasse, role } = req.body;
+  const { nom, prenom, email, motDePasse, telephone, adresse, role } = req.body;
 
   try {
     const utilisateurExist = await Utilisateur.findOne({ email });
@@ -170,6 +170,8 @@ export async function register(req, res) {
       prenom,
       email,
       motDePasse: hashedPassword,
+      telephone,
+      adresse,
       role,
       approvalCode,
       isApproved: false,
@@ -411,6 +413,8 @@ export const getProfile = async (req, res) => {
         nom: utilisateur.nom,
         prenom: utilisateur.prenom,
         email: utilisateur.email,
+        telephone: utilisateur.telephone || '',
+        adresse: utilisateur.adresse || '',
         role: utilisateur.role,
         isApproved: utilisateur.isApproved
       }

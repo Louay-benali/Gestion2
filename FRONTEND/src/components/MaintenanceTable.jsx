@@ -28,15 +28,15 @@ const getStatusStyles = (status) => {
 
   switch (lowercaseStatus) {
     case "planifiée":
-      return "bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400";
+      return "bg-blue-50 text-blue-600";
     case "en cours":
-      return "bg-amber-50 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400";
+      return "bg-amber-50 text-amber-600";
     case "terminée":
-      return "bg-emerald-50 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400";
+      return "bg-emerald-50 text-emerald-600";
     case "annulée":
-      return "bg-red-50 dark:bg-red-500/15 text-red-600 dark:text-red-400";
+      return "bg-red-50 text-red-600";
     default:
-      return "bg-gray-50 dark:bg-gray-500/15 text-gray-600 dark:text-gray-400";
+      return "bg-gray-50 text-gray-600";
   }
 };
 
@@ -125,20 +125,20 @@ const MaintenanceTable = () => {
 
     // Check if status matches filter
     const matchesStatusFilter =
-      statusFilter === "" ||
-      (maintenance.statut === statusFilter);
+      statusFilter === "" || maintenance.statut === statusFilter;
 
     // Check if type matches filter
     const matchesTypeFilter =
-      typeFilter === "" ||
-      (maintenance.typeIntervention === typeFilter);
+      typeFilter === "" || maintenance.typeIntervention === typeFilter;
 
     // Maintenance must match all active filters
     return matchesSearch && matchesStatusFilter && matchesTypeFilter;
   });
 
   useEffect(() => {
-    setIsAnyFilterActive(statusFilter !== "" || searchTerm !== "" || typeFilter !== "");
+    setIsAnyFilterActive(
+      statusFilter !== "" || searchTerm !== "" || typeFilter !== ""
+    );
   }, [statusFilter, searchTerm, typeFilter]);
 
   const handleSearch = (e) => {
@@ -217,7 +217,7 @@ const MaintenanceTable = () => {
 
   // Status options for filtering and editing
   const statusOptions = ["Planifiée", "En cours", "Terminée", "Annulée"];
-  
+
   // Type options for filtering
   const typeOptions = ["Préventive", "Corrective", "Prédictive"];
 
@@ -225,29 +225,32 @@ const MaintenanceTable = () => {
   const formatDate = (dateString) => {
     if (!dateString) return "-";
     const date = new Date(dateString);
-    return date.toLocaleDateString('fr-FR');
+    return date.toLocaleDateString("fr-FR");
   };
 
   // Render a card view for mobile displays
   const renderMobileCard = (maintenance) => {
     const status = mapMaintenanceStatusToDisplay(maintenance.statut);
-    
+
     if (editingId === maintenance._id) {
       return (
-        <div key={maintenance._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4 border border-gray-200 dark:border-gray-700">
+        <div
+          key={maintenance._id}
+          className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-gray-200"
+        >
           <div className="flex justify-between items-start mb-3">
-            <div className="text-xs text-gray-500 dark:text-gray-400">ID: {maintenance._id}</div>
+            <div className="text-xs text-gray-500">ID: {maintenance._id}</div>
             <div className="flex gap-2">
               <button
                 onClick={() => saveEdit(maintenance._id)}
-                className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
                 title="Enregistrer"
               >
                 <Save size={16} />
               </button>
               <button
                 onClick={cancelEdit}
-                className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
                 title="Annuler"
               >
                 <XCircle size={16} />
@@ -257,12 +260,10 @@ const MaintenanceTable = () => {
 
           <div className="space-y-3">
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-                Titre
-              </label>
+              <label className="block text-xs text-gray-500 mb-1">Titre</label>
               <input
                 type="text"
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.titre}
                 onChange={(e) =>
                   setEditValues({ ...editValues, titre: e.target.value })
@@ -270,13 +271,13 @@ const MaintenanceTable = () => {
                 placeholder="Titre de la maintenance"
               />
             </div>
-            
+
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <label className="block text-xs text-gray-500 mb-1">
                 Description
               </label>
               <textarea
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.description}
                 onChange={(e) =>
                   setEditValues({ ...editValues, description: e.target.value })
@@ -285,13 +286,11 @@ const MaintenanceTable = () => {
                 rows="3"
               />
             </div>
-            
+
             <div>
-              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
-                Statut
-              </label>
+              <label className="block text-xs text-gray-500 mb-1">Statut</label>
               <select
-                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 text-sm bg-white dark:bg-gray-700 dark:text-gray-200"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
                 value={editValues.statut}
                 onChange={(e) =>
                   setEditValues({ ...editValues, statut: e.target.value })
@@ -311,16 +310,23 @@ const MaintenanceTable = () => {
     }
 
     return (
-      <div key={maintenance._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4 border border-gray-200 dark:border-gray-700">
+      <div
+        key={maintenance._id}
+        className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-gray-200"
+      >
         <div className="flex justify-between items-start mb-3">
-          <div className="text-xs text-gray-500 dark:text-gray-400">ID: {maintenance._id}</div>
+          <div className="text-xs text-gray-500">ID: {maintenance._id}</div>
           <div className="flex items-center gap-2">
-            <p className={`${getStatusStyles(status)} inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium`}>
+            <p
+              className={`${getStatusStyles(
+                status
+              )} inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium`}
+            >
               {status}
             </p>
             <button
               onClick={() => startEdit(maintenance)}
-              className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+              className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
               title="Modifier"
             >
               <MdEdit size={18} />
@@ -330,24 +336,34 @@ const MaintenanceTable = () => {
 
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Titre:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">{maintenance.titre}</span>
-          </div>
-          
-          <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Type:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">{maintenance.typeIntervention}</span>
+            <span className="text-sm font-medium text-gray-600">Titre:</span>
+            <span className="text-sm text-gray-800">{maintenance.titre}</span>
           </div>
 
           <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Date planifiée:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">{formatDate(maintenance.datePlanifiee)}</span>
+            <span className="text-sm font-medium text-gray-600">Type:</span>
+            <span className="text-sm text-gray-800">
+              {maintenance.typeIntervention}
+            </span>
           </div>
 
           <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Technicien:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">
-              {maintenance.technicien ? `${maintenance.technicien.nom} ${maintenance.technicien.prenom}` : "-"}
+            <span className="text-sm font-medium text-gray-600">
+              Date planifiée:
+            </span>
+            <span className="text-sm text-gray-800">
+              {formatDate(maintenance.datePlanifiee)}
+            </span>
+          </div>
+
+          <div className="flex justify-between">
+            <span className="text-sm font-medium text-gray-600">
+              Technicien:
+            </span>
+            <span className="text-sm text-gray-800">
+              {maintenance.technicien
+                ? `${maintenance.technicien.nom} ${maintenance.technicien.prenom}`
+                : "-"}
             </span>
           </div>
         </div>
@@ -356,9 +372,9 @@ const MaintenanceTable = () => {
   };
 
   return (
-    <div className="border py-4 rounded-3xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <div className="border py-4 rounded-3xl border-gray-200 bg-white">
       <div className="px-4 sm:px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-lg sm:text-xl font-semibold dark:text-white">
+        <h1 className="text-lg sm:text-xl font-semibold">
           Tableau des Maintenances
         </h1>
         <div className="flex gap-2 justify-between w-full sm:w-auto">
@@ -371,8 +387,8 @@ const MaintenanceTable = () => {
           <button
             className={`border p-2 rounded-lg sm:w-24 flex flex-row gap-1 items-center justify-center transition-colors ${
               showFilters
-                ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
-                : "border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-200"
+                ? "bg-blue-100 border-blue-300 text-blue-700"
+                : "border-gray-300 hover:bg-gray-50"
             }`}
             onClick={() => setShowFilters(!showFilters)}
           >
@@ -384,14 +400,12 @@ const MaintenanceTable = () => {
 
       {/* Filter section */}
       {showFilters && (
-        <div className="px-4 sm:px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <div className="px-4 sm:px-5 pb-4 border-t border-gray-200 pt-4">
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center">
             <div className="flex flex-col gap-1 w-full sm:w-auto sm:min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
-                Statut
-              </label>
+              <label className="text-sm text-gray-600">Statut</label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white w-full"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white w-full"
                 value={statusFilter}
                 onChange={(e) => handleStatusFilter(e.target.value)}
               >
@@ -405,11 +419,11 @@ const MaintenanceTable = () => {
             </div>
 
             <div className="flex flex-col gap-1 w-full sm:w-auto sm:min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
+              <label className="text-sm text-gray-600">
                 Type d'intervention
               </label>
               <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white w-full"
+                className="border border-gray-300 rounded-lg p-2 text-sm bg-white w-full"
                 value={typeFilter}
                 onChange={(e) => handleTypeFilter(e.target.value)}
               >
@@ -424,7 +438,7 @@ const MaintenanceTable = () => {
 
             {isAnyFilterActive && (
               <button
-                className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 mt-2 sm:mt-6"
+                className="flex items-center gap-1 text-sm text-red-600 hover:text-red-800 mt-2 sm:mt-6"
                 onClick={resetFilters}
               >
                 <X size={14} />
@@ -438,35 +452,35 @@ const MaintenanceTable = () => {
       {/* Display active filters */}
       {isAnyFilterActive && !showFilters && (
         <div className="px-4 sm:px-5 pb-4 flex flex-wrap items-center gap-2">
-          <span className="text-sm text-gray-500 dark:text-gray-400">Filtres actifs:</span>
+          <span className="text-sm text-gray-500">Filtres actifs:</span>
           {searchTerm && (
-            <div className="bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-sm flex items-center gap-1">
-              <span className="dark:text-gray-300">Titre: {searchTerm}</span>
+            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1">
+              <span>Titre: {searchTerm}</span>
               <button
                 onClick={() => setSearchTerm("")}
-                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                className="text-gray-500 hover:text-gray-700"
               >
                 <X size={14} />
               </button>
             </div>
           )}
           {statusFilter && (
-            <div className="bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-sm flex items-center gap-1">
-              <span className="dark:text-gray-300">Statut: {statusFilter}</span>
+            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1">
+              <span>Statut: {statusFilter}</span>
               <button
                 onClick={() => setStatusFilter("")}
-                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                className="text-gray-500 hover:text-gray-700"
               >
                 <X size={14} />
               </button>
             </div>
           )}
           {typeFilter && (
-            <div className="bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-sm flex items-center gap-1">
-              <span className="dark:text-gray-300">Type: {typeFilter}</span>
+            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1">
+              <span>Type: {typeFilter}</span>
               <button
                 onClick={() => setTypeFilter("")}
-                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                className="text-gray-500 hover:text-gray-700"
               >
                 <X size={14} />
               </button>
@@ -475,10 +489,10 @@ const MaintenanceTable = () => {
         </div>
       )}
 
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-4 sm:pt-6 pb-3 px-4 sm:px-7">
+      <div className="border-t border-gray-200 pt-4 sm:pt-6 pb-3 px-4 sm:px-7">
         {loading ? (
           <div className="flex justify-center p-8">
-            <p className="dark:text-gray-300">Chargement des données...</p>
+            <p>Chargement des données...</p>
           </div>
         ) : error ? (
           <div className="flex justify-center p-8 text-red-500">
@@ -489,39 +503,41 @@ const MaintenanceTable = () => {
             {/* Mobile view with cards (shown on small screens) */}
             <div className="md:hidden">
               {filteredMaintenances.length > 0 ? (
-                filteredMaintenances.map((maintenance) => renderMobileCard(maintenance))
+                filteredMaintenances.map((maintenance) =>
+                  renderMobileCard(maintenance)
+                )
               ) : (
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                <div className="text-center py-8 text-gray-500">
                   Aucune maintenance ne correspond aux critères de recherche
                 </div>
               )}
             </div>
 
             {/* Desktop view with table (hidden on small screens) */}
-            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="overflow-x-auto custom-scrollbar">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-100 dark:border-gray-700">
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                    <tr className="border-b border-gray-100">
+                      <th className="px-4 py-3 text-left text-gray-600 text-theme-xs">
                         ID
                       </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-4 py-3 text-left text-gray-600 text-theme-xs">
                         Titre
                       </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-4 py-3 text-left text-gray-600 text-theme-xs">
                         Type
                       </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-4 py-3 text-left text-gray-600 text-theme-xs">
                         Date planifiée
                       </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-4 py-3 text-left text-gray-600 text-theme-xs">
                         Technicien
                       </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-4 py-3 text-left text-gray-600 text-theme-xs">
                         Statut
                       </th>
-                      <th className="px-4 py-3 text-right text-gray-600 dark:text-gray-300 text-theme-xs">
+                      <th className="px-4 py-3 text-right text-gray-600 text-theme-xs">
                         Actions
                       </th>
                     </tr>
@@ -529,20 +545,22 @@ const MaintenanceTable = () => {
                   <tbody>
                     {filteredMaintenances.length > 0 ? (
                       filteredMaintenances.map((maintenance) => {
-                        const status = mapMaintenanceStatusToDisplay(maintenance.statut);
+                        const status = mapMaintenanceStatusToDisplay(
+                          maintenance.statut
+                        );
                         return (
                           <tr
                             key={maintenance._id}
-                            className="border-b border-gray-100 dark:border-gray-700"
+                            className="border-b border-gray-100"
                           >
-                            <td className="px-4 py-4 text-theme-xs dark:text-gray-300">
+                            <td className="px-4 py-4 text-theme-xs">
                               {maintenance._id}
                             </td>
                             <td className="px-4 py-4">
                               {editingId === maintenance._id ? (
                                 <input
                                   type="text"
-                                  className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                  className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                   value={editValues.titre}
                                   onChange={(e) =>
                                     setEditValues({
@@ -554,26 +572,27 @@ const MaintenanceTable = () => {
                                 />
                               ) : (
                                 <div className="flex items-center gap-3">
-                                  <span className="block text-theme-xs dark:text-gray-300">
+                                  <span className="block text-theme-xs">
                                     {maintenance.titre}
                                   </span>
                                 </div>
                               )}
                             </td>
-                            <td className="px-4 py-4 text-theme-sm dark:text-gray-300">
+                            <td className="px-4 py-4 text-theme-sm">
                               {maintenance.typeIntervention}
                             </td>
-                            <td className="px-4 py-4 text-theme-sm dark:text-gray-300">
+                            <td className="px-4 py-4 text-theme-sm">
                               {formatDate(maintenance.datePlanifiee)}
                             </td>
-                            <td className="px-4 py-4 text-theme-sm dark:text-gray-300">
-                              {maintenance.technicien ? 
-                                `${maintenance.technicien.nom} ${maintenance.technicien.prenom}` : "-"}
+                            <td className="px-4 py-4 text-theme-sm">
+                              {maintenance.technicien
+                                ? `${maintenance.technicien.nom} ${maintenance.technicien.prenom}`
+                                : "-"}
                             </td>
                             <td className="px-4 py-4">
                               {editingId === maintenance._id ? (
                                 <select
-                                  className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                                  className="border border-gray-300 rounded p-1 text-sm bg-white w-full"
                                   value={editValues.statut}
                                   onChange={(e) =>
                                     setEditValues({
@@ -582,7 +601,9 @@ const MaintenanceTable = () => {
                                     })
                                   }
                                 >
-                                  <option value="">Sélectionner un statut</option>
+                                  <option value="">
+                                    Sélectionner un statut
+                                  </option>
                                   {statusOptions.map((status) => (
                                     <option key={status} value={status}>
                                       {status}
@@ -604,14 +625,14 @@ const MaintenanceTable = () => {
                                 <div className="flex justify-end gap-2">
                                   <button
                                     onClick={() => saveEdit(maintenance._id)}
-                                    className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                                    className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
                                     title="Enregistrer"
                                   >
                                     <Save size={16} />
                                   </button>
                                   <button
                                     onClick={cancelEdit}
-                                    className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                                    className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
                                     title="Annuler"
                                   >
                                     <XCircle size={16} />
@@ -620,7 +641,7 @@ const MaintenanceTable = () => {
                               ) : (
                                 <button
                                   onClick={() => startEdit(maintenance)}
-                                  className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+                                  className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
                                   title="Modifier"
                                 >
                                   <MdEdit size={18} />
@@ -634,9 +655,10 @@ const MaintenanceTable = () => {
                       <tr>
                         <td
                           colSpan="7"
-                          className="px-4 py-8 text-center text-gray-500 dark:text-gray-400"
+                          className="px-4 py-8 text-center text-gray-500"
                         >
-                          Aucune maintenance ne correspond aux critères de recherche
+                          Aucune maintenance ne correspond aux critères de
+                          recherche
                         </td>
                       </tr>
                     )}
@@ -646,7 +668,7 @@ const MaintenanceTable = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 gap-3">
-              <div className="text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
+              <div className="text-sm text-gray-500 text-center sm:text-left">
                 Affichage de {filteredMaintenances.length} sur{" "}
                 {pagination.totalMaintenances} maintenances
               </div>
@@ -656,13 +678,13 @@ const MaintenanceTable = () => {
                   disabled={pagination.page <= 1}
                   className={`p-2 rounded-md ${
                     pagination.page <= 1
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <FiChevronLeft size={18} />
                 </button>
-                <span className="text-sm dark:text-gray-300">
+                <span className="text-sm">
                   Page {pagination.page} sur {pagination.totalPages}
                 </span>
                 <button
@@ -670,8 +692,8 @@ const MaintenanceTable = () => {
                   disabled={pagination.page >= pagination.totalPages}
                   className={`p-2 rounded-md ${
                     pagination.page >= pagination.totalPages
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      ? "text-gray-300 cursor-not-allowed"
+                      : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <FiChevronRight size={18} />
@@ -685,4 +707,4 @@ const MaintenanceTable = () => {
   );
 };
 
-export default MaintenanceTable; 
+export default MaintenanceTable;

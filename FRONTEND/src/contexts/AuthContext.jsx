@@ -53,7 +53,18 @@ export const AuthProvider = ({ children }) => {
             // Try to get user profile from API
             const response = await axios.get('http://localhost:3001/auth/profile');
             if (response.data && response.data.utilisateur) {
-              setUser(response.data.utilisateur);
+              // Assurez-vous que toutes les propriétés sont correctement récupérées
+              const userData = response.data.utilisateur;
+              
+              setUser({
+                id: userData.id || '',
+                nom: userData.nom || '',
+                prenom: userData.prenom || '',
+                email: userData.email || '',
+                telephone: userData.telephone || '',
+                adresse: userData.adresse || '',
+                role: userData.role || ''
+              });
               return;
             }
           } catch (profileError) {

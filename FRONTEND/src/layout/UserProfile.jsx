@@ -14,8 +14,9 @@ const UserProfile = () => {
     lastName: "",
     email: "",
     phone: "",
-    bio: "",
     role: "",
+    isApproved: false,
+    id: ""
   });
 
   const [addressInfo, setAddressInfo] = useState({
@@ -34,8 +35,9 @@ const UserProfile = () => {
         lastName: user.nom || "",
         email: user.email || "",
         phone: user.telephone || "",
-        bio: "", // Can be updated later if needed
         role: user.role || "",
+        isApproved: user.isApproved || false,
+        id: user.id || ""
       });
       
       // Update address info if address is available
@@ -73,7 +75,7 @@ const UserProfile = () => {
   return (
     <div className="py-2 mb-6 border border-gray-300 rounded-2xl bg-white lg:p-6 font-style">
       <h1 className="py-6 text-xl font-medium">Profile</h1>
-      <Profile Name={`${userInfo.firstName} ${userInfo.lastName}`} City={addressInfo.City} Bio={userInfo.role} />
+      <Profile Name={`${userInfo.firstName} ${userInfo.lastName}`} City={addressInfo.City} Bio={userInfo.role} Id={userInfo.id} IsApproved={userInfo.isApproved} />
       <PersonalInfo {...userInfo} onEdit={handleEdit} />
       <Address {...addressInfo} onEdit={handleEdit} />
       {isModalOpen && (

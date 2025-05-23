@@ -18,7 +18,7 @@ const CreateInterventionForm = () => {
     type: "Maintenance",
     status: "En cours",
     scheduledDate: "",
-    rapport: ""
+    rapport: "",
   });
 
   // Charger la liste des machines et techniciens au chargement du composant
@@ -26,24 +26,31 @@ const CreateInterventionForm = () => {
     const fetchData = async () => {
       try {
         const token = Cookies.get("accessToken");
-        
+
         // Récupérer les machines
         const machineResponse = await axios.get(
           "http://localhost:3001/machine",
           {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
-            withCredentials: true
+            withCredentials: true,
           }
         );
-        
+
         // Vérifier la structure de la réponse et extraire les machines
         const machineData = machineResponse.data;
-        if (machineData && machineData.results && Array.isArray(machineData.results)) {
+        if (
+          machineData &&
+          machineData.results &&
+          Array.isArray(machineData.results)
+        ) {
           setMachines(machineData.results);
         } else {
-          console.error("Format de réponse inattendu pour les machines:", machineData);
+          console.error(
+            "Format de réponse inattendu pour les machines:",
+            machineData
+          );
           setMachines([]);
         }
 
@@ -52,20 +59,25 @@ const CreateInterventionForm = () => {
           "http://localhost:3001/user",
           {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
-            withCredentials: true
+            withCredentials: true,
           }
         );
-        
+
         // Vérifier la structure de la réponse et extraire les techniciens
         const techData = technicienResponse.data;
         if (techData && techData.results && Array.isArray(techData.results)) {
           // Filtrer pour ne garder que les techniciens
-          const techniciensList = techData.results.filter(user => user.role === 'technicien');
+          const techniciensList = techData.results.filter(
+            (user) => user.role === "technicien"
+          );
           setTechniciens(techniciensList);
         } else {
-          console.error("Format de réponse inattendu pour les techniciens:", techData);
+          console.error(
+            "Format de réponse inattendu pour les techniciens:",
+            techData
+          );
           setTechniciens([]);
         }
       } catch (error) {
@@ -85,35 +97,35 @@ const CreateInterventionForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInterventionData((prev) => ({ ...prev, [name]: value }));
-    
+
     // Clear validation errors when user types
     if (validationErrors[name]) {
-      setValidationErrors(prev => ({ ...prev, [name]: null }));
+      setValidationErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
-  
+
   const validateForm = () => {
     const errors = {};
-    
+
     if (!interventionData.technicien) {
       errors.technicien = "Veuillez sélectionner un technicien";
     }
-    
+
     if (!interventionData.machine) {
       errors.machine = "Veuillez sélectionner une machine";
     }
-    
+
     if (!interventionData.scheduledDate) {
       errors.scheduledDate = "Veuillez définir une date planifiée";
     }
-    
+
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Valider le formulaire avant soumission
     if (!validateForm()) {
       toast.error("Veuillez corriger les erreurs dans le formulaire", {
@@ -124,35 +136,31 @@ const CreateInterventionForm = () => {
       });
       return;
     }
-    
+
     setLoading(true);
-    
+
     try {
       const token = Cookies.get("accessToken");
-      
+
       const formData = {
         ...interventionData,
-        dateDebut: new Date().toISOString() // Date actuelle comme date de début
+        dateDebut: new Date().toISOString(), // Date actuelle comme date de début
       };
-      
-      await axios.post(
-        "http://localhost:3001/intervention",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-          withCredentials: true
-        }
-      );
-      
+
+      await axios.post("http://localhost:3001/intervention", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+
       toast.success("Intervention créée avec succès!", {
         position: "bottom-center",
         autoClose: 3000,
         theme: "light",
         transition: Bounce,
       });
-      
+
       // Réinitialiser le formulaire
       setInterventionData({
         technicien: "",
@@ -160,12 +168,12 @@ const CreateInterventionForm = () => {
         type: "Maintenance",
         status: "En cours",
         scheduledDate: "",
-        rapport: ""
+        rapport: "",
       });
-      
     } catch (error) {
       console.error("Erreur lors de la création de l'intervention:", error);
-      const errorMessage = error.response?.data?.message || "Une erreur est survenue";
+      const errorMessage =
+        error.response?.data?.message || "Une erreur est survenue";
       toast.error(`Erreur: ${errorMessage}`, {
         position: "bottom-center",
         autoClose: 3000,
@@ -180,22 +188,16 @@ const CreateInterventionForm = () => {
   return (
     <>
       {loading && <Loader />}
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-3xl">
-          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Créer une nouvelle intervention
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Remplissez le formulaire pour créer une nouvelle intervention
-          </p>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-3xl">
-          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 shadow-sm rounded-xl border border-gray-200">
-            <div className="flex flex-wrap -mx-2.5">
-              {/* Sélection du technicien */}
-              <div className="w-full px-2.5 xl:w-1/2">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+      <div className="w-full max-w-3xl mx-auto px-3 sm:px-0">
+        <div className="border border-gray-300 p-4 sm:p-6 md:p-10 bg-white rounded-xl sm:rounded-2xl md:rounded-3xl shadow-sm">
+          <h1 className="pb-4 sm:pb-6 text-xl sm:text-2xl font-bold text-gray-700 font-style">
+            Crée nouvelle intervention
+          </h1>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-300 pt-4 sm:pt-6">
+              {/* Technicien */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Technicien
                 </label>
                 <select
@@ -203,7 +205,7 @@ const CreateInterventionForm = () => {
                   value={interventionData.technicien}
                   onChange={handleChange}
                   required
-                  className="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 >
                   <option value="">Sélectionner un technicien</option>
                   {Array.isArray(techniciens) && techniciens.length > 0 ? (
@@ -217,13 +219,14 @@ const CreateInterventionForm = () => {
                   )}
                 </select>
                 {validationErrors.technicien && (
-                  <p className="mt-1 text-xs text-red-500">{validationErrors.technicien}</p>
+                  <p className="mt-1 text-xs text-red-500">
+                    {validationErrors.technicien}
+                  </p>
                 )}
               </div>
-
-              {/* Sélection de la machine */}
-              <div className="w-full px-2.5 xl:w-1/2">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+              {/* Machine */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Machine
                 </label>
                 <select
@@ -231,7 +234,7 @@ const CreateInterventionForm = () => {
                   value={interventionData.machine}
                   onChange={handleChange}
                   required
-                  className="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 >
                   <option value="">Sélectionner une machine</option>
                   {Array.isArray(machines) && machines.length > 0 ? (
@@ -245,13 +248,14 @@ const CreateInterventionForm = () => {
                   )}
                 </select>
                 {validationErrors.machine && (
-                  <p className="mt-1 text-xs text-red-500">{validationErrors.machine}</p>
+                  <p className="mt-1 text-xs text-red-500">
+                    {validationErrors.machine}
+                  </p>
                 )}
               </div>
-
-              {/* Type d'intervention */}
-              <div className="w-full px-2.5 xl:w-1/2">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+              {/* Type */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Type d'intervention
                 </label>
                 <select
@@ -259,16 +263,15 @@ const CreateInterventionForm = () => {
                   value={interventionData.type}
                   onChange={handleChange}
                   required
-                  className="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 >
                   <option value="Maintenance">Maintenance</option>
                   <option value="Réparation">Réparation</option>
                 </select>
               </div>
-
               {/* Statut */}
-              <div className="w-full px-2.5 xl:w-1/2">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Statut
                 </label>
                 <select
@@ -276,17 +279,16 @@ const CreateInterventionForm = () => {
                   value={interventionData.status}
                   onChange={handleChange}
                   required
-                  className="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 >
                   <option value="En cours">En cours</option>
                   <option value="Completé">Completé</option>
                   <option value="Reporté">Reporté</option>
                 </select>
               </div>
-
               {/* Date planifiée */}
-              <div className="w-full px-2.5 xl:w-1/2">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Date planifiée
                 </label>
                 <input
@@ -295,42 +297,44 @@ const CreateInterventionForm = () => {
                   value={interventionData.scheduledDate}
                   onChange={handleChange}
                   required
-                  className="h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full border border-gray-300 rounded-lg p-2 text-sm bg-white"
                 />
                 {validationErrors.scheduledDate && (
-                  <p className="mt-1 text-xs text-red-500">{validationErrors.scheduledDate}</p>
+                  <p className="mt-1 text-xs text-red-500">
+                    {validationErrors.scheduledDate}
+                  </p>
                 )}
               </div>
-              
-              {/* Rapport initial (optionnel) */}
-              <div className="w-full px-2.5">
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">
+              {/* Rapport initial */}
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Rapport initial (optionnel)
                 </label>
                 <textarea
                   name="rapport"
-                  rows="5"
+                  rows="4"
                   placeholder="Description initiale de l'intervention à effectuer..."
                   value={interventionData.rapport}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-400 placeholder:text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
-                  style={{ minHeight: "120px" }}
+                  className="w-full border border-gray-300 rounded-lg p-2 text-sm bg-white placeholder:text-gray-300"
+                  style={{ minHeight: "100px" }}
                 />
               </div>
-
-              {/* Bouton de soumission */}
-              <div className="w-full px-2.5 flex justify-end">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={`flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-white rounded-md ${
-                    loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 transition-colors"
-                  }`}
-                >
-                  {loading ? "Création en cours..." : "Créer l'intervention"}
-                  {!loading && <MdBuild size={20} />}
-                </button>
-              </div>
+            </div>
+            {/* Bouton de soumission */}
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                disabled={loading}
+                className={`flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-white rounded-md ${
+                  loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700 transition-colors"
+                }`}
+              >
+                {loading ? "Création en cours..." : "Créer l'intervention"}
+                {!loading && <MdBuild size={20} />}
+              </button>
             </div>
           </form>
         </div>

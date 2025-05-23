@@ -9,7 +9,7 @@ const SignUpForm = ({ data, setData, onSubmit }) => {
       onSubmit={onSubmit}
       className="bg-white flex flex-col items-center justify-center px-12 h-full text-center"
     >
-      <h1 className="font-bold text-[40px] m-0 mb-5 text-gray-800">
+      <h1 className="font-bold text-[40px]  text-gray-800">
         Create Account
       </h1>
 
@@ -81,7 +81,7 @@ const SignUpForm = ({ data, setData, onSubmit }) => {
 
       <button
         type="submit"
-        className="rounded-full border border-[#3b80aa] bg-[#3b80aa] text-white text-xs font-bold py-3 px-12 uppercase tracking-wider mt-4 hover:bg-[#35729a] active:scale-95 transition duration-100"
+        className="rounded-full border border-[#3b80aa] bg-[#3b80aa] text-white text-xs font-bold py-3 px-12 uppercase tracking-wider mt-2 hover:bg-[#35729a] active:scale-95 transition duration-100"
       >
         Sign Up
       </button>

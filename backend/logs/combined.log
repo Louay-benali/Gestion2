@@ -11413,3 +11413,185 @@
 [2025-05-23 01:35:03] INFO: GET /auth/profile 304 - 2ms
 [2025-05-23 01:35:05] INFO: GET /auth/profile 304 - 2ms
 [2025-05-23 01:35:05] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 01:44:29] INFO: POST /auth/logout 200 - 8ms
+[2025-05-23 01:45:34] INFO: [REGISTER] Utilisateur enregistré: louaybenali133@gmail.com, code d'approbation envoyé.
+[2025-05-23 01:45:34] INFO: POST /auth/register 201 - 2906ms
+[2025-05-23 01:45:48] INFO: [APPROVAL] Utilisateur approuvé avec succès : louaybenali133@gmail.com
+[2025-05-23 01:45:48] INFO: POST /auth/approve 200 - 8ms
+[2025-05-23 01:46:03] WARN: [LOGIN] Mot de passe incorrect pour l'email: louaybenali133@gmail.com
+[2025-05-23 01:46:03] INFO: POST /auth/login 401 - 109ms
+[2025-05-23 01:46:09] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 01:46:09] INFO: POST /auth/login 200 - 123ms
+[2025-05-23 01:47:10] INFO: POST /auth/logout 200 - 11ms
+[2025-05-23 01:47:17] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 01:47:17] INFO: POST /auth/login 200 - 115ms
+[2025-05-23 01:47:24] INFO: GET /auth/profile 200 - 3ms
+[2025-05-23 01:47:24] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 01:47:27] INFO: POST /auth/logout 200 - 12ms
+[2025-05-23 01:47:36] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 01:47:36] INFO: POST /auth/login 200 - 114ms
+[2025-05-23 01:47:40] INFO: POST /auth/logout 200 - 11ms
+[2025-05-23 01:47:55] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 01:47:55] INFO: POST /auth/login 200 - 111ms
+[2025-05-23 01:47:58] INFO: POST /auth/logout 200 - 10ms
+[2025-05-23 01:48:12] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 01:48:12] INFO: POST /auth/login 200 - 119ms
+[2025-05-23 01:55:19] INFO: GET /user 200 - 4ms
+[2025-05-23 01:55:19] INFO: GET /user 304 - 6ms
+[2025-05-23 01:55:19] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 01:55:19] INFO: GET /machine 304 - 16ms
+[2025-05-23 01:55:19] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 01:55:19] INFO: GET /machine 304 - 8ms
+[2025-05-23 01:56:15] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 01:56:15] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 01:56:31] INFO: GET /user 304 - 7ms
+[2025-05-23 01:56:31] INFO: GET /user 304 - 7ms
+[2025-05-23 01:56:31] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 01:56:31] INFO: GET /machine 304 - 13ms
+[2025-05-23 01:56:32] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 01:56:32] INFO: GET /machine 304 - 10ms
+[2025-05-23 02:19:50] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:19:50] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:27:11] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:27:11] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:27:53] INFO: GET /user 304 - 8ms
+[2025-05-23 02:27:53] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-23 02:27:53] INFO: GET /intervention 200 - 16ms
+[2025-05-23 02:27:53] INFO: GET /user 304 - 7ms
+[2025-05-23 02:27:53] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-23 02:27:53] INFO: GET /intervention 304 - 15ms
+[2025-05-23 02:27:53] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 02:27:53] INFO: GET /machine 304 - 9ms
+[2025-05-23 02:27:53] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 02:27:53] INFO: GET /machine 304 - 7ms
+[2025-05-23 02:27:54] INFO: GET /user 304 - 6ms
+[2025-05-23 02:27:54] INFO: GET /user 304 - 4ms
+[2025-05-23 02:27:54] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 02:27:54] INFO: GET /machine 304 - 7ms
+[2025-05-23 02:27:54] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 02:27:54] INFO: GET /machine 304 - 4ms
+[2025-05-23 02:29:59] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:29:59] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 02:32:21] INFO: GET /auth/profile 304 - 4ms
+[2025-05-23 02:32:21] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:37:30] INFO: GET /auth/profile 304 - 4ms
+[2025-05-23 02:37:30] INFO: GET /auth/profile 304 - 4ms
+[2025-05-23 02:47:35] INFO: GET /user 304 - 6ms
+[2025-05-23 02:47:35] INFO: GET /user 304 - 6ms
+[2025-05-23 02:47:35] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 02:47:35] INFO: GET /machine 304 - 8ms
+[2025-05-23 02:47:35] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 02:47:35] INFO: GET /machine 304 - 9ms
+[2025-05-23 02:47:40] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 02:47:40] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 02:49:01] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 02:49:01] INFO: ✅ Connecté à MongoDB
+[2025-05-23 02:49:16] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 02:49:16] INFO: ✅ Connecté à MongoDB
+[2025-05-23 02:59:44] INFO: GET /auth/profile 200 - 22ms
+[2025-05-23 02:59:44] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 03:00:02] INFO: POST /auth/logout 200 - 3ms
+[2025-05-23 03:00:13] INFO: [REGISTER] Utilisateur enregistré: louaybenali133@gmail.com, code d'approbation envoyé.
+[2025-05-23 03:00:13] INFO: POST /auth/register 201 - 3018ms
+[2025-05-23 03:00:26] INFO: [APPROVAL] Utilisateur approuvé avec succès : louaybenali133@gmail.com
+[2025-05-23 03:00:26] INFO: POST /auth/approve 200 - 11ms
+[2025-05-23 03:00:33] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 03:00:33] INFO: POST /auth/login 200 - 94ms
+[2025-05-23 03:01:55] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 03:01:55] INFO: ✅ Connecté à MongoDB
+[2025-05-23 03:04:12] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 03:04:12] INFO: ✅ Connecté à MongoDB
+[2025-05-23 03:07:27] INFO: GET /auth/profile 404 - 23ms
+[2025-05-23 03:07:27] INFO: GET /auth/profile 404 - 4ms
+[2025-05-23 03:07:35] INFO: [REGISTER] Utilisateur enregistré: louaybenali133@gmail.com, code d'approbation envoyé.
+[2025-05-23 03:07:35] INFO: POST /auth/register 201 - 1456ms
+[2025-05-23 03:07:51] WARN: [APPROVAL] Code incorrect pour l'utilisateur : louaybenali133@gmail.com
+[2025-05-23 03:07:51] INFO: POST /auth/approve 400 - 10ms
+[2025-05-23 03:07:53] WARN: [APPROVAL] Code incorrect pour l'utilisateur : louaybenali133@gmail.com
+[2025-05-23 03:07:53] INFO: POST /auth/approve 400 - 7ms
+[2025-05-23 03:07:57] INFO: [APPROVAL] Utilisateur approuvé avec succès : louaybenali133@gmail.com
+[2025-05-23 03:07:57] INFO: POST /auth/approve 200 - 25ms
+[2025-05-23 03:08:02] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 03:08:02] INFO: POST /auth/login 200 - 101ms
+[2025-05-23 12:49:29] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 12:49:29] INFO: ✅ Connecté à MongoDB
+[2025-05-23 12:50:58] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 12:50:58] INFO: ✅ Connecté à MongoDB
+[2025-05-23 12:51:00] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-23 12:51:00] INFO: POST /auth/login 200 - 99ms
+[2025-05-23 12:51:31] INFO: GET /auth/profile 200 - 7ms
+[2025-05-23 12:51:31] INFO: GET /auth/profile 304 - 4ms
+[2025-05-23 12:51:34] INFO: GET /maintenance?page=1&limit=5 304 - 27ms
+[2025-05-23 12:51:34] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-23 12:51:38] INFO: GET /maintenance?page=1&limit=5&titre=a 304 - 16ms
+[2025-05-23 12:51:38] INFO: GET /maintenance?page=1&limit=5&titre=as 304 - 17ms
+[2025-05-23 12:51:38] INFO: GET /maintenance?page=1&limit=5&titre=ass 304 - 12ms
+[2025-05-23 12:51:39] INFO: GET /maintenance?page=1&limit=5&titre=asss 200 - 10ms
+[2025-05-23 12:51:39] INFO: GET /maintenance?page=1&limit=5&titre=ass 304 - 9ms
+[2025-05-23 12:51:40] INFO: GET /maintenance?page=1&limit=5&titre=as 304 - 12ms
+[2025-05-23 12:51:40] INFO: GET /maintenance?page=1&limit=5&titre=a 304 - 13ms
+[2025-05-23 12:51:40] INFO: GET /maintenance?page=1&limit=5 304 - 13ms
+[2025-05-23 12:51:45] INFO: PUT /maintenance/682c71960c6118fd22ec4e12 200 - 13ms
+[2025-05-23 12:51:46] INFO: GET /maintenance?page=1&limit=5 200 - 8ms
+[2025-05-23 12:51:53] INFO: GET /maintenance?page=1&limit=5&statut=Termin%C3%A9e 200 - 13ms
+[2025-05-23 12:51:55] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-23 12:51:56] INFO: GET /maintenance?page=1&limit=5&typeIntervention=Corrective 200 - 8ms
+[2025-05-23 12:51:58] INFO: GET /maintenance?page=1&limit=5 304 - 18ms
+[2025-05-23 12:53:18] INFO: GET /auth/profile 304 - 4ms
+[2025-05-23 12:53:18] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 12:53:21] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (0) avec pagination
+[2025-05-23 12:53:21] INFO: GET /demande/technicien/demandes?page=1&limit=5 200 - 8ms
+[2025-05-23 12:53:21] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (0) avec pagination
+[2025-05-23 12:53:21] INFO: GET /demande/technicien/demandes?page=1&limit=5 304 - 6ms
+[2025-05-23 12:53:24] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-23 12:53:24] INFO: GET /piece 304 - 7ms
+[2025-05-23 12:53:24] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-23 12:53:24] INFO: GET /piece 304 - 8ms
+[2025-05-23 12:53:31] WARN: [DEMANDE] Aucun magasinier trouvé pour envoyer la notification
+[2025-05-23 12:53:31] INFO: [DEMANDE] Nouvelle demande créée par l'utilisateur : louay
+[2025-05-23 12:53:31] INFO: POST /demande 201 - 16ms
+[2025-05-23 12:53:34] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (1) avec pagination
+[2025-05-23 12:53:34] INFO: GET /demande/technicien/demandes?page=1&limit=5 200 - 11ms
+[2025-05-23 12:53:34] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (1) avec pagination
+[2025-05-23 12:53:34] INFO: GET /demande/technicien/demandes?page=1&limit=5 304 - 10ms
+[2025-05-23 12:53:40] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-23 12:53:40] INFO: GET /piece 304 - 35ms
+[2025-05-23 12:53:40] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-23 12:53:40] INFO: GET /piece 304 - 50ms
+[2025-05-23 12:53:47] WARN: [DEMANDE] Aucun magasinier trouvé pour envoyer la notification
+[2025-05-23 12:53:47] INFO: [DEMANDE] Nouvelle demande créée par l'utilisateur : louay
+[2025-05-23 12:53:47] INFO: POST /demande 201 - 10ms
+[2025-05-23 12:53:48] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (2) avec pagination
+[2025-05-23 12:53:48] INFO: GET /demande/technicien/demandes?page=1&limit=5 200 - 11ms
+[2025-05-23 12:53:48] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (2) avec pagination
+[2025-05-23 12:53:48] INFO: GET /demande/technicien/demandes?page=1&limit=5 304 - 9ms
+[2025-05-23 12:54:31] INFO: GET /auth/profile 200 - 2ms
+[2025-05-23 12:54:31] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 12:54:35] INFO: GET /commande?page=1 200 - 11ms
+[2025-05-23 12:54:35] INFO: GET /commande?page=1 200 - 10ms
+[2025-05-23 12:54:41] INFO: GET /commande?page=2 200 - 11ms
+[2025-05-23 12:54:43] INFO: GET /commande?page=1 200 - 6ms
+[2025-05-23 12:55:02] INFO: GET /commande?page=2 304 - 5ms
+[2025-05-23 12:55:04] INFO: GET /commande?page=1 200 - 9ms
+[2025-05-23 12:56:09] INFO: GET /auth/profile 200 - 2ms
+[2025-05-23 12:56:09] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 12:56:11] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 12:56:11] INFO: GET /machine 304 - 6ms
+[2025-05-23 12:56:11] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 12:56:11] INFO: GET /machine 304 - 7ms
+[2025-05-23 12:56:12] INFO: GET /user 200 - 6ms
+[2025-05-23 12:56:12] INFO: GET /user 304 - 3ms
+[2025-05-23 12:56:27] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 12:56:27] INFO: GET /machine 304 - 10ms
+[2025-05-23 12:56:27] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 12:56:27] INFO: GET /machine 304 - 12ms
+[2025-05-23 12:56:27] INFO: GET /user 200 - 7ms
+[2025-05-23 12:56:27] INFO: GET /user 304 - 6ms
+[2025-05-23 12:56:28] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 12:56:28] INFO: GET /machine 304 - 7ms
+[2025-05-23 12:56:28] INFO: GET /user 304 - 7ms
+[2025-05-23 12:56:28] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 12:56:28] INFO: GET /machine 304 - 11ms
+[2025-05-23 12:56:28] INFO: GET /user 304 - 5ms
+[2025-05-23 12:56:48] INFO: [INTERVENTION] Intervention créée pour la machine 6824ebde6631f53a0c0f0eb7 par technicien 682db0b0a122ae0297a405d9
+[2025-05-23 12:56:48] INFO: POST /intervention 201 - 12ms

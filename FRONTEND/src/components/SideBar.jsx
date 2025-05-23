@@ -3,6 +3,7 @@ import LogoAndTitle from "./LogoAndTitle";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { PiChatCircleDots } from "react-icons/pi";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import useWindowSize from "../hooks/useWindowSize";
 
 const Sidebar = ({
   setSelectedPage,
@@ -19,6 +20,22 @@ const Sidebar = ({
   const [showTooltip, setShowTooltip] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { width } = useWindowSize();
+  
+  // Automatically collapse sidebar on smaller screens
+  useEffect(() => {
+    // If screen width is less than 768px (typical tablet breakpoint)
+    if (width < 768) {
+      // Only trigger if sidebar is not already collapsed
+      if (!isCollapsed) {
+  
+        const navbarToggleButton = document.querySelector('[aria-label="Collapse sidebar"], [aria-label="Expand sidebar"]');
+        if (navbarToggleButton) {
+          navbarToggleButton.click();
+        }
+      }
+    }
+  }, [width, isCollapsed]);
 
   // Set active item based on current path
   useEffect(() => {
@@ -93,7 +110,7 @@ const Sidebar = ({
     <>
       <aside
         ref={sidebarRef}
-        className={`fixed md:sticky top-0 ${
+        className={`sidebar-container fixed md:sticky top-0 ${
           isCollapsed && !sidebarToggle ? "w-16 md:w-22" : "w-64 md:w-72"
         } h-screen bg-white border-r border-gray-200 flex flex-col overflow-y-auto font-style transition-all duration-300 z-20`}
         onMouseEnter={() => {

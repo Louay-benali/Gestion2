@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Camera } from "lucide-react";
 
-const Profile = ({ Name, Bio, City, Id, IsApproved }) => {
+const Profile = ({ Name, Bio, City, Id }) => {
   const [imageUrl, setImageUrl] = useState(null);
 
   const handleImageChange = (e) => {
@@ -59,13 +59,7 @@ const Profile = ({ Name, Bio, City, Id, IsApproved }) => {
                   </p>
                 </>
               )}
-              <div className="hidden h-3.5 w-px bg-gray-300 xl:block"></div>
-              <p className="text-sm text-gray-500 flex items-center">
-                Status: 
-                <span className={`ml-1 px-2 py-0.5 rounded-full text-xs ${IsApproved ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                  {IsApproved ? 'Approved' : 'Pending'}
-                </span>
-              </p>
+
             </div>
           </div>
         </div>

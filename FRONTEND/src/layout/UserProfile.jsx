@@ -15,7 +15,6 @@ const UserProfile = () => {
     email: "",
     phone: "",
     role: "",
-    isApproved: false,
     id: ""
   });
 
@@ -36,7 +35,6 @@ const UserProfile = () => {
         email: user.email || "",
         phone: user.telephone || "",
         role: user.role || "",
-        isApproved: user.isApproved || false,
         id: user.id || ""
       });
       
@@ -75,7 +73,7 @@ const UserProfile = () => {
   return (
     <div className="py-2 mb-6 border border-gray-300 rounded-2xl bg-white lg:p-6 font-style">
       <h1 className="py-6 text-xl font-medium">Profile</h1>
-      <Profile Name={`${userInfo.firstName} ${userInfo.lastName}`} City={addressInfo.City} Bio={userInfo.role} Id={userInfo.id} IsApproved={userInfo.isApproved} />
+      <Profile Name={`${userInfo.firstName} ${userInfo.lastName}`} City={addressInfo.City} Bio={userInfo.role} Id={userInfo.id} />
       <PersonalInfo {...userInfo} onEdit={handleEdit} />
       <Address {...addressInfo} onEdit={handleEdit} />
       {isModalOpen && (

@@ -12,6 +12,7 @@ const Sidebar = ({
   isCollapsed,
 }) => {
   const [sidebarToggle, setSidebarToggle] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const sidebarRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("Dashboard");
@@ -21,21 +22,15 @@ const Sidebar = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { width } = useWindowSize();
+  const isMobile = width < 786;
   
-  // Automatically collapse sidebar on smaller screens
+  // Set initial state for mobile sidebar
   useEffect(() => {
-    // If screen width is less than 768px (typical tablet breakpoint)
-    if (width < 768) {
-      // Only trigger if sidebar is not already collapsed
-      if (!isCollapsed) {
-  
-        const navbarToggleButton = document.querySelector('[aria-label="Collapse sidebar"], [aria-label="Expand sidebar"]');
-        if (navbarToggleButton) {
-          navbarToggleButton.click();
-        }
-      }
+    if (isMobile) {
+      setSidebarToggle(false);
+      setMobileMenuOpen(false);
     }
-  }, [width, isCollapsed]);
+  }, [isMobile]);
 
   // Set active item based on current path
   useEffect(() => {
@@ -60,14 +55,29 @@ const Sidebar = ({
   // Close sidebar when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
+      // Ignore clicks on the mobile toggle button
+      if (event.target.closest('[aria-label="Open sidebar"]')) {
+        return;
+      }
+      
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setSidebarToggle(false);
+        
+        // Also close mobile menu when clicking outside
+        if (isMobile && mobileMenuOpen) {
+          setMobileMenuOpen(false);
+        }
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    document.addEventListener("touchstart", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isMobile, mobileMenuOpen]);
 
   const toggleDropdown = () => {
     setIsOpen((v) => !v);
@@ -77,6 +87,12 @@ const Sidebar = ({
     setActiveItem(label);
     if (setSelectedPage) {
       setSelectedPage(label);
+    }
+    
+    // Close sidebar on mobile when an item is clicked
+    if (isMobile) {
+      setSidebarToggle(false);
+      setMobileMenuOpen(false);
     }
     
     // Navigate if link is provided
@@ -103,30 +119,76 @@ const Sidebar = ({
   };
 
   // Determine if text labels should be shown
-  // Show labels if sidebar is not collapsed OR if it's toggled by hover
-  const showLabels = !isCollapsed || sidebarToggle;
+  // Show labels if sidebar is not collapsed OR if it's toggled by hover or mobile menu is open
+  const showLabels = !isCollapsed || sidebarToggle || (isMobile && mobileMenuOpen);
 
   return (
     <>
+      {/* Mobile menu toggle button - only visible on mobile */}
+      {isMobile && !mobileMenuOpen && (
+        <div className="fixed top-1/2 left-0 z-30 transform -translate-y-1/2">
+          <button 
+            onClick={() => setMobileMenuOpen(true)}
+            className="group relative w-6 h-8 bg-transparent focus:outline-none overflow-hidden"
+            aria-label="Open sidebar"
+          >
+            {/* Fond avec effet de verre dépoli */}
+            <div className="absolute inset-0 backdrop-blur-sm bg-white/10 border-r border-white/20 shadow-lg"></div>
+            
+            {/* Effet de brillance qui se déplace */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 opacity-70"></div>
+            <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:-translate-x-full ease-out duration-700 transition-transform"></div>
+            
+            {/* Cercle principal avec animation */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.7)] group-hover:scale-110 transition-transform duration-300">
+              <div className="absolute inset-0.5 rounded-full bg-gradient-to-tr from-blue-400 to-blue-600"></div>
+            </div>
+            
+            {/* Lignes avec animation */}
+            <div className="absolute left-1/2 top-2 -translate-x-1/2 w-1.5 h-0.5 bg-blue-400 rounded-full shadow-[0_0_2px_rgba(59,130,246,0.7)] group-hover:w-2 transition-all duration-300 ease-out"></div>
+            <div className="absolute left-1/2 bottom-2 -translate-x-1/2 w-1.5 h-0.5 bg-blue-400 rounded-full shadow-[0_0_2px_rgba(59,130,246,0.7)] group-hover:w-2 transition-all duration-300 ease-out"></div>
+            
+            {/* Points décoratifs avec animation */}
+            <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-0.5 h-0.5 bg-blue-300 rounded-full animate-pulse"></div>
+            <div className="absolute left-1/2 bottom-1/4 -translate-x-1/2 w-0.5 h-0.5 bg-blue-300 rounded-full animate-pulse delay-300"></div>
+          </button>
+        </div>
+      )}
+      
       <aside
         ref={sidebarRef}
         className={`sidebar-container fixed md:sticky top-0 ${
-          isCollapsed && !sidebarToggle ? "w-16 md:w-22" : "w-64 md:w-72"
+          (isCollapsed && !sidebarToggle) || (isMobile && !mobileMenuOpen) ? "w-0 md:w-22 overflow-hidden" : "w-64 md:w-72"
         } h-screen bg-white border-r border-gray-200 flex flex-col overflow-y-auto font-style transition-all duration-300 z-20`}
         onMouseEnter={() => {
-          if (isCollapsed) setSidebarToggle(true);
+          if (isCollapsed && !isMobile) setSidebarToggle(true);
         }}
         onMouseLeave={() => {
-          if (isCollapsed) setSidebarToggle(false);
+          if (isCollapsed && !isMobile) setSidebarToggle(false);
         }}
       >
         {/* Logo and Title */}
-        <div
-          className={`${
-            isCollapsed && !sidebarToggle ? "py-4 flex justify-center" : ""
-          }`}
-        >
-          <LogoAndTitle collapsed={isCollapsed && !sidebarToggle} />
+        <div className="flex items-center justify-between">
+          <div
+            className={`${
+              isCollapsed && !sidebarToggle ? "py-4 flex justify-center" : ""
+            }`}
+          >
+            <LogoAndTitle collapsed={isCollapsed && !sidebarToggle} />
+          </div>
+          
+          {/* Close button for mobile */}
+          {isMobile && mobileMenuOpen && (
+            <button 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 mr-2"
+              aria-label="Close sidebar"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Separator in collapsed mode */}

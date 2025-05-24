@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 
-const PersonalInfo = ({ firstName, lastName, email, phone, role, isApproved, id, onEdit }) => {
+const PersonalInfo = ({ firstName, lastName, email, phone, role, id, onEdit }) => {
   const Labels = {
     personelInfo: "Personal Information",
     firstName: "First Name",
@@ -9,7 +9,6 @@ const PersonalInfo = ({ firstName, lastName, email, phone, role, isApproved, id,
     email: "Email Address",
     phone: "Phone",
     role: "Role",
-    isApproved: "Account Status",
     id: "User ID",
   };
 
@@ -65,16 +64,6 @@ const PersonalInfo = ({ firstName, lastName, email, phone, role, isApproved, id,
               <p className="text-sm font-medium text-gray-800">{id || "Non spécifié"}</p>
             </div>
 
-            <div>
-              <p className="mb-2 text-xs leading-normal text-gray-500">
-                {Labels.isApproved}
-              </p>
-              <p className="text-sm font-medium">
-                <span className={`px-2 py-1 rounded-full text-xs ${isApproved ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                  {isApproved ? 'Approved' : 'Pending'}
-                </span>
-              </p>
-            </div>
           </div>
         </div>
 

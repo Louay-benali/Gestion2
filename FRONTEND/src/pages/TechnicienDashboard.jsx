@@ -87,8 +87,8 @@ const TechnicienDashboard = () => {
   ];
 
   // Function to handle sidebar toggle
-  const handleToggleSidebar = (isOpen) => {
-    setIsSidebarCollapsed(!isOpen);
+   const handleToggleSidebar = () => {
+    setIsSidebarCollapsed((prev) => !prev);
   };
 
   // Function that displays content according to the selected page

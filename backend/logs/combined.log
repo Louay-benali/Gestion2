@@ -11728,3 +11728,37 @@
 [2025-05-23 18:47:45] INFO: GET /machine 304 - 7ms
 [2025-05-23 18:47:45] INFO: [MACHINE] Machines filtrées : 3 résultats
 [2025-05-23 18:47:45] INFO: GET /machine 304 - 4ms
+[2025-05-23 18:50:19] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 18:50:19] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 19:11:45] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 19:11:45] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 19:18:25] INFO: GET /auth/profile 304 - 3ms
+[2025-05-23 19:18:25] INFO: GET /auth/profile 304 - 2ms
+[2025-05-23 21:52:23] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-23 21:52:23] INFO: ✅ Connecté à MongoDB
+[2025-05-23 21:52:58] INFO: GET /auth/profile 304 - 46ms
+[2025-05-23 21:52:58] INFO: GET /auth/profile 304 - 6ms
+[2025-05-23 21:54:46] INFO: GET /user 304 - 92ms
+[2025-05-23 21:54:46] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-23 21:54:46] INFO: GET /intervention 304 - 147ms
+[2025-05-23 21:54:46] INFO: GET /user 304 - 24ms
+[2025-05-23 21:54:46] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 21:54:46] INFO: GET /machine 304 - 28ms
+[2025-05-23 21:54:46] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-23 21:54:46] INFO: GET /intervention 304 - 33ms
+[2025-05-23 21:54:46] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-23 21:54:46] INFO: GET /machine 304 - 11ms
+[2025-05-24 15:00:38] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-24 15:00:38] INFO: ✅ Connecté à MongoDB
+[2025-05-24 15:01:01] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-24 15:01:01] INFO: POST /auth/login 200 - 167ms
+[2025-05-24 15:13:01] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-24 15:13:01] INFO: ✅ Connecté à MongoDB
+[2025-05-24 15:13:14] INFO: GET /auth/profile 200 - 85ms
+[2025-05-24 15:13:14] INFO: GET /auth/profile 304 - 7ms
+[2025-05-24 15:28:58] INFO: GET /auth/profile 200 - 18ms
+[2025-05-24 15:28:58] INFO: GET /auth/profile 304 - 9ms
+[2025-05-24 15:29:26] INFO: GET /auth/profile 304 - 17ms
+[2025-05-24 15:29:26] INFO: GET /auth/profile 304 - 26ms
+[2025-05-24 15:29:47] INFO: GET /auth/profile 200 - 14ms
+[2025-05-24 15:29:47] INFO: GET /auth/profile 304 - 10ms

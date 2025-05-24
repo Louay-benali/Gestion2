@@ -52,8 +52,8 @@ const ResponsableDashboard = () => {
   ];
 
   // Function to handle sidebar toggle
-  const handleToggleSidebar = (isOpen) => {
-    setIsSidebarCollapsed(!isOpen);
+   const handleToggleSidebar = () => {
+    setIsSidebarCollapsed((prev) => !prev);
   };
 
   const renderContent = () => {

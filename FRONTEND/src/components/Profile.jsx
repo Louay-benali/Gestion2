@@ -1,16 +1,79 @@
-import React, { useState } from "react";
-import { Camera } from "lucide-react";
+import React, { useState, useContext, useEffect } from "react";
+import { Camera, Upload, CheckCircle, AlertCircle } from "lucide-react";
+import { AuthContext } from "../contexts/AuthContext.jsx";
+import Cookies from "js-cookie";
+import { toast, ToastContainer } from "react-toastify";
 
 const Profile = ({ Name, Bio, City, Id }) => {
+  const { user, apiBaseUrl, refreshUserProfile } = useContext(AuthContext);
   const [imageUrl, setImageUrl] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+  
+  // Charger l'image de profil depuis le serveur si disponible
+  useEffect(() => {
+    if (user && user.profileImage) {
+      setImageUrl(`${apiBaseUrl}${user.profileImage}`);
+    }
+  }, [user, apiBaseUrl]);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
+      // Afficher l'image localement d'abord pour un retour visuel immédiat
       const reader = new FileReader();
       reader.onload = (event) => {
         setImageUrl(event.target.result);
       };
       reader.readAsDataURL(e.target.files[0]);
+      
+      // Envoyer l'image au serveur
+      await uploadImage(e.target.files[0]);
+    }
+  };
+  
+  const uploadImage = async (file) => {
+    if (!user || !user.id) {
+      setUploadError("Utilisateur non connecté");
+      return;
+    }
+    
+    setUploading(true);
+    setUploadError(null);
+    
+    try {
+      const formData = new FormData();
+      formData.append('profileImage', file);
+      
+      const response = await fetch(`${apiBaseUrl}/user/${user.id}/profile-image`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('accessToken')}`
+        },
+        body: formData
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Erreur lors du téléchargement');
+      }
+      
+      const data = await response.json();
+      
+      // Mettre à jour l'URL de l'image avec le chemin retourné par le serveur
+      setImageUrl(`${apiBaseUrl}${data.profileImage}`);
+      
+      // Rafraîchir les informations de l'utilisateur dans le contexte
+      if (refreshUserProfile) {
+        refreshUserProfile();
+      }
+      
+      toast.success("Photo de profil mise à jour avec succès");
+    } catch (error) {
+      console.error('Erreur lors du téléchargement de l\'image:', error);
+      setUploadError(error.message);
+      toast.error(`Erreur: ${error.message}`);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -26,18 +89,31 @@ const Profile = ({ Name, Bio, City, Id }) => {
                 <Camera size={24} className="text-gray-400" />
               </div>
             )}
-            <label htmlFor="image-upload" className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center cursor-pointer transition-all duration-200">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <span className="text-xl font-bold text-gray-800">+</span>
+            {uploading ? (
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <Upload size={24} className="text-white animate-pulse" />
               </div>
-            </label>
+            ) : (
+              <label htmlFor="image-upload" className="absolute inset-0 bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center cursor-pointer transition-all duration-200">
+                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <span className="text-xl font-bold text-gray-800">+</span>
+                </div>
+              </label>
+            )}
             <input
               id="image-upload"
               type="file"
               accept="image/*"
               className="hidden"
               onChange={handleImageChange}
+              disabled={uploading}
             />
+            {uploadError && (
+              <div className="absolute -bottom-6 left-0 right-0 text-xs text-red-500 flex items-center justify-center">
+                <AlertCircle size={12} className="mr-1" />
+                <span>{uploadError}</span>
+              </div>
+            )}
           </div>
           <div className="order-3 xl:order-2">
             <h4 className="mb-2 text-lg font-semibold text-center text-gray-800 xl:text-left">
@@ -64,6 +140,7 @@ const Profile = ({ Name, Bio, City, Id }) => {
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-center"/>
     </div>
   );
 };

@@ -12189,3 +12189,990 @@
 [2025-05-25 00:31:55] INFO: GET /piece 304 - 12ms
 [2025-05-25 00:31:55] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
 [2025-05-25 00:31:55] INFO: GET /piece 304 - 8ms
+[2025-05-25 00:47:58] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 00:47:58] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 00:48:04] INFO: GET /user 304 - 5ms
+[2025-05-25 00:48:04] INFO: GET /user 304 - 4ms
+[2025-05-25 00:48:04] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:48:04] INFO: GET /machine 304 - 9ms
+[2025-05-25 00:48:04] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:48:04] INFO: GET /machine 304 - 6ms
+[2025-05-25 00:51:42] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 00:51:42] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 00:51:59] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 00:51:59] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 00:52:10] INFO: GET /tache/technicien?page=1&limit=5 304 - 7ms
+[2025-05-25 00:52:10] INFO: GET /tache/technicien?page=1&limit=5 304 - 5ms
+[2025-05-25 00:52:16] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:52:16] INFO: GET /machine?page=1&limit=5 304 - 8ms
+[2025-05-25 00:52:16] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:52:16] INFO: GET /machine?page=1&limit=5 304 - 5ms
+[2025-05-25 00:54:13] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 00:54:13] INFO: POST /auth/login 200 - 117ms
+[2025-05-25 00:56:06] INFO: GET /auth/profile 200 - 2ms
+[2025-05-25 00:56:06] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 00:56:09] INFO: GET /user 200 - 5ms
+[2025-05-25 00:56:09] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:56:09] INFO: GET /intervention 200 - 10ms
+[2025-05-25 00:56:09] INFO: GET /user 304 - 20ms
+[2025-05-25 00:56:09] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:56:09] INFO: GET /intervention 304 - 32ms
+[2025-05-25 00:56:09] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:56:09] INFO: GET /machine 200 - 7ms
+[2025-05-25 00:56:09] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:56:09] INFO: GET /machine 304 - 6ms
+[2025-05-25 00:56:11] INFO: GET /user 304 - 4ms
+[2025-05-25 00:56:11] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:56:11] INFO: GET /intervention 304 - 9ms
+[2025-05-25 00:56:11] INFO: GET /user 304 - 5ms
+[2025-05-25 00:56:11] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:56:11] INFO: GET /intervention 304 - 9ms
+[2025-05-25 00:56:11] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:56:11] INFO: GET /machine 304 - 7ms
+[2025-05-25 00:56:11] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:56:11] INFO: GET /machine 304 - 5ms
+[2025-05-25 00:57:45] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (3) avec pagination
+[2025-05-25 00:57:45] INFO: GET /demande/technicien/demandes?page=1&limit=5 200 - 13ms
+[2025-05-25 00:57:45] INFO: [DEMANDE] Récupération des demandes du technicien 682fca5676a4e885af65d46f (3) avec pagination
+[2025-05-25 00:57:45] INFO: GET /demande/technicien/demandes?page=1&limit=5 304 - 12ms
+[2025-05-25 00:57:51] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-25 00:57:51] INFO: GET /piece?page=1&limit=5 200 - 8ms
+[2025-05-25 00:57:51] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-25 00:57:51] INFO: GET /piece?page=1&limit=5 304 - 6ms
+[2025-05-25 00:57:54] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:57:54] INFO: GET /machine 304 - 8ms
+[2025-05-25 00:57:54] INFO: GET /panne?page=1&limit=5 200 - 11ms
+[2025-05-25 00:57:54] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:57:54] INFO: GET /machine 304 - 7ms
+[2025-05-25 00:57:54] INFO: GET /panne?page=1&limit=5 304 - 8ms
+[2025-05-25 00:57:59] INFO: GET /maintenance?page=1&limit=5 200 - 31ms
+[2025-05-25 00:57:59] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 00:58:01] INFO: GET /user 304 - 5ms
+[2025-05-25 00:58:01] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:58:01] INFO: GET /intervention?page=1&limit=5 200 - 11ms
+[2025-05-25 00:58:01] INFO: GET /user 304 - 5ms
+[2025-05-25 00:58:01] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:58:01] INFO: GET /intervention?page=1&limit=5 304 - 7ms
+[2025-05-25 00:58:02] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:02] INFO: GET /machine?page=1&limit=5 200 - 5ms
+[2025-05-25 00:58:02] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:02] INFO: GET /machine?page=1&limit=5 304 - 6ms
+[2025-05-25 00:58:04] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-25 00:58:04] INFO: GET /piece 200 - 7ms
+[2025-05-25 00:58:04] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-25 00:58:04] INFO: GET /piece 304 - 9ms
+[2025-05-25 00:58:06] INFO: GET /user 304 - 4ms
+[2025-05-25 00:58:06] INFO: GET /user 304 - 4ms
+[2025-05-25 00:58:06] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:06] INFO: GET /machine 304 - 5ms
+[2025-05-25 00:58:06] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:06] INFO: GET /machine 304 - 6ms
+[2025-05-25 00:58:28] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-25 00:58:28] INFO: GET /piece 304 - 9ms
+[2025-05-25 00:58:28] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-05-25 00:58:28] INFO: GET /piece 304 - 9ms
+[2025-05-25 00:58:30] INFO: GET /user 200 - 5ms
+[2025-05-25 00:58:30] INFO: GET /user 304 - 4ms
+[2025-05-25 00:58:30] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:30] INFO: GET /machine 304 - 5ms
+[2025-05-25 00:58:30] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:30] INFO: GET /machine 304 - 4ms
+[2025-05-25 00:58:36] INFO: GET /user 304 - 6ms
+[2025-05-25 00:58:36] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:58:36] INFO: GET /intervention 304 - 14ms
+[2025-05-25 00:58:36] INFO: GET /user 304 - 9ms
+[2025-05-25 00:58:36] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 00:58:36] INFO: GET /intervention 304 - 12ms
+[2025-05-25 00:58:36] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:36] INFO: GET /machine 304 - 29ms
+[2025-05-25 00:58:36] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 00:58:36] INFO: GET /machine 304 - 12ms
+[2025-05-25 01:00:45] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:00:45] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:01:11] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:01:11] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:01:47] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:01:47] INFO: GET /auth/profile 500 - 6ms
+[2025-05-25 01:01:47] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:01:47] INFO: GET /auth/profile 500 - 2ms
+[2025-05-25 01:02:12] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:02:12] INFO: POST /auth/login 200 - 156ms
+[2025-05-25 01:02:23] INFO: PUT /auth/update-avatar 401 - 1ms
+[2025-05-25 01:03:32] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:03:32] INFO: GET /auth/profile 500 - 1ms
+[2025-05-25 01:03:32] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:03:32] INFO: GET /auth/profile 500 - 2ms
+[2025-05-25 01:03:46] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:03:46] INFO: POST /auth/login 200 - 123ms
+[2025-05-25 01:03:55] INFO: PUT /auth/update-avatar 401 - 1ms
+[2025-05-25 01:04:40] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:04:40] INFO: GET /auth/profile 500 - 1ms
+[2025-05-25 01:04:40] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:04:40] INFO: GET /auth/profile 500 - 2ms
+[2025-05-25 01:04:59] INFO: [REGISTER] Utilisateur enregistré: louaybenali133@gmail.com, code d'approbation envoyé.
+[2025-05-25 01:04:59] INFO: POST /auth/register 201 - 1711ms
+[2025-05-25 01:05:14] INFO: [APPROVAL] Utilisateur approuvé avec succès : louaybenali133@gmail.com
+[2025-05-25 01:05:14] INFO: POST /auth/approve 200 - 7ms
+[2025-05-25 01:05:30] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:05:30] INFO: POST /auth/login 200 - 86ms
+[2025-05-25 01:05:32] INFO: GET /user 200 - 16ms
+[2025-05-25 01:05:32] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 01:05:32] INFO: GET /intervention 304 - 32ms
+[2025-05-25 01:05:32] INFO: GET /user 304 - 14ms
+[2025-05-25 01:05:32] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 01:05:32] INFO: GET /machine 304 - 16ms
+[2025-05-25 01:05:32] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 01:05:32] INFO: GET /intervention 304 - 19ms
+[2025-05-25 01:05:32] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 01:05:32] INFO: GET /machine 304 - 7ms
+[2025-05-25 01:05:39] INFO: PUT /auth/update-avatar 401 - 1ms
+[2025-05-25 01:06:10] INFO: PUT /auth/update-avatar 401 - 0ms
+[2025-05-25 01:07:04] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:07:04] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:07:18] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:07:18] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:10:12] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:10:12] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:10:31] INFO: GET /auth/profile 401 - 27ms
+[2025-05-25 01:10:31] INFO: GET /auth/profile 401 - 4ms
+[2025-05-25 01:10:48] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:10:48] INFO: POST /auth/login 200 - 135ms
+[2025-05-25 01:10:59] INFO: GET /auth/profile 401 - 4ms
+[2025-05-25 01:10:59] INFO: GET /auth/profile 401 - 6ms
+[2025-05-25 01:11:03] INFO: GET /auth/profile 401 - 4ms
+[2025-05-25 01:11:03] INFO: GET /auth/profile 401 - 4ms
+[2025-05-25 01:11:22] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:11:22] INFO: POST /auth/login 200 - 101ms
+[2025-05-25 01:11:29] INFO: GET /auth/profile 401 - 4ms
+[2025-05-25 01:11:29] INFO: GET /auth/profile 401 - 5ms
+[2025-05-25 01:11:43] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:11:43] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:11:55] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:11:55] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:11:57] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:11:57] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:12:27] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:12:27] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:12:31] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:12:31] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:15:29] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:15:29] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:16:27] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:16:27] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:16:59] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:16:59] INFO: POST /auth/login 200 - 140ms
+[2025-05-25 01:17:06] INFO: GET /auth/profile 200 - 5ms
+[2025-05-25 01:17:06] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 01:17:08] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:17:08] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:18:59] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:18:59] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:19:31] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:19:31] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:19:47] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:19:47] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:19:56] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:19:56] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:23:48] INFO: GET /auth/profile 200 - 26ms
+[2025-05-25 01:23:48] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 01:23:50] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:23:50] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:23:53] INFO: GET /auth/profile 304 - 35ms
+[2025-05-25 01:23:54] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:24:04] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:24:04] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:24:04] INFO: POST /auth/update-profile-photo 400 - 3ms
+[2025-05-25 01:24:55] INFO: GET /auth/profile 304 - 14ms
+[2025-05-25 01:24:55] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 01:24:56] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:24:56] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:25:02] INFO: POST /auth/update-profile-photo 200 - 10ms
+[2025-05-25 01:25:09] INFO: GET /user 200 - 8ms
+[2025-05-25 01:25:09] INFO: GET /user 304 - 10ms
+[2025-05-25 01:25:09] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 01:25:09] INFO: GET /machine 304 - 12ms
+[2025-05-25 01:25:09] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 01:25:09] INFO: GET /machine 304 - 6ms
+[2025-05-25 01:25:15] INFO: POST /auth/logout 200 - 23ms
+[2025-05-25 01:25:34] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 01:25:34] INFO: POST /auth/login 200 - 95ms
+[2025-05-25 01:25:54] INFO: POST /auth/update-profile-photo 200 - 3ms
+[2025-05-25 01:25:57] INFO: GET /auth/profile 200 - 3ms
+[2025-05-25 01:25:57] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 01:26:06] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:26:06] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:28:04] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:28:04] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:28:28] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 01:28:28] INFO: ✅ Connecté à MongoDB
+[2025-05-25 01:29:46] INFO: GET /auth/profile 200 - 18ms
+[2025-05-25 01:29:46] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:29:47] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:29:47] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 01:29:51] INFO: GET /user 200 - 14ms
+[2025-05-25 01:29:51] INFO: GET /user 304 - 14ms
+[2025-05-25 01:29:51] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 01:29:51] INFO: GET /machine 304 - 16ms
+[2025-05-25 01:29:51] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 01:29:51] INFO: GET /machine 304 - 9ms
+[2025-05-25 01:30:00] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 01:30:00] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 02:26:44] INFO: GET /user 304 - 6ms
+[2025-05-25 02:26:44] INFO: GET /user 304 - 5ms
+[2025-05-25 02:26:44] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 02:26:44] INFO: GET /machine 304 - 13ms
+[2025-05-25 02:26:44] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 02:26:44] INFO: GET /machine 304 - 6ms
+[2025-05-25 02:26:53] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 02:26:53] INFO: GET /machine?page=1&limit=5 304 - 7ms
+[2025-05-25 02:26:53] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 02:26:53] INFO: GET /machine?page=1&limit=5 304 - 6ms
+[2025-05-25 02:45:15] INFO: GET /auth/profile 200 - 5ms
+[2025-05-25 02:45:15] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 02:46:19] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 02:46:19] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 02:54:43] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 02:54:43] INFO: ✅ Connecté à MongoDB
+[2025-05-25 02:55:41] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 02:55:41] INFO: ✅ Connecté à MongoDB
+[2025-05-25 02:56:09] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 02:56:09] INFO: ✅ Connecté à MongoDB
+[2025-05-25 03:04:19] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 03:04:19] INFO: ✅ Connecté à MongoDB
+[2025-05-25 03:04:44] WARN: [LOGIN] Mot de passe incorrect pour l'email: louaybenali133@gmail.com
+[2025-05-25 03:04:44] INFO: POST /auth/login 401 - 88ms
+[2025-05-25 03:04:55] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 03:04:55] INFO: POST /auth/login 200 - 91ms
+[2025-05-25 03:05:06] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:05:06] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 03:05:14] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 03:05:14] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 03:05:16] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 03:05:16] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 03:05:29] INFO: PUT /users/68325099095dee3b649b9273/profile-image 404 - 2ms
+[2025-05-25 03:08:28] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:08:28] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 15ms
+[2025-05-25 03:08:28] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 03:08:28] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135308711-533509426.JPG 200 - 3ms
+[2025-05-25 03:08:58] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:08:58] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 15ms
+[2025-05-25 03:08:58] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 03:08:58] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135338541-469576852.JPG 200 - 3ms
+[2025-05-25 03:09:04] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:09:04] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:10:34] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 03:10:34] INFO: ✅ Connecté à MongoDB
+[2025-05-25 03:11:24] INFO: GET /auth/profile 200 - 30ms
+[2025-05-25 03:11:24] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:11:28] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135338541-469576852.JPG 304 - 3ms
+[2025-05-25 03:11:33] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:11:33] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:11:35] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135338541-469576852.JPG 304 - 3ms
+[2025-05-25 03:11:42] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:11:42] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 45ms
+[2025-05-25 03:11:42] INFO: GET /auth/profile 200 - 6ms
+[2025-05-25 03:11:42] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135502402-666086545.JPG 200 - 5ms
+[2025-05-25 03:11:46] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:11:46] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 03:11:49] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135502402-666086545.JPG 304 - 2ms
+[2025-05-25 03:11:53] INFO: POST /auth/logout 200 - 12ms
+[2025-05-25 03:12:15] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 03:12:15] INFO: POST /auth/login 200 - 257ms
+[2025-05-25 03:13:23] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 03:13:23] INFO: ✅ Connecté à MongoDB
+[2025-05-25 03:13:45] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 03:13:45] INFO: ✅ Connecté à MongoDB
+[2025-05-25 03:13:58] INFO: GET /auth/profile 304 - 32ms
+[2025-05-25 03:13:58] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:14:02] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135502402-666086545.JPG 304 - 4ms
+[2025-05-25 03:14:10] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:14:10] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 53ms
+[2025-05-25 03:14:10] INFO: GET /auth/profile 200 - 5ms
+[2025-05-25 03:14:10] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135650358-132271516.JPG 200 - 6ms
+[2025-05-25 03:14:15] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:14:15] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:14:17] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135650358-132271516.JPG 304 - 1ms
+[2025-05-25 03:14:21] INFO: POST /auth/logout 200 - 25ms
+[2025-05-25 03:14:37] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 03:14:37] INFO: POST /auth/login 200 - 244ms
+[2025-05-25 03:14:40] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135650358-132271516.JPG 304 - 1ms
+[2025-05-25 03:15:12] INFO: POST /auth/logout 200 - 19ms
+[2025-05-25 03:15:29] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 03:15:29] INFO: POST /auth/login 200 - 218ms
+[2025-05-25 03:15:31] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748135650358-132271516.JPG 304 - 3ms
+[2025-05-25 03:23:01] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 03:23:01] INFO: ✅ Connecté à MongoDB
+[2025-05-25 03:23:26] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:23:26] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 70ms
+[2025-05-25 03:23:26] INFO: GET /auth/profile 200 - 9ms
+[2025-05-25 03:23:26] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136206057-699663452.JPG 200 - 7ms
+[2025-05-25 03:25:22] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136206057-699663452.JPG 304 - 2ms
+[2025-05-25 03:26:11] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:26:11] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:26:11] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136206057-699663452.JPG 304 - 0ms
+[2025-05-25 03:26:14] INFO: POST /auth/logout 200 - 10ms
+[2025-05-25 03:26:33] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 03:26:33] INFO: POST /auth/login 200 - 231ms
+[2025-05-25 03:26:45] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:26:45] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 18ms
+[2025-05-25 03:26:45] INFO: GET /auth/profile 200 - 6ms
+[2025-05-25 03:26:45] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136405310-777418984.JPG 200 - 2ms
+[2025-05-25 03:27:57] INFO: GET /auth/profile 304 - 9ms
+[2025-05-25 03:27:57] INFO: GET /auth/profile 304 - 8ms
+[2025-05-25 03:27:57] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136405310-777418984.JPG 304 - 2ms
+[2025-05-25 03:28:06] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:28:06] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 37ms
+[2025-05-25 03:28:06] INFO: GET /auth/profile 200 - 4ms
+[2025-05-25 03:28:06] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136486742-919692591.png 200 - 3ms
+[2025-05-25 03:29:11] INFO: GET /auth/profile 304 - 5ms
+[2025-05-25 03:29:11] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 03:29:12] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136486742-919692591.png 304 - 3ms
+[2025-05-25 03:29:19] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 03:29:19] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 14ms
+[2025-05-25 03:29:19] INFO: GET /auth/profile 200 - 5ms
+[2025-05-25 03:29:19] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 200 - 4ms
+[2025-05-25 03:30:08] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 5ms
+[2025-05-25 03:30:14] INFO: GET /user 200 - 87ms
+[2025-05-25 03:30:14] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 03:30:14] INFO: GET /intervention 304 - 133ms
+[2025-05-25 03:30:14] INFO: GET /user 304 - 25ms
+[2025-05-25 03:30:14] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 03:30:14] INFO: GET /intervention 304 - 36ms
+[2025-05-25 03:30:14] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:30:14] INFO: GET /machine 304 - 14ms
+[2025-05-25 03:30:14] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:30:14] INFO: GET /machine 304 - 14ms
+[2025-05-25 03:31:06] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 03:31:06] INFO: GET /demande?page=1&limit=5 200 - 33ms
+[2025-05-25 03:31:06] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 03:31:06] INFO: GET /demande?page=1&limit=5 304 - 24ms
+[2025-05-25 03:31:13] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 03:31:13] INFO: GET /demande?page=2&limit=5 200 - 30ms
+[2025-05-25 03:31:16] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 03:31:16] INFO: GET /demande?page=3&limit=5 200 - 36ms
+[2025-05-25 03:31:19] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 03:31:19] INFO: GET /demande?page=4&limit=5 200 - 51ms
+[2025-05-25 03:31:22] INFO: [DEMANDE] Demande validée : 682d82c84e4e95395de8b7ab
+[2025-05-25 03:31:22] INFO: PUT /demande/682d82c84e4e95395de8b7ab/valider 200 - 32ms
+[2025-05-25 03:31:22] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 03:31:22] INFO: GET /demande?page=4&limit=5 200 - 44ms
+[2025-05-25 03:31:33] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:31:33] INFO: GET /machine 304 - 18ms
+[2025-05-25 03:31:33] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:31:33] INFO: GET /machine 304 - 26ms
+[2025-05-25 03:31:33] INFO: GET /user 304 - 8ms
+[2025-05-25 03:31:33] INFO: GET /user 304 - 8ms
+[2025-05-25 03:31:43] INFO: GET /user 304 - 18ms
+[2025-05-25 03:31:43] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 03:31:43] INFO: GET /intervention 304 - 41ms
+[2025-05-25 03:31:43] INFO: GET /user 304 - 31ms
+[2025-05-25 03:31:43] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 03:31:43] INFO: GET /intervention 304 - 42ms
+[2025-05-25 03:31:43] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:31:43] INFO: GET /machine 304 - 15ms
+[2025-05-25 03:31:43] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:31:43] INFO: GET /machine 304 - 14ms
+[2025-05-25 03:32:02] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 2ms
+[2025-05-25 03:33:54] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:33:54] INFO: GET /machine 304 - 17ms
+[2025-05-25 03:33:54] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 03:33:54] INFO: GET /machine 304 - 25ms
+[2025-05-25 03:33:54] INFO: GET /maintenance 200 - 62ms
+[2025-05-25 03:33:54] INFO: GET /maintenance 304 - 28ms
+[2025-05-25 12:42:12] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-05-25 12:42:12] INFO: ✅ Connecté à MongoDB
+[2025-05-25 12:42:37] INFO: GET /auth/profile 404 - 16ms
+[2025-05-25 12:42:37] INFO: GET /auth/profile 404 - 3ms
+[2025-05-25 12:42:46] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-05-25 12:42:46] INFO: POST /auth/login 200 - 142ms
+[2025-05-25 12:42:46] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 200 - 3ms
+[2025-05-25 12:44:35] INFO: [LOGIN] Connexion réussie: hamedgharbi55@gmail.com
+[2025-05-25 12:44:35] INFO: POST /auth/login 200 - 83ms
+[2025-05-25 12:44:48] INFO: [PUT] /users/682db0b0a122ae0297a405d9/profile-image → Photo de profil mise à jour
+[2025-05-25 12:44:48] INFO: PUT /user/682db0b0a122ae0297a405d9/profile-image 200 - 17ms
+[2025-05-25 12:44:48] INFO: GET /auth/profile 200 - 3ms
+[2025-05-25 12:44:48] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 200 - 3ms
+[2025-05-25 12:44:53] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 12:44:53] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 12:44:53] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 1ms
+[2025-05-25 12:44:59] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 1ms
+[2025-05-25 12:58:24] INFO: GET /maintenance?page=1&limit=5 304 - 29ms
+[2025-05-25 12:58:24] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:00:08] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:00:08] INFO: GET /machine?page=1&limit=5 304 - 9ms
+[2025-05-25 13:00:08] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:00:08] INFO: GET /machine?page=1&limit=5 304 - 6ms
+[2025-05-25 13:01:40] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:01:40] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:04:30] INFO: GET /maintenance?page=1&limit=5 304 - 15ms
+[2025-05-25 13:05:15] INFO: GET /auth/profile 200 - 4ms
+[2025-05-25 13:05:15] INFO: GET /auth/profile 304 - 14ms
+[2025-05-25 13:05:15] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:05:36] INFO: GET /maintenance?page=1&limit=5 304 - 14ms
+[2025-05-25 13:05:36] INFO: GET /maintenance?page=1&limit=5 304 - 14ms
+[2025-05-25 13:05:54] INFO: PUT /maintenance/682e12454bf76ec033add346 200 - 39ms
+[2025-05-25 13:05:54] INFO: GET /maintenance?page=1&limit=5 200 - 9ms
+[2025-05-25 13:05:59] INFO: GET /maintenance?page=1&limit=5&titre=hhhhhh 200 - 12ms
+[2025-05-25 13:06:01] INFO: GET /maintenance?page=1&limit=5&titre=hhhhh 200 - 12ms
+[2025-05-25 13:06:02] INFO: GET /maintenance?page=1&limit=5&titre=hhhh 200 - 11ms
+[2025-05-25 13:06:03] INFO: GET /maintenance?page=1&limit=5&titre=hhh 200 - 15ms
+[2025-05-25 13:06:09] INFO: GET /maintenance?page=1&limit=5&titre=hh 200 - 14ms
+[2025-05-25 13:06:10] INFO: GET /maintenance?page=1&limit=5&titre=h 200 - 12ms
+[2025-05-25 13:06:10] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:06:12] INFO: GET /maintenance?page=1&limit=5&titre=a 200 - 11ms
+[2025-05-25 13:06:12] INFO: GET /maintenance?page=1&limit=5&titre=as 200 - 10ms
+[2025-05-25 13:06:13] INFO: GET /maintenance?page=1&limit=5&titre=ass 200 - 9ms
+[2025-05-25 13:06:16] INFO: GET /maintenance?page=1&limit=5&titre=as 304 - 8ms
+[2025-05-25 13:06:16] INFO: GET /maintenance?page=1&limit=5&titre=a 304 - 9ms
+[2025-05-25 13:06:16] INFO: GET /maintenance?page=1&limit=5 304 - 7ms
+[2025-05-25 13:06:21] INFO: GET /maintenance?page=1&limit=5&statut=En%20cours 200 - 8ms
+[2025-05-25 13:07:13] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:07:13] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:07:13] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:07:28] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:07:28] INFO: GET /maintenance?page=1&limit=5 304 - 14ms
+[2025-05-25 13:09:03] INFO: GET /user 200 - 7ms
+[2025-05-25 13:09:03] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:09:03] INFO: GET /intervention?page=1&limit=5 304 - 16ms
+[2025-05-25 13:09:03] INFO: GET /user 304 - 11ms
+[2025-05-25 13:09:03] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:09:03] INFO: GET /machine 304 - 11ms
+[2025-05-25 13:09:03] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:09:03] INFO: GET /intervention?page=1&limit=5 304 - 12ms
+[2025-05-25 13:09:03] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:09:03] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:09:37] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 13:09:37] INFO: GET /demande?page=1&limit=5 200 - 15ms
+[2025-05-25 13:09:37] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 13:09:37] INFO: GET /demande?page=1&limit=5 304 - 9ms
+[2025-05-25 13:09:46] INFO: GET /user 304 - 8ms
+[2025-05-25 13:09:46] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:09:46] INFO: GET /intervention 304 - 12ms
+[2025-05-25 13:09:46] INFO: GET /user 304 - 4ms
+[2025-05-25 13:09:46] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:09:46] INFO: GET /intervention 304 - 9ms
+[2025-05-25 13:09:46] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:09:46] INFO: GET /machine 304 - 8ms
+[2025-05-25 13:09:46] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:09:46] INFO: GET /machine 304 - 6ms
+[2025-05-25 13:22:30] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:22:30] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:22:30] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:22:30] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:22:30] INFO: GET /maintenance 200 - 11ms
+[2025-05-25 13:22:30] INFO: GET /maintenance 304 - 10ms
+[2025-05-25 13:24:38] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:24:38] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:24:38] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 2ms
+[2025-05-25 13:24:44] INFO: GET /user 304 - 8ms
+[2025-05-25 13:24:44] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:24:44] INFO: GET /intervention 304 - 15ms
+[2025-05-25 13:24:44] INFO: GET /user 304 - 7ms
+[2025-05-25 13:24:44] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:24:44] INFO: GET /intervention 304 - 12ms
+[2025-05-25 13:24:44] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:24:44] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:24:44] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:24:44] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:24:53] INFO: GET /maintenance?page=1&limit=5 304 - 13ms
+[2025-05-25 13:24:53] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:25:21] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:25:21] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 13:25:21] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 0ms
+[2025-05-25 13:28:38] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:28:38] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:29:29] INFO: GET /user 304 - 6ms
+[2025-05-25 13:29:29] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:29:29] INFO: GET /intervention 304 - 11ms
+[2025-05-25 13:29:29] INFO: GET /user 304 - 5ms
+[2025-05-25 13:29:29] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:29:29] INFO: GET /intervention 304 - 9ms
+[2025-05-25 13:29:29] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:29:29] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:29:29] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:29:29] INFO: GET /machine 304 - 4ms
+[2025-05-25 13:29:43] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:29:43] INFO: GET /machine 304 - 10ms
+[2025-05-25 13:29:43] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:29:43] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:29:43] INFO: GET /user 304 - 4ms
+[2025-05-25 13:29:43] INFO: GET /user 304 - 4ms
+[2025-05-25 13:29:51] INFO: GET /maintenance?page=1&limit=5 304 - 13ms
+[2025-05-25 13:29:51] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:29:56] INFO: GET /user 304 - 8ms
+[2025-05-25 13:29:56] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:29:56] INFO: GET /intervention?page=1&limit=5 304 - 21ms
+[2025-05-25 13:29:56] INFO: GET /user 304 - 11ms
+[2025-05-25 13:29:56] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:29:56] INFO: GET /machine 304 - 11ms
+[2025-05-25 13:29:56] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:29:56] INFO: GET /intervention?page=1&limit=5 304 - 16ms
+[2025-05-25 13:29:56] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:29:56] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:30:02] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:02] INFO: GET /machine?page=1&limit=5 304 - 10ms
+[2025-05-25 13:30:02] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:02] INFO: GET /machine?page=1&limit=5 304 - 8ms
+[2025-05-25 13:30:08] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:30:20] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 13:30:20] INFO: GET /demande?page=1&limit=5 304 - 16ms
+[2025-05-25 13:30:20] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 13:30:20] INFO: GET /demande?page=1&limit=5 304 - 9ms
+[2025-05-25 13:30:22] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:22] INFO: GET /machine 304 - 10ms
+[2025-05-25 13:30:22] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:22] INFO: GET /machine 304 - 9ms
+[2025-05-25 13:30:22] INFO: GET /user 304 - 7ms
+[2025-05-25 13:30:22] INFO: GET /user 304 - 4ms
+[2025-05-25 13:30:26] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:26] INFO: GET /machine 304 - 9ms
+[2025-05-25 13:30:26] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:26] INFO: GET /machine 304 - 8ms
+[2025-05-25 13:30:26] INFO: GET /user 304 - 6ms
+[2025-05-25 13:30:26] INFO: GET /user 304 - 5ms
+[2025-05-25 13:30:30] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:30] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:30:30] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:30] INFO: GET /machine 304 - 9ms
+[2025-05-25 13:30:30] INFO: GET /maintenance 304 - 14ms
+[2025-05-25 13:30:30] INFO: GET /maintenance 304 - 8ms
+[2025-05-25 13:30:35] INFO: GET /user 304 - 7ms
+[2025-05-25 13:30:35] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:30:35] INFO: GET /intervention 304 - 13ms
+[2025-05-25 13:30:35] INFO: GET /user 304 - 6ms
+[2025-05-25 13:30:35] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:30:35] INFO: GET /intervention 304 - 14ms
+[2025-05-25 13:30:35] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:35] INFO: GET /machine 304 - 9ms
+[2025-05-25 13:30:35] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:30:35] INFO: GET /machine 304 - 6ms
+[2025-05-25 13:37:35] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:37:35] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:37:35] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:37:35] INFO: GET /machine 304 - 10ms
+[2025-05-25 13:37:35] INFO: GET /maintenance 304 - 13ms
+[2025-05-25 13:37:35] INFO: GET /maintenance 304 - 9ms
+[2025-05-25 13:38:20] INFO: GET /user 304 - 6ms
+[2025-05-25 13:38:20] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:38:20] INFO: GET /intervention 304 - 11ms
+[2025-05-25 13:38:20] INFO: GET /user 304 - 5ms
+[2025-05-25 13:38:20] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:38:20] INFO: GET /intervention 304 - 11ms
+[2025-05-25 13:38:20] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:20] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:38:20] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:20] INFO: GET /machine 304 - 6ms
+[2025-05-25 13:38:25] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:25] INFO: GET /machine 304 - 8ms
+[2025-05-25 13:38:25] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:25] INFO: GET /machine 304 - 8ms
+[2025-05-25 13:38:25] INFO: GET /user 304 - 5ms
+[2025-05-25 13:38:25] INFO: GET /user 304 - 4ms
+[2025-05-25 13:38:31] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:31] INFO: GET /machine?page=1&limit=5 304 - 8ms
+[2025-05-25 13:38:31] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:31] INFO: GET /machine?page=1&limit=5 304 - 7ms
+[2025-05-25 13:38:37] INFO: GET /user 304 - 5ms
+[2025-05-25 13:38:37] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:38:37] INFO: GET /intervention?page=1&limit=5 304 - 14ms
+[2025-05-25 13:38:37] INFO: GET /user 304 - 9ms
+[2025-05-25 13:38:37] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:37] INFO: GET /machine 304 - 11ms
+[2025-05-25 13:38:37] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:38:37] INFO: GET /intervention?page=1&limit=5 304 - 12ms
+[2025-05-25 13:38:37] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:38:37] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:38:42] INFO: GET /maintenance?page=1&limit=5 304 - 24ms
+[2025-05-25 13:38:42] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:39:02] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:39:27] INFO: GET /user 304 - 6ms
+[2025-05-25 13:39:27] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:39:27] INFO: GET /intervention 304 - 12ms
+[2025-05-25 13:39:27] INFO: GET /user 304 - 6ms
+[2025-05-25 13:39:27] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:39:27] INFO: GET /intervention 304 - 9ms
+[2025-05-25 13:39:27] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:39:27] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:39:27] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:39:27] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:39:44] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:39:44] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:39:44] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:39:44] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:39:44] INFO: GET /maintenance 304 - 12ms
+[2025-05-25 13:39:44] INFO: GET /maintenance 304 - 9ms
+[2025-05-25 13:39:47] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:39:47] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:40:52] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:40:52] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:40:52] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 2ms
+[2025-05-25 13:40:55] INFO: GET /user 304 - 6ms
+[2025-05-25 13:40:55] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:40:55] INFO: GET /intervention 304 - 13ms
+[2025-05-25 13:40:55] INFO: GET /user 304 - 8ms
+[2025-05-25 13:40:55] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:40:55] INFO: GET /intervention 304 - 13ms
+[2025-05-25 13:40:55] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:40:55] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:40:55] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:40:55] INFO: GET /machine 304 - 9ms
+[2025-05-25 13:40:57] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:40:57] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:40:57] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:40:57] INFO: GET /machine 304 - 4ms
+[2025-05-25 13:40:57] INFO: GET /maintenance 304 - 12ms
+[2025-05-25 13:40:57] INFO: GET /maintenance 304 - 9ms
+[2025-05-25 13:41:00] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:41:00] INFO: GET /machine 304 - 6ms
+[2025-05-25 13:41:00] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:41:00] INFO: GET /machine 304 - 6ms
+[2025-05-25 13:41:00] INFO: GET /user 304 - 5ms
+[2025-05-25 13:41:00] INFO: GET /user 304 - 5ms
+[2025-05-25 13:41:05] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:41:05] INFO: GET /machine 304 - 6ms
+[2025-05-25 13:41:05] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:41:05] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:41:05] INFO: GET /user 304 - 4ms
+[2025-05-25 13:41:05] INFO: GET /user 304 - 4ms
+[2025-05-25 13:41:10] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 13:41:10] INFO: GET /demande?page=1&limit=5 304 - 11ms
+[2025-05-25 13:41:10] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-05-25 13:41:10] INFO: GET /demande?page=1&limit=5 304 - 11ms
+[2025-05-25 13:42:26] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 13:42:26] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 13:42:26] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 0ms
+[2025-05-25 13:42:27] INFO: GET /auth/profile 304 - 3ms
+[2025-05-25 13:42:27] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 13:42:27] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:46:39] INFO: GET /user 304 - 4ms
+[2025-05-25 13:46:39] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:46:39] INFO: GET /intervention 304 - 10ms
+[2025-05-25 13:46:39] INFO: GET /user 304 - 6ms
+[2025-05-25 13:46:39] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:46:39] INFO: GET /intervention 304 - 11ms
+[2025-05-25 13:46:39] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:46:39] INFO: GET /machine 304 - 5ms
+[2025-05-25 13:46:39] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:46:39] INFO: GET /machine 304 - 7ms
+[2025-05-25 13:46:43] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:46:43] INFO: GET /maintenance?page=1&limit=4 200 - 12ms
+[2025-05-25 13:46:43] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:46:43] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:46:47] INFO: GET /auth/profile 304 - 4ms
+[2025-05-25 13:46:47] INFO: GET /auth/profile 304 - 6ms
+[2025-05-25 13:46:47] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=5 304 - 16ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=5 304 - 17ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=4 304 - 15ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:46:51] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:46:52] INFO: GET /maintenance?page=1&limit=4 304 - 19ms
+[2025-05-25 13:46:58] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 13:46:59] INFO: GET /auth/profile 304 - 2ms
+[2025-05-25 13:46:59] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 20ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 18ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 13ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:02] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 7ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 7ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 17ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:03] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 13ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 26ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:04] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:05] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 7ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:06] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 7ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 7ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:07] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 13ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 12ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 7ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:08] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 7ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 15ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 67ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 37ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=4 304 - 47ms
+[2025-05-25 13:47:09] INFO: GET /maintenance?page=1&limit=5 304 - 12ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 11ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 10ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 8ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=5 304 - 11ms
+[2025-05-25 13:47:10] INFO: GET /maintenance?page=1&limit=4 304 - 10ms
+[2025-05-25 13:47:18] INFO: GET /maintenance?page=1&limit=5 304 - 42ms
+[2025-05-25 13:48:39] INFO: GET /user 304 - 5ms
+[2025-05-25 13:48:39] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:48:39] INFO: GET /intervention?page=1&limit=5 304 - 12ms
+[2025-05-25 13:48:39] INFO: GET /user 304 - 9ms
+[2025-05-25 13:48:39] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:48:39] INFO: GET /machine 304 - 9ms
+[2025-05-25 13:48:39] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-05-25 13:48:39] INFO: GET /intervention?page=1&limit=5 304 - 10ms
+[2025-05-25 13:48:39] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-05-25 13:48:39] INFO: GET /machine 304 - 4ms
+[2025-05-25 13:48:45] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748136559758-180301310.JPG 304 - 1ms
+[2025-05-25 13:48:49] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 13:48:49] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 9ms
+[2025-05-25 13:48:49] INFO: GET /auth/profile 200 - 1ms
+[2025-05-25 13:48:49] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748173729913-240181415.png 200 - 1ms
+[2025-05-25 13:48:54] INFO: [PUT] /users/68325099095dee3b649b9273/profile-image → Photo de profil mise à jour
+[2025-05-25 13:48:54] INFO: PUT /user/68325099095dee3b649b9273/profile-image 200 - 7ms
+[2025-05-25 13:48:54] INFO: GET /auth/profile 200 - 1ms
+[2025-05-25 13:48:54] INFO: GET /uploads/profile-68325099095dee3b649b9273-1748173734692-36528364.JPG 200 - 1ms

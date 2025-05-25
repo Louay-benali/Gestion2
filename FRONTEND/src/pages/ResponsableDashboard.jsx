@@ -14,6 +14,7 @@ import DemandesValRejTable from "../components/DemandesValRejTable.jsx";
 import CreateTaskForm from "../components/CreateTaskForm.jsx";
 import CreateMaintenanceForm from "../components/CreateMaintenanceForm.jsx";
 import CreateInterventionForm from "../components/CreateInterventionForm.jsx";
+import CostDurationManagement from "../components/CostDurationManagement.jsx";
 
 import {
   MdDashboard,
@@ -25,6 +26,7 @@ import {
   MdAddTask,
   MdEngineering,
   MdBuild,
+  MdAttachMoney,
 } from "react-icons/md";
 import { BsCalendarEvent } from "react-icons/bs";
 
@@ -49,10 +51,11 @@ const ResponsableDashboard = () => {
     { label: "Machine Table", icon: <MdTableChart size={24} /> },
     { label: "Intervention Table", icon: <MdTableChart size={24} /> },
     { label: "Maintenance Table", icon: <MdTableChart size={24} /> },
+    { label: "Cost & Duration Management", icon: <MdTableChart size={24} /> },
   ];
 
   // Function to handle sidebar toggle
-   const handleToggleSidebar = () => {
+  const handleToggleSidebar = () => {
     setIsSidebarCollapsed((prev) => !prev);
   };
 
@@ -80,6 +83,8 @@ const ResponsableDashboard = () => {
         return <CreateMaintenanceForm />;
       case "Créer Intervention":
         return <CreateInterventionForm />;
+      case "Gestion Coûts":
+        return <CostDurationManagement />;
       case "Calendar":
         return <Calendar />;
       case "Machine Table":

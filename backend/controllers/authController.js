@@ -242,7 +242,10 @@ export async function handleLogin(req, res) {
         nom: utilisateur.nom,
         prenom: utilisateur.prenom,
         email: utilisateur.email,
+        telephone: utilisateur.telephone || '',
+        adresse: utilisateur.adresse || '',
         role: utilisateur.role,
+        profileImage: utilisateur.profileImage || ''
       },
       tokens,
     });
@@ -283,7 +286,20 @@ export const signInUsingToken = async (req, res, next) => {
       roleId: user.role_id,
     });
 
-    res.status(200).send({ user, tokens });
+    res.status(200).json({
+      message: "Connexion réussie.",
+      utilisateur: {
+        id: user._id,
+        nom: user.nom,
+        prenom: user.prenom,
+        email: user.email,
+        telephone: user.telephone || '',
+        adresse: user.adresse || '',
+        role: user.role,
+        profileImage: user.profileImage || ''
+      },
+      tokens,
+    });
   } catch (error) {
     next(error);
   }
@@ -416,7 +432,8 @@ export const getProfile = async (req, res) => {
         telephone: utilisateur.telephone || '',
         adresse: utilisateur.adresse || '',
         role: utilisateur.role,
-        isApproved: utilisateur.isApproved
+        isApproved: utilisateur.isApproved,
+        profileImage: utilisateur.profileImage || ''
       }
     });
   } catch (error) {

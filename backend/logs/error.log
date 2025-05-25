@@ -147,3 +147,9 @@
 [2025-05-21 18:06:06] ERROR: [COMMANDE] Erreur validation commande : Commande validation failed: statut: `validee` is not a valid enum value for path `statut`.
 [2025-05-21 18:06:10] ERROR: [COMMANDE] Erreur validation commande : Commande validation failed: statut: `validee` is not a valid enum value for path `statut`.
 [2025-05-21 18:06:22] ERROR: [COMMANDE] Erreur validation commande : Commande validation failed: statut: `validee` is not a valid enum value for path `statut`.
+[2025-05-25 01:01:47] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:01:47] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:03:32] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:03:32] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:04:40] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-25 01:04:40] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined

@@ -1,11 +1,13 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import UserDropdown from "./UserDropdown";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import { AuthContext } from "../contexts/AuthContext.jsx";
 
 const UserMenu = ({ isOpen, setIsOpen, closeAllDropdowns }) => {
   const menuRef = useRef(null);
   const { user } = useAuth();
+  const { apiBaseUrl } = useContext(AuthContext);
 
   // Effect to handle clicks outside of the component
   useEffect(() => {
@@ -36,24 +38,28 @@ const UserMenu = ({ isOpen, setIsOpen, closeAllDropdowns }) => {
 
   return (
     <div className="relative" ref={menuRef}>
-      <button
-        type="button"
+      <div
         onClick={() => setIsOpen()}
-        className="flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
       >
         <span className="sr-only">Open user menu</span>
-        {user && user.avatarUrl ? (
+        {user && user.profileImage ? (
           <img
-            className="h-11 w-11 rounded-full"
-            src={user.avatarUrl}
+            className="h-11 w-11 rounded-full object-cover"
+            src={`${apiBaseUrl}${user.profileImage}`}
             alt="User Avatar"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '';
+              e.target.style.display = 'none';
+              e.target.nextElementSibling.style.display = 'flex';
+            }}
           />
-        ) : (
-          <div className="h-11 w-11 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">
-            {getUserInitials()}
-          </div>
-        )}
-        <button className="flex items-center justify-center pr-8 pl-4">
+        ) : null}
+        <div className={`h-11 w-11 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium ${user && user.profileImage ? 'hidden' : ''}`}>
+          {getUserInitials()}
+        </div>
+        <div className="flex items-center justify-center pr-8 pl-4">
           <span className="text-[14px] font-normal text-[#344054] font-['Outfit',_sans-serif]">
             {user ? user.prenom : "Utilisateur"}
           </span>
@@ -62,8 +68,8 @@ const UserMenu = ({ isOpen, setIsOpen, closeAllDropdowns }) => {
           ) : (
             <RiArrowDropDownLine size={24} />
           )}
-        </button>
-      </button>
+        </div>
+      </div>
 
       {isOpen && <UserDropdown />}
     </div>

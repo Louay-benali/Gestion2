@@ -12,6 +12,7 @@ const utilisateurSchema = new Schema(
     motDePasse: { type: String, required: true },
     telephone: { type: String },
     adresse: { type: String },
+    profileImage: { type: String },
     role: {
       type: String,
       enum: [RolesEnum.operateur, RolesEnum.technicien, RolesEnum.magasinier, RolesEnum.responsable, RolesEnum.admin],

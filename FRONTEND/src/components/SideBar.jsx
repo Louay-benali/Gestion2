@@ -22,7 +22,7 @@ const Sidebar = ({
   const navigate = useNavigate();
   const location = useLocation();
   const { width } = useWindowSize();
-  const isMobile = width < 786;
+  const isMobile = width < 768;
   
   // Set initial state for mobile sidebar
   useEffect(() => {

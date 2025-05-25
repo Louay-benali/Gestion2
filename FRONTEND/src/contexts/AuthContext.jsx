@@ -3,12 +3,13 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 
 // Create context
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // Create provider
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const apiBaseUrl = 'http://localhost:3001'; // URL de base de l'API
 
   // Function to check if token is expired
   const isTokenExpired = (token) => {
@@ -33,6 +34,39 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Fonction pour rafraîchir les informations de l'utilisateur
+  const refreshUserProfile = async () => {
+    try {
+      const accessToken = Cookies.get('accessToken');
+      if (!accessToken || isTokenExpired(accessToken)) {
+        console.log("Token invalide ou expiré lors du rafraîchissement du profil");
+        return;
+      }
+
+      // Set default authorization header
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      
+      // Get user profile from API
+      const response = await axios.get(`${apiBaseUrl}/auth/profile`);
+      if (response.data && response.data.utilisateur) {
+        const userData = response.data.utilisateur;
+        
+        setUser({
+          id: userData.id || '',
+          nom: userData.nom || '',
+          prenom: userData.prenom || '',
+          email: userData.email || '',
+          telephone: userData.telephone || '',
+          adresse: userData.adresse || '',
+          role: userData.role || '',
+          profileImage: userData.profileImage || ''
+        });
+      }
+    } catch (error) {
+      console.error("Erreur lors du rafraîchissement du profil:", error);
+    }
+  };
+
   // Check for existing token on mount and get user info
   useEffect(() => {
     const checkAuth = async () => {
@@ -51,7 +85,7 @@ export const AuthProvider = ({ children }) => {
           
           try {
             // Try to get user profile from API
-            const response = await axios.get('http://localhost:3001/auth/profile');
+            const response = await axios.get(`${apiBaseUrl}/auth/profile`);
             if (response.data && response.data.utilisateur) {
               // Assurez-vous que toutes les propriétés sont correctement récupérées
               const userData = response.data.utilisateur;
@@ -63,7 +97,8 @@ export const AuthProvider = ({ children }) => {
                 email: userData.email || '',
                 telephone: userData.telephone || '',
                 adresse: userData.adresse || '',
-                role: userData.role || ''
+                role: userData.role || '',
+                profileImage: userData.profileImage || ''
               });
               return;
             }
@@ -164,7 +199,9 @@ export const AuthProvider = ({ children }) => {
       logout, 
       isAuthenticated,
       loading,
-      isTokenExpired
+      isTokenExpired,
+      apiBaseUrl,
+      refreshUserProfile
     }}>
       {children}
     </AuthContext.Provider>

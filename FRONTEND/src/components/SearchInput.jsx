@@ -1,7 +1,7 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
 
-const SearchInput = ({ className, placeholder, value, onChange }) => {
+const SearchInput = ({ className, placeholder, value, onChange = () => {} }) => {
   return (
     <div className="relative w-fit">
       <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">

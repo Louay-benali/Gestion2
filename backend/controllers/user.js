@@ -2,6 +2,8 @@ import { Utilisateur } from "../models/user.js";
 import bcrypt from "bcrypt";
 import logger from "../utils/logger.js";
 import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -126,10 +128,62 @@ export const deleteUser = async (req, res) => {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
 
+    // Supprimer la photo de profil si elle existe
+    if (user.profileImage) {
+      const imagePath = path.join(process.cwd(), user.profileImage);
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+        logger.info(`[DELETE] /users/${req.params.id} → Photo de profil supprimée`);
+      }
+    }
+
     logger.info(`[DELETE] /users/${req.params.id} → Utilisateur supprimé`);
     res.status(200).json({ message: "Utilisateur supprimé avec succès" });
   } catch (error) {
     logger.error(`[DELETE] /users/${req.params.id} → ${error.message}`);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+};
+
+// 📌 Télécharger et mettre à jour la photo de profil
+export const updateProfileImage = async (req, res) => {
+  try {
+    // Vérifier si un fichier a été téléchargé
+    if (!req.file) {
+      return res.status(400).json({ message: "Aucune image n'a été téléchargée" });
+    }
+
+    const userId = req.params.id;
+    const user = await Utilisateur.findById(userId);
+    
+    if (!user) {
+      // Supprimer le fichier téléchargé si l'utilisateur n'existe pas
+      fs.unlinkSync(req.file.path);
+      logger.warn(`[PUT] /users/${userId}/profile-image → Utilisateur non trouvé`);
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+
+    // Supprimer l'ancienne image si elle existe
+    if (user.profileImage) {
+      const oldImagePath = path.join(process.cwd(), user.profileImage);
+      if (fs.existsSync(oldImagePath)) {
+        fs.unlinkSync(oldImagePath);
+      }
+    }
+
+    // Mettre à jour le chemin de l'image dans la base de données
+    // Stocker le chemin relatif pour faciliter l'accès via l'API
+    const relativeImagePath = req.file.path.replace(process.cwd(), '').replace(/\\/g, '/');
+    user.profileImage = relativeImagePath;
+    await user.save();
+
+    logger.info(`[PUT] /users/${userId}/profile-image → Photo de profil mise à jour`);
+    res.status(200).json({ 
+      message: "Photo de profil mise à jour avec succès",
+      profileImage: relativeImagePath
+    });
+  } catch (error) {
+    logger.error(`[PUT] /users/profile-image → ${error.message}`);
     res.status(500).json({ message: "Erreur serveur" });
   }
 };

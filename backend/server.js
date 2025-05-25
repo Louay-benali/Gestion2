@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import logger from "./utils/logger.js"; // <<-- Import du logger
 import requestLogger from "./middleware/requestLogger.js";
 import errorHandler from "./middleware/errorHandler.js";
@@ -33,6 +35,11 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
+
+// Configuration pour servir les fichiers statiques (images de profil)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware to sanitize request URLs and remove double slashes
 app.use((req, res, next) => {

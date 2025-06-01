@@ -48,6 +48,16 @@ const interventionSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    cost: {
+      type: Number,
+      default: 100,
+      min: 0,
+    },
+    duration: {
+      type: Number,
+      default: 1,
+      min: 0,
+    },
     observations: [
       {
         observation: String,

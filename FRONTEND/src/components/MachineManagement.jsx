@@ -4,10 +4,12 @@ import {
   MdEdit,
   MdDeleteForever,
   MdSettingsApplications,
+  MdOutlineViewList,
 } from "react-icons/md";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useWindowSize from "../hooks/useWindowSize";
 
 const MachineManagement = () => {
   // State for machines data
@@ -20,6 +22,11 @@ const MachineManagement = () => {
     totalPages: 1,
     totalMachines: 0,
   });
+  
+  // Utilisation du hook useWindowSize pour détecter les écrans mobiles et tablettes
+  const windowSize = useWindowSize();
+  const isMobile = windowSize.width < 768;
+  const isTablet = windowSize.width >= 768 && windowSize.width < 1024;
 
   // Form states
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -81,6 +88,8 @@ const MachineManagement = () => {
   useEffect(() => {
     fetchMachines();
   }, [pagination.page, pagination.limit]);
+
+  // Le hook useWindowSize gère déjà la détection de la taille de l'écran
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -237,13 +246,14 @@ const MachineManagement = () => {
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="p-6 flex justify-between items-center border-b border-gray-300">
+      <div className={`${isMobile ? 'p-4' : isTablet ? 'p-5' : 'p-6'} flex ${isMobile ? 'flex-col' : 'flex-row'} justify-between items-${isMobile ? 'start' : 'center'} border-b border-gray-300 gap-3`}>
         <h2 className="text-xl font-semibold">Machine Management</h2>
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
+          className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center ${isMobile ? 'w-full' : 'w-auto'} justify-${isMobile ? 'center' : 'start'} transition-colors duration-200`}
           onClick={() => setIsAddModalOpen(true)}
+          aria-label="Ajouter une machine"
         >
-          <IoMdAdd className="mr-1" /> Add Machine
+          <IoMdAdd className="mr-1" /> {isMobile ? "Add" : "Add Machine"}
         </button>
       </div>
 
@@ -261,29 +271,99 @@ const MachineManagement = () => {
         </div>
       ) : (
         <>
-          {/* Machines Table */}
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Machine
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Datasheet
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {machines.map((machine) => (
-                  <tr key={machine._id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
+          {/* Desktop and Tablet Machines Table */}
+          {!isMobile ? (
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className={`${isTablet ? 'px-3' : 'px-6'} py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider`}>
+                      Machine
+                    </th>
+                    <th className={`${isTablet ? 'px-3' : 'px-6'} py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${isTablet ? 'hidden md:table-cell' : ''}`}>
+                      Datasheet
+                    </th>
+                    <th className={`${isTablet ? 'px-3' : 'px-6'} py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider`}>
+                      Status
+                    </th>
+                    <th className={`${isTablet ? 'px-3' : 'px-6'} py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider`}>
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {machines.map((machine) => (
+                    <tr key={machine._id}>
+                      <td className={`${isTablet ? 'px-3 py-3' : 'px-6 py-4'} whitespace-nowrap`}>
+                        <div className="flex items-center">
+                          <div className={`flex-shrink-0 ${isTablet ? 'h-8 w-8' : 'h-10 w-10'} flex items-center justify-center bg-gray-200 rounded-md`}>
+                            <MdSettingsApplications
+                              size={isTablet ? 20 : 24}
+                              className="text-gray-600"
+                            />
+                          </div>
+                          <div className={`${isTablet ? 'ml-2' : 'ml-4'}`}>
+                            <div className={`${isTablet ? 'text-xs' : 'text-sm'} font-medium text-gray-900`}>
+                              {machine.nomMachine}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className={`${isTablet ? 'px-3 py-3 hidden md:table-cell' : 'px-6 py-4'} whitespace-nowrap text-sm text-gray-500`}>
+                        {machine.dataSheet}
+                      </td>
+                      <td className={`${isTablet ? 'px-3 py-3' : 'px-6 py-4'} whitespace-nowrap`}>
+                        <span
+                          className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
+                            machine.etat
+                          )}`}
+                        >
+                          {machine.etat}
+                        </span>
+                      </td>
+                      <td className={`${isTablet ? 'px-3 py-3' : 'px-6 py-4'} whitespace-nowrap text-sm font-medium`}>
+                        <div className={`flex ${isTablet ? 'space-x-1' : 'space-x-2'}`}>
+                          <button
+                            className="text-gray-600 hover:text-blue-900"
+                            onClick={() => {
+                              setCurrentMachine(machine);
+                              setIsEditModalOpen(true);
+                            }}
+                          >
+                            <MdEdit size={20} />
+                          </button>
+                          <button
+                            className="text-red-600 hover:text-red-900"
+                            onClick={() => {
+                              setCurrentMachine(machine);
+                              setIsDeleteModalOpen(true);
+                            }}
+                          >
+                            <MdDeleteForever size={20} />
+                          </button>
+                          <button
+                            className="text-green-600 hover:text-green-900"
+                            onClick={() => {
+                              setCurrentMachine(machine);
+                              setIsSettingsModalOpen(true);
+                            }}
+                          >
+                            <MdSettingsApplications size={20} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            /* Mobile Machines Cards */
+            <div className="px-4 py-2 space-y-4">
+              {machines.map((machine) => (
+                <div key={machine._id} className="bg-white border rounded-lg shadow-sm overflow-hidden">
+                  <div className="p-4">
+                    <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-gray-200 rounded-md">
                           <MdSettingsApplications
@@ -291,17 +371,12 @@ const MachineManagement = () => {
                             className="text-gray-600"
                           />
                         </div>
-                        <div className="ml-4">
+                        <div className="ml-3">
                           <div className="text-sm font-medium text-gray-900">
                             {machine.nomMachine}
                           </div>
                         </div>
                       </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {machine.dataSheet}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
                           machine.etat
@@ -309,61 +384,66 @@ const MachineManagement = () => {
                       >
                         {machine.etat}
                       </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex space-x-2">
-                        <button
-                          className="text-gray-600 hover:text-blue-900"
-                          onClick={() => {
-                            setCurrentMachine(machine);
-                            setIsEditModalOpen(true);
-                          }}
-                        >
-                          <MdEdit size={20} />
-                        </button>
-                        <button
-                          className="text-red-600 hover:text-red-900"
-                          onClick={() => {
-                            setCurrentMachine(machine);
-                            setIsDeleteModalOpen(true);
-                          }}
-                        >
-                          <MdDeleteForever size={20} />
-                        </button>
-                        <button
-                          className="text-green-600 hover:text-green-900"
-                          onClick={() => {
-                            setCurrentMachine(machine);
-                            setIsSettingsModalOpen(true);
-                          }}
-                        >
-                          <MdSettingsApplications size={20} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                    
+                    <div className="text-sm text-gray-500 mb-3">
+                      <span className="font-medium">Datasheet:</span> {machine.dataSheet}
+                    </div>
+                    
+                    <div className="flex justify-end space-x-2 border-t pt-3">
+                      <button
+                        className="p-2 text-gray-600 hover:text-blue-900 hover:bg-blue-50 rounded-full"
+                        onClick={() => {
+                          setCurrentMachine(machine);
+                          setIsEditModalOpen(true);
+                        }}
+                      >
+                        <MdEdit size={20} />
+                      </button>
+                      <button
+                        className="p-2 text-red-600 hover:text-red-900 hover:bg-red-50 rounded-full"
+                        onClick={() => {
+                          setCurrentMachine(machine);
+                          setIsDeleteModalOpen(true);
+                        }}
+                      >
+                        <MdDeleteForever size={20} />
+                      </button>
+                      <button
+                        className="p-2 text-green-600 hover:text-green-900 hover:bg-green-50 rounded-full"
+                        onClick={() => {
+                          setCurrentMachine(machine);
+                          setIsSettingsModalOpen(true);
+                        }}
+                      >
+                        <MdSettingsApplications size={20} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Pagination Controls */}
-          <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
-            <div className="text-sm text-gray-700">
-              Showing page {pagination.page} of {pagination.totalPages || 1}
+          <div className={`${isMobile ? 'px-4' : isTablet ? 'px-5' : 'px-6'} py-4 bg-gray-50 border-t border-gray-200 flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-between gap-3`}>
+            <div className={`text-sm text-gray-700 ${isMobile ? 'text-center w-full' : 'text-left w-auto'}`}>
+              Page {pagination.page} / {pagination.totalPages || 1}
             </div>
-            <div className="flex space-x-2">
+            <div className={`flex space-x-2 ${isMobile ? 'w-full justify-center' : 'w-auto'}`}>
               <button
-                className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50"
+                className={`px-3 ${isMobile ? 'py-2 flex-1' : 'py-1'} border border-gray-300 rounded-md text-sm disabled:opacity-50 transition-colors duration-200`}
                 disabled={pagination.page <= 1}
                 onClick={() => setPagination({...pagination, page: pagination.page - 1})}
+                aria-label="Page précédente"
               >
                 Previous
               </button>
               <button
-                className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50"
+                className={`px-3 ${isMobile ? 'py-2 flex-1' : 'py-1'} border border-gray-300 rounded-md text-sm disabled:opacity-50 transition-colors duration-200`}
                 disabled={pagination.page >= pagination.totalPages}
                 onClick={() => setPagination({...pagination, page: pagination.page + 1})}
+                aria-label="Page suivante"
               >
                 Next
               </button>
@@ -374,9 +454,18 @@ const MachineManagement = () => {
 
       {/* Add Machine Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">Add New Machine</h3>
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`bg-white rounded-lg shadow-lg ${isMobile ? 'p-4' : 'p-6'} w-full max-w-md max-h-[90vh] overflow-y-auto`}>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className={`${isMobile ? 'text-base' : 'text-lg'} font-semibold`}>Add New Machine</h3>
+              <button 
+                onClick={() => setIsAddModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+                aria-label="Fermer"
+              >
+                ✕
+              </button>
+            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -422,18 +511,20 @@ const MachineManagement = () => {
                 </select>
               </div>
             </div>
-            <div className="mt-6 flex justify-end space-x-3">
+            <div className={`mt-6 ${isMobile ? 'flex flex-col space-y-2' : 'flex justify-end space-x-3'}`}>
               <button
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
-                onClick={() => setIsAddModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className={`${isMobile ? 'order-1 w-full' : 'px-4'} py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200`}
                 onClick={handleAddMachine}
+                aria-label="Ajouter une machine"
               >
                 Add Machine
+              </button>
+              <button
+                className={`${isMobile ? 'order-2 w-full' : 'px-4'} py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200`}
+                onClick={() => setIsAddModalOpen(false)}
+                aria-label="Annuler"
+              >
+                Cancel
               </button>
             </div>
           </div>
@@ -442,9 +533,18 @@ const MachineManagement = () => {
 
       {/* Edit Machine Modal */}
       {isEditModalOpen && currentMachine && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">Edit Machine</h3>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`bg-white rounded-lg shadow-lg ${isMobile ? 'p-4' : 'p-6'} w-full max-w-md max-h-[90vh] overflow-y-auto`}>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className={`${isMobile ? 'text-base' : 'text-lg'} font-semibold`}>Edit Machine</h3>
+              <button 
+                onClick={() => setIsEditModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+                aria-label="Fermer"
+              >
+                ✕
+              </button>
+            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -488,18 +588,20 @@ const MachineManagement = () => {
                 </select>
               </div>
             </div>
-            <div className="mt-6 flex justify-end space-x-3">
+            <div className={`mt-6 ${isMobile ? 'flex flex-col space-y-2' : 'flex justify-end space-x-3'}`}>
               <button
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
-                onClick={() => setIsEditModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className={`${isMobile ? 'order-1 w-full' : 'px-4'} py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200`}
                 onClick={handleUpdateMachine}
+                aria-label="Enregistrer les modifications"
               >
                 Save Changes
+              </button>
+              <button
+                className={`${isMobile ? 'order-2 w-full' : 'px-4'} py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200`}
+                onClick={() => setIsEditModalOpen(false)}
+                aria-label="Annuler"
+              >
+                Cancel
               </button>
             </div>
           </div>
@@ -508,26 +610,37 @@ const MachineManagement = () => {
 
       {/* Delete Machine Modal */}
       {isDeleteModalOpen && currentMachine && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">Delete Machine</h3>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`bg-white rounded-lg shadow-lg ${isMobile ? 'p-4' : 'p-6'} w-full max-w-md max-h-[90vh] overflow-y-auto`}>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className={`${isMobile ? 'text-base' : 'text-lg'} font-semibold`}>Delete Machine</h3>
+              <button 
+                onClick={() => setIsDeleteModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+                aria-label="Fermer"
+              >
+                ✕
+              </button>
+            </div>
             <p className="text-gray-700">
               Are you sure you want to delete the machine{" "}
               <strong>{currentMachine.nomMachine}</strong>? This action cannot be
               undone.
             </p>
-            <div className="mt-6 flex justify-end space-x-3">
+            <div className={`mt-6 ${isMobile ? 'flex flex-col space-y-2' : 'flex justify-end space-x-3'}`}>
               <button
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
-                onClick={() => setIsDeleteModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                className={`${isMobile ? 'order-1 w-full' : 'px-4'} py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors duration-200`}
                 onClick={handleDeleteMachine}
+                aria-label="Supprimer la machine"
               >
                 Delete Machine
+              </button>
+              <button
+                className={`${isMobile ? 'order-2 w-full' : 'px-4'} py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200`}
+                onClick={() => setIsDeleteModalOpen(false)}
+                aria-label="Annuler"
+              >
+                Cancel
               </button>
             </div>
           </div>
@@ -536,9 +649,18 @@ const MachineManagement = () => {
 
       {/* Machine Settings Modal */}
       {isSettingsModalOpen && currentMachine && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4">Machine Settings</h3>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`bg-white rounded-lg shadow-lg ${isMobile ? 'p-4' : 'p-6'} w-full max-w-md max-h-[90vh] overflow-y-auto`}>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className={`${isMobile ? 'text-base' : 'text-lg'} font-semibold`}>Machine Settings</h3>
+              <button 
+                onClick={() => setIsSettingsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700"
+                aria-label="Fermer"
+              >
+                ✕
+              </button>
+            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -589,18 +711,20 @@ const MachineManagement = () => {
                 ></textarea>
               </div>
             </div>
-            <div className="mt-6 flex justify-end space-x-3">
+            <div className={`mt-6 ${isMobile ? 'flex flex-col space-y-2' : 'flex justify-end space-x-3'}`}>
               <button
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
-                onClick={() => setIsSettingsModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className={`${isMobile ? 'order-1 w-full' : 'px-4'} py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200`}
                 onClick={handleUpdateSettings}
+                aria-label="Mettre à jour les paramètres"
               >
                 Update Settings
+              </button>
+              <button
+                className={`${isMobile ? 'order-2 w-full' : 'px-4'} py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200`}
+                onClick={() => setIsSettingsModalOpen(false)}
+                aria-label="Annuler"
+              >
+                Cancel
               </button>
             </div>
           </div>

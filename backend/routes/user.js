@@ -16,7 +16,7 @@ const router = express.Router();
 router.get("/", getAllUsers); // Obtenir tous les utilisateurs
 router.get("/:id", authorize(["admin"]), getUserById); // Obtenir un utilisateur par ID
 router.post("/", authorize(["admin"]), createUser); // Créer un utilisateur
-router.put("/:id", authorize(["admin"]), updateUser); // Mettre à jour un utilisateur
+router.put("/:id", authorize(["admin","technicien"]), updateUser); // Mettre à jour un utilisateur
 router.delete("/:id", authorize(["admin"]), deleteUser); // Supprimer un utilisateur
 
 // 📌 Route pour mettre à jour la photo de profil (accessible à l'utilisateur connecté et aux administrateurs)

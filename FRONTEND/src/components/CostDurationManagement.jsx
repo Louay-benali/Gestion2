@@ -250,119 +250,138 @@ const CostDurationManagement = () => {
       );
 
     return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Machine
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Type
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Technicien
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Statut
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Coût (DH)
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Durée (heures)
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredInterventions.map((intervention) => (
-              <tr key={intervention._id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {intervention.machine?.nomMachine || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {intervention.type || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {intervention.technicien
-                    ? `${intervention.technicien.prenom} ${intervention.technicien.nom}`
-                    : "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyles(
-                      intervention.status
-                    )}`}
-                  >
-                    {intervention.status || "N/A"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {editingId === intervention._id ? (
-                    <input
-                      type="number"
-                      name="cost"
-                      value={editValues.cost}
-                      onChange={handleInputChange}
-                      className="border rounded px-2 py-1 w-24"
-                      min="0"
-                      step="0.01"
-                    />
-                  ) : intervention.cost ? (
-                    `${intervention.cost.toFixed(2)} DH`
-                  ) : (
-                    "Non défini"
-                  )}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {editingId === intervention._id ? (
-                    <input
-                      type="number"
-                      name="duration"
-                      value={editValues.duration}
-                      onChange={handleInputChange}
-                      className="border rounded px-2 py-1 w-24"
-                      min="0"
-                    />
-                  ) : intervention.duration ? (
-                    `${intervention.duration} h`
-                  ) : (
-                    "Non défini"
-                  )}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                  {editingId === intervention._id ? (
-                    <div className="flex justify-center space-x-2">
-                      <button
-                        onClick={() => saveInterventionEdit(intervention._id)}
-                        className="text-green-600 hover:text-green-900"
-                      >
-                        <Save size={18} />
-                      </button>
-                      <button
-                        onClick={cancelEdit}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        <XCircle size={18} />
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => startEdit(intervention)}
-                      className="text-indigo-600 hover:text-indigo-900 mx-auto"
-                    >
-                      <MdEdit size={20} />
-                    </button>
-                  )}
-                </td>
+      <>
+        {/* Desktop View - Table */}
+        <div className="hidden lg:block overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Machine
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Type
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Technicien
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Statut
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Coût (DH)
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Durée (heures)
+                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredInterventions.map((intervention) => (
+                <tr key={intervention._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {intervention.machine?.nomMachine || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {intervention.type || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {intervention.technicien
+                      ? `${intervention.technicien.prenom} ${intervention.technicien.nom}`
+                      : "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyles(
+                        intervention.status
+                      )}`}
+                    >
+                      {intervention.status || "N/A"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {editingId === intervention._id ? (
+                      <input
+                        type="number"
+                        name="cost"
+                        value={editValues.cost}
+                        onChange={handleInputChange}
+                        className="border rounded px-2 py-1 w-24"
+                        min="0"
+                        step="0.01"
+                      />
+                    ) : intervention.cost ? (
+                      `${intervention.cost.toFixed(2)} DH`
+                    ) : (
+                      "Non défini"
+                    )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {editingId === intervention._id ? (
+                      <input
+                        type="number"
+                        name="duration"
+                        value={editValues.duration}
+                        onChange={handleInputChange}
+                        className="border rounded px-2 py-1 w-24"
+                        min="0"
+                        step="0.5"
+                      />
+                    ) : intervention.duration ? (
+                      `${intervention.duration} h`
+                    ) : (
+                      "Non défini"
+                    )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                    {editingId === intervention._id ? (
+                      <div className="flex justify-center space-x-2">
+                        <button
+                          onClick={() => saveInterventionEdit(intervention._id)}
+                          className="text-green-600 hover:text-green-900"
+                        >
+                          <Save size={18} />
+                        </button>
+                        <button
+                          onClick={cancelEdit}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          <XCircle size={18} />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => startEdit(intervention)}
+                        className="text-indigo-600 hover:text-indigo-900 mx-auto"
+                      >
+                        <MdEdit size={20} />
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile and Tablet View - Cards */}
+        <div className="lg:hidden">
+          {filteredInterventions.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {filteredInterventions.map((intervention) =>
+                renderInterventionCard(intervention)
+              )}
+            </div>
+          ) : (
+            <div className="p-6 text-center text-gray-500">
+              Aucune intervention trouvée avec les critères sélectionnés
+            </div>
+          )}
+        </div>
+      </>
     );
   };
 
@@ -374,103 +393,138 @@ const CostDurationManagement = () => {
       return <div className="text-center py-4">Aucune maintenance trouvée</div>;
 
     return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Titre
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Type
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Technicien
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Statut
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Coût (DH)
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Durée (heures)
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredMaintenances.map((maintenance) => (
-              <tr key={maintenance._id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {maintenance.titre || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {maintenance.typeMaintenance || "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {maintenance.technicien
-                    ? `${maintenance.technicien.prenom} ${maintenance.technicien.nom}`
-                    : "N/A"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getMaintenanceStatusStyles(
-                      maintenance.statut
-                    )}`}
-                  >
-                    {maintenance.statut || "N/A"}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {editingId === maintenance._id ? (
-                    <input
-                      type="number"
-                      name="cost"
-                      value={editValues.cost}
-                      onChange={handleInputChange}
-                      className="border rounded px-2 py-1 w-24"
-                      min="0"
-                      step="0.01"
-                    />
-                  ) : maintenance.cost ? (
-                    `${maintenance.cost.toFixed(2)} DH`
-                  ) : (
-                    "Non défini"
-                  )}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {editingId === maintenance._id ? (
-                    <div className="flex justify-center space-x-2">
-                      <button
-                        onClick={() => saveMaintenanceEdit(maintenance._id)}
-                        className="text-green-600 hover:text-green-900"
-                      >
-                        <Save size={18} />
-                      </button>
-                      <button
-                        onClick={cancelEdit}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        <XCircle size={18} />
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => startEdit(maintenance)}
-                      className="text-indigo-600 hover:text-indigo-900 mx-auto"
-                    >
-                      <MdEdit size={20} />
-                    </button>
-                  )}
-                </td>
+      <>
+        {/* Desktop View - Table */}
+        <div className="hidden lg:block overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Titre
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Type
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Technicien
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Statut
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Coût (DH)
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Durée (heures)
+                </th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredMaintenances.map((maintenance) => (
+                <tr key={maintenance._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {maintenance.titre || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {maintenance.typeMaintenance || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {maintenance.technicien
+                      ? `${maintenance.technicien.prenom} ${maintenance.technicien.nom}`
+                      : "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getMaintenanceStatusStyles(
+                        maintenance.statut
+                      )}`}
+                    >
+                      {maintenance.statut || "N/A"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {editingId === maintenance._id ? (
+                      <input
+                        type="number"
+                        name="cost"
+                        value={editValues.cost}
+                        onChange={handleInputChange}
+                        className="border rounded px-2 py-1 w-24"
+                        min="0"
+                        step="0.01"
+                      />
+                    ) : maintenance.cost ? (
+                      `${maintenance.cost.toFixed(2)} DH`
+                    ) : (
+                      "Non défini"
+                    )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {editingId === maintenance._id ? (
+                      <input
+                        type="number"
+                        name="duration"
+                        value={editValues.duration}
+                        onChange={handleInputChange}
+                        className="border rounded px-2 py-1 w-24"
+                        min="0"
+                        step="0.5"
+                      />
+                    ) : maintenance.duration ? (
+                      `${maintenance.duration}`
+                    ) : (
+                      "Non défini"
+                    )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {editingId === maintenance._id ? (
+                      <div className="flex justify-center space-x-2">
+                        <button
+                          onClick={() => saveMaintenanceEdit(maintenance._id)}
+                          className="text-green-600 hover:text-green-900"
+                        >
+                          <Save size={18} />
+                        </button>
+                        <button
+                          onClick={cancelEdit}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          <XCircle size={18} />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => startEdit(maintenance)}
+                        className="text-indigo-600 hover:text-indigo-900 mx-auto"
+                      >
+                        <MdEdit size={20} />
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile and Tablet View - Cards */}
+        <div className="lg:hidden">
+          {filteredMaintenances.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {filteredMaintenances.map((maintenance) =>
+                renderMaintenanceCard(maintenance)
+              )}
+            </div>
+          ) : (
+            <div className="p-6 text-center text-gray-500">
+              Aucune maintenance trouvée avec les critères sélectionnés
+            </div>
+          )}
+        </div>
+      </>
     );
   };
 
@@ -501,6 +555,284 @@ const CostDurationManagement = () => {
       default:
         return "bg-gray-50 text-gray-600";
     }
+  };
+  
+  // Render a card for mobile and tablet view of an intervention
+  const renderInterventionCard = (intervention) => {
+    if (editingId === intervention._id) {
+      return (
+        <div
+          key={intervention._id}
+          className="p-4 border rounded-lg mb-4 bg-white shadow-sm hover:shadow transition-shadow"
+        >
+          <div className="flex justify-between items-start mb-3">
+            <div className="text-xs text-gray-500 truncate max-w-[150px]">
+              ID: {intervention._id}
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => saveInterventionEdit(intervention._id)}
+                className="p-1.5 rounded bg-green-100 text-green-600 hover:bg-green-200 active:bg-green-300 transition-colors"
+                title="Enregistrer"
+                aria-label="Enregistrer les modifications"
+              >
+                <Save size={16} />
+              </button>
+              <button
+                onClick={cancelEdit}
+                className="p-1.5 rounded bg-red-100 text-red-600 hover:bg-red-200 active:bg-red-300 transition-colors"
+                title="Annuler"
+                aria-label="Annuler les modifications"
+              >
+                <XCircle size={16} />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3">
+            <div>
+              <label className="block text-xs text-gray-500 mb-1 font-medium">
+                Coût (DH)
+              </label>
+              <input
+                type="number"
+                name="cost"
+                value={editValues.cost}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                min="0"
+                step="0.01"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs text-gray-500 mb-1 font-medium">
+                Durée (heures)
+              </label>
+              <input
+                type="number"
+                name="duration"
+                value={editValues.duration}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                min="0"
+                step="0.5"
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        key={intervention._id}
+        className="p-4 border rounded-lg mb-4 bg-white shadow-sm hover:shadow-md transition-shadow"
+      >
+        <div className="flex justify-between items-start mb-3">
+          <div className="text-xs text-gray-500 truncate max-w-[150px]">
+            ID: {intervention._id}
+          </div>
+          <button
+            onClick={() => startEdit(intervention)}
+            className="p-1.5 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 active:bg-blue-300 transition-colors"
+            title="Modifier"
+            aria-label="Modifier l'intervention"
+          >
+            <MdEdit size={18} />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mb-3">
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Machine</div>
+            <div className="text-sm font-medium break-words">{intervention.machine?.nomMachine || "N/A"}</div>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Type</div>
+            <div className="text-sm font-medium">
+              {intervention.type || "N/A"}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Statut</div>
+            <p
+              className={`${getStatusStyles(
+                intervention.status
+              )} inline-block rounded-full px-2 py-0.5 text-xs font-medium mt-1`}
+            >
+              {intervention.status || "N/A"}
+            </p>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Coût</div>
+            <div className="text-sm font-medium">
+              {intervention.cost ? `${intervention.cost.toFixed(2)} DH` : "Non défini"}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Technicien</div>
+            <div className="text-sm font-medium break-words">
+              {intervention.technicien
+                ? `${intervention.technicien.prenom} ${intervention.technicien.nom}`
+                : "N/A"}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Durée</div>
+            <div className="text-sm font-medium">
+              {intervention.duration ? `${intervention.duration} heures` : "Non défini"}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Render a card for mobile and tablet view of a maintenance
+  const renderMaintenanceCard = (maintenance) => {
+    if (editingId === maintenance._id) {
+      return (
+        <div
+          key={maintenance._id}
+          className="p-4 border rounded-lg mb-4 bg-white shadow-sm hover:shadow transition-shadow"
+        >
+          <div className="flex justify-between items-start mb-3">
+            <div className="text-xs text-gray-500 truncate max-w-[150px]">
+              ID: {maintenance._id}
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => saveMaintenanceEdit(maintenance._id)}
+                className="p-1.5 rounded bg-green-100 text-green-600 hover:bg-green-200 active:bg-green-300 transition-colors"
+                title="Enregistrer"
+                aria-label="Enregistrer les modifications"
+              >
+                <Save size={16} />
+              </button>
+              <button
+                onClick={cancelEdit}
+                className="p-1.5 rounded bg-red-100 text-red-600 hover:bg-red-200 active:bg-red-300 transition-colors"
+                title="Annuler"
+                aria-label="Annuler les modifications"
+              >
+                <XCircle size={16} />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3">
+            <div>
+              <label className="block text-xs text-gray-500 mb-1 font-medium">
+                Coût (DH)
+              </label>
+              <input
+                type="number"
+                name="cost"
+                value={editValues.cost}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                min="0"
+                step="0.01"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs text-gray-500 mb-1 font-medium">
+                Durée (heures)
+              </label>
+              <input
+                type="number"
+                name="duration"
+                value={editValues.duration}
+                onChange={handleInputChange}
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                min="0"
+                step="0.5"
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div
+        key={maintenance._id}
+        className="p-4 border rounded-lg mb-4 bg-white shadow-sm hover:shadow-md transition-shadow"
+      >
+        <div className="flex justify-between items-start mb-3">
+          <div className="text-xs text-gray-500 truncate max-w-[150px]">
+            ID: {maintenance._id}
+          </div>
+          <button
+            onClick={() => startEdit(maintenance)}
+            className="p-1.5 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 active:bg-blue-300 transition-colors"
+            title="Modifier"
+            aria-label="Modifier la maintenance"
+          >
+            <MdEdit size={18} />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mb-3">
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Titre</div>
+            <div className="text-sm font-medium break-words">{maintenance.titre || "N/A"}</div>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Type</div>
+            <div className="text-sm font-medium">
+              {maintenance.typeMaintenance || "N/A"}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Statut</div>
+            <p
+              className={`${getMaintenanceStatusStyles(
+                maintenance.statut
+              )} inline-block rounded-full px-2 py-0.5 text-xs font-medium mt-1`}
+            >
+              {maintenance.statut || "N/A"}
+            </p>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Coût</div>
+            <div className="text-sm font-medium">
+              {maintenance.cost ? `${maintenance.cost.toFixed(2)} DH` : "Non défini"}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Technicien</div>
+            <div className="text-sm font-medium break-words">
+              {maintenance.technicien
+                ? `${maintenance.technicien.prenom} ${maintenance.technicien.nom}`
+                : "N/A"}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs text-gray-500 font-medium">Durée</div>
+            <div className="text-sm font-medium">
+              {maintenance.duration ? `${maintenance.duration} heures` : "Non défini"}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   // Options for status filters

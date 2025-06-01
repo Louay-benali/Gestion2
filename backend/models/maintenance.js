@@ -34,6 +34,16 @@ const maintenanceSchema = new mongoose.Schema(
       enum: ["Planifiée", "En cours", "Terminée", "Annulée"],
       default: "Planifiée"
     },
+    cost: {
+      type: Number,
+      default: 100,
+      min: 0
+    },
+    duration: {
+      type: Number,
+      default: 1,
+      min: 0
+    },
     pieceUtilisees: [{
       piece: {
         type: mongoose.Schema.Types.ObjectId,

@@ -51,7 +51,7 @@ const ResponsableDashboard = () => {
     { label: "Machine Table", icon: <MdTableChart size={24} /> },
     { label: "Intervention Table", icon: <MdTableChart size={24} /> },
     { label: "Maintenance Table", icon: <MdTableChart size={24} /> },
-    { label: "Cost & Duration Management", icon: <MdTableChart size={24} /> },
+    { label: "Gestion Coûts", icon: <MdTableChart size={24} /> },
   ];
 
   // Function to handle sidebar toggle

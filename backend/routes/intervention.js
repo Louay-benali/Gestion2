@@ -11,6 +11,7 @@ import {
   getTachesAssignees,
   addObservation,
   createRapportIntervention,
+  updateInterventionCostDuration,
 } from "../controllers/intervention.js";
 import { authorize } from "../middleware/auth.js";
 
@@ -42,6 +43,7 @@ router.get(
 router.get("/:id", authorize(["responsable", "technicien"]), getInterventionById); // ✅ Récupérer une intervention par ID
 router.put("/:id", authorize(["responsable","technicien"]), updateIntervention); // ✅ Modifier une intervention
 router.put("/:id/observation", authorize(["technicien"]), addObservation); // Mentionner des observations
+router.put("/:id/cost-duration", authorize(["responsable","technicien"]), updateInterventionCostDuration); // ✅ Mettre à jour le coût et la durée
 router.delete("/:id", deleteIntervention); // ✅ Supprimer une intervention
 
 export default router;

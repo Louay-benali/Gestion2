@@ -58,7 +58,7 @@ const PanneTable = () => {
   // Vérification de la taille d'écran lors du montage et du redimensionnement
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth < 1024); // Augmenter le seuil pour inclure les tablettes
     };
 
     checkScreenSize();
@@ -298,37 +298,38 @@ const PanneTable = () => {
 
   return (
     <div className="border py-4 rounded-3xl border-gray-200 bg-white">
-      <div className="px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-xl font-semibold">Machines en Panne</h1>
-        <div className="flex gap-2 justify-end w-full sm:w-auto">
+      <div className="px-5 pb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h1 className="text-xl font-semibold text-center md:text-left dark:text-white">Machines en Panne</h1>
+        <div className="flex gap-2 justify-between w-full md:w-auto">
           <SearchInput
-            className="w-full sm:w-48 md:w-72"
+            className="flex-1 md:w-64 lg:w-72"
             placeholder="Rechercher par nom de machine..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
-            className={`border p-2 rounded-lg sm:w-24 flex flex-row gap-2 items-center justify-center transition-colors ${
+            className={`border p-2 rounded-lg min-w-[40px] flex flex-row gap-1 items-center justify-center transition-colors ${
               showFilters
-                ? "bg-blue-100 border-blue-300 text-blue-700"
-                : "border-gray-300 hover:bg-gray-50"
+                ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
+                : "border-gray-300 hover:bg-gray-50 active:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700 dark:active:bg-gray-600 dark:text-gray-200"
             }`}
             onClick={() => setShowFilters(!showFilters)}
+            aria-label="Filtrer les pannes"
           >
             <VscSettings size={18} />
-            Filtrer
+            <span className="hidden md:inline">Filtrer</span>
           </button>
         </div>
       </div>
 
       {/* Section des filtres */}
       {showFilters && (
-        <div className="px-5 pb-4 border-t border-gray-200 pt-4">
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex flex-col gap-1 min-w-40">
-              <label className="text-sm text-gray-600">Machine</label>
+        <div className="px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+          <div className="flex flex-col md:flex-row flex-wrap gap-4 items-start md:items-center">
+            <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+              <label className="text-sm text-gray-600 dark:text-gray-300 font-medium">Machine</label>
               <select
-                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
+                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 text-sm bg-white dark:bg-gray-700 dark:text-white w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400 outline-none"
                 value={filters.machine}
                 onChange={(e) =>
                   setFilters({ ...filters, machine: e.target.value })
@@ -343,10 +344,10 @@ const PanneTable = () => {
               </select>
             </div>
 
-            <div className="flex flex-col gap-1 min-w-40">
-              <label className="text-sm text-gray-600">État</label>
+            <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+              <label className="text-sm text-gray-600 dark:text-gray-300 font-medium">État</label>
               <select
-                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
+                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 text-sm bg-white dark:bg-gray-700 dark:text-white w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400 outline-none"
                 value={filters.etat}
                 onChange={(e) =>
                   setFilters({ ...filters, etat: e.target.value })
@@ -361,8 +362,9 @@ const PanneTable = () => {
 
             {isAnyFilterActive && (
               <button
-                className="mt-6 flex items-center gap-1 text-sm text-red-600 hover:text-red-800"
+                className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 active:text-red-900 dark:active:text-red-200 mt-2 md:mt-6 py-1.5 px-2 rounded-lg transition-colors hover:bg-red-50 active:bg-red-100 dark:hover:bg-red-900/20 dark:active:bg-red-900/30 w-full md:w-auto justify-center md:justify-start"
                 onClick={resetFilters}
+                aria-label="Réinitialiser tous les filtres"
               >
                 <XCircle size={14} />
                 Réinitialiser les filtres
@@ -372,10 +374,10 @@ const PanneTable = () => {
         </div>
       )}
 
-      <div className="border-t border-gray-200 pt-6 pb-3 px-7">
+      <div className="border-t border-gray-200 dark:border-gray-700 pt-4 sm:pt-6 pb-3 px-4 sm:px-7">
         {loading ? (
           <div className="flex justify-center p-8">
-            <p>Chargement des données...</p>
+            <p className="dark:text-gray-300 animate-pulse">Chargement des données...</p>
           </div>
         ) : error ? (
           <div className="flex justify-center p-8 text-red-500">
@@ -554,17 +556,17 @@ const PanneTable = () => {
               </div>
             )}
 
-            {/* Vue mobile responsive */}
+            {/* Vue mobile et tablette responsive */}
             {isSmallScreen && (
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {filteredPannes.length > 0 ? (
                   filteredPannes.map((panne) => (
                     <div
                       key={panne._id}
-                      className="p-4 rounded-lg border border-gray-200"
+                      className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-md transition-shadow"
                     >
-                      <div className="flex justify-between items-start mb-2">
-                        <span className="font-medium text-sm">
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="font-medium text-sm dark:text-gray-200 truncate max-w-[150px]">
                           {panne.machineName}
                         </span>
                         <div className="flex items-center gap-2">
@@ -575,29 +577,29 @@ const PanneTable = () => {
                           >
                             {panne.etat}
                           </p>
-                          {/* FaRegCheckCircle supprimé */}
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 gap-2 mb-3">
-                        <div>
-                          <p className="text-xs text-gray-500">Description</p>
-                          <p className="text-sm">{panne.description}</p>
+                      <div className="space-y-2">
+                        <div className="flex flex-col md:flex-row md:justify-between">
+                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Description:</span>
+                          <span className="text-sm text-gray-800 dark:text-gray-200 break-words md:max-w-[60%] md:text-right">{panne.description}</span>
                         </div>
-                        <div>
-                          <p className="text-xs text-gray-500">Signalé par</p>
-                          <p className="text-sm">{panne.operateurName}</p>
+                        <div className="flex flex-col md:flex-row md:justify-between">
+                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Signalé par:</span>
+                          <span className="text-sm text-gray-800 dark:text-gray-200 break-words md:max-w-[60%] md:text-right">{panne.operateurName}</span>
                         </div>
-                        <div>
-                          <p className="text-xs text-gray-500">Date</p>
-                          <p className="text-sm">{panne.formattedDate}</p>
+                        <div className="flex flex-col md:flex-row md:justify-between">
+                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Date:</span>
+                          <span className="text-sm text-gray-800 dark:text-gray-200 md:text-right">{panne.formattedDate}</span>
                         </div>
                       </div>
-                      <div className="flex justify-end">
+                      <div className="flex justify-end mt-3">
                         <button
                           onClick={() => startEdit(panne)}
-                          className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
+                          className="p-1.5 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 active:bg-blue-300 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
                           title="Modifier"
+                          aria-label="Modifier cette panne"
                         >
                           <MdEdit size={18} />
                         </button>
@@ -605,41 +607,43 @@ const PanneTable = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="p-8 text-center text-gray-500 border border-gray-200 rounded-lg">
+                  <div className="p-8 text-center text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg col-span-full">
                     Aucune panne trouvée avec les critères sélectionnés
                   </div>
                 )}
               </div>
             )}
 
-            <div className="flex justify-between items-center mt-6">
-              <div className="text-sm text-gray-500">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-6 gap-3">
+              <div className="text-sm text-gray-500 dark:text-gray-400 text-center md:text-left">
                 Affichage de {filteredPannes.length} sur{" "}
                 {pagination.totalPannes} pannes
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
                 <button
                   onClick={() => handlePageChange(pagination.page - 1)}
                   disabled={pagination.page <= 1}
-                  className={`p-2 rounded-md ${
+                  className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
                     pagination.page <= 1
-                      ? "text-gray-300 cursor-not-allowed"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed bg-gray-50 dark:bg-gray-800"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"
                   }`}
+                  aria-label="Page précédente"
                 >
                   <FiChevronLeft size={18} />
                 </button>
-                <span className="text-sm">
+                <span className="text-sm dark:text-gray-300 whitespace-nowrap px-2">
                   Page {pagination.page} sur {pagination.totalPages}
                 </span>
                 <button
                   onClick={() => handlePageChange(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages}
-                  className={`p-2 rounded-md ${
+                  className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
                     pagination.page >= pagination.totalPages
-                      ? "text-gray-300 cursor-not-allowed"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed bg-gray-50 dark:bg-gray-800"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"
                   }`}
+                  aria-label="Page suivante"
                 >
                   <FiChevronRight size={18} />
                 </button>

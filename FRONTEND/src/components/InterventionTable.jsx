@@ -362,30 +362,32 @@ const InterventionTable = () => {
     return formattedType;
   };
 
-  // Render a card for mobile view of an intervention
+  // Render a card for mobile and tablet view of an intervention
   const renderInterventionCard = (intervention) => {
     if (editingId === intervention._id) {
       return (
         <div
           key={intervention._id}
-          className="p-4 border rounded-lg mb-4 bg-white shadow-sm"
+          className="p-4 border rounded-lg mb-4 bg-white shadow-sm hover:shadow transition-shadow"
         >
           <div className="flex justify-between items-start mb-3">
-            <div className="text-sm font-medium text-gray-500">
+            <div className="text-xs text-gray-500 truncate max-w-[150px]">
               ID: {intervention._id}
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => saveEdit(intervention._id)}
-                className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
+                className="p-1.5 rounded bg-green-100 text-green-600 hover:bg-green-200 active:bg-green-300 transition-colors"
                 title="Enregistrer"
+                aria-label="Enregistrer les modifications"
               >
                 <Save size={16} />
               </button>
               <button
                 onClick={cancelEdit}
-                className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
+                className="p-1.5 rounded bg-red-100 text-red-600 hover:bg-red-200 active:bg-red-300 transition-colors"
                 title="Annuler"
+                aria-label="Annuler les modifications"
               >
                 <XCircle size={16} />
               </button>
@@ -394,12 +396,12 @@ const InterventionTable = () => {
 
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs text-gray-500 mb-1 font-medium">
                 Machine
               </label>
               <input
                 type="text"
-                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={editValues.machine}
                 onChange={(e) =>
                   setEditValues({ ...editValues, machine: e.target.value })
@@ -409,9 +411,9 @@ const InterventionTable = () => {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Type</label>
+              <label className="block text-xs text-gray-500 mb-1 font-medium">Type</label>
               <select
-                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={editValues.type}
                 onChange={(e) =>
                   setEditValues({ ...editValues, type: e.target.value })
@@ -423,12 +425,12 @@ const InterventionTable = () => {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-500 mb-1">
+              <label className="block text-xs text-gray-500 mb-1 font-medium">
                 Technicien
               </label>
               <input
                 type="text"
-                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={editValues.technicien}
                 onChange={(e) =>
                   setEditValues({ ...editValues, technicien: e.target.value })
@@ -438,9 +440,9 @@ const InterventionTable = () => {
             </div>
 
             <div>
-              <label className="block text-xs text-gray-500 mb-1">Status</label>
+              <label className="block text-xs text-gray-500 mb-1 font-medium">Status</label>
               <select
-                className="w-full border border-gray-300 rounded p-2 text-sm bg-white"
+                className="w-full border border-gray-300 rounded p-2 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={editValues.status}
                 onChange={(e) =>
                   setEditValues({ ...editValues, status: e.target.value })
@@ -459,36 +461,37 @@ const InterventionTable = () => {
     return (
       <div
         key={intervention._id}
-        className="p-4 border rounded-lg mb-4 bg-white shadow-sm"
+        className="p-4 border rounded-lg mb-4 bg-white shadow-sm hover:shadow-md transition-shadow"
       >
         <div className="flex justify-between items-start mb-3">
-          <div className="text-sm font-medium text-gray-500">
+          <div className="text-xs text-gray-500 truncate max-w-[150px]">
             ID: {intervention._id}
           </div>
           <button
             onClick={() => startEdit(intervention)}
-            className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
+            className="p-1.5 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 active:bg-blue-300 transition-colors"
             title="Modifier"
+            aria-label="Modifier l'intervention"
           >
             <MdEdit size={18} />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mb-3">
           <div>
-            <div className="text-xs text-gray-500">Machine</div>
-            <div className="text-sm font-medium">{intervention.machineNom}</div>
+            <div className="text-xs text-gray-500 font-medium">Machine</div>
+            <div className="text-sm font-medium break-words">{intervention.machineNom}</div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500">Date</div>
+            <div className="text-xs text-gray-500 font-medium">Date</div>
             <div className="text-sm font-medium">
               {intervention.formattedDate}
             </div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500">Type</div>
+            <div className="text-xs text-gray-500 font-medium">Type</div>
             <div className="flex items-center gap-2 text-sm font-medium">
               {getInterventionTypeIcon(intervention.type)}
               <span>{formatTypeDisplay(intervention.type)}</span>
@@ -496,7 +499,7 @@ const InterventionTable = () => {
           </div>
 
           <div>
-            <div className="text-xs text-gray-500">Status</div>
+            <div className="text-xs text-gray-500 font-medium">Status</div>
             <p
               className={`${getStatusStyles(
                 intervention.status
@@ -508,8 +511,8 @@ const InterventionTable = () => {
         </div>
 
         <div>
-          <div className="text-xs text-gray-500">Technicien</div>
-          <div className="text-sm font-medium">
+          <div className="text-xs text-gray-500 font-medium">Technicien</div>
+          <div className="text-sm font-medium break-words">
             {intervention.technicienNom}
           </div>
         </div>
@@ -519,25 +522,26 @@ const InterventionTable = () => {
 
   return (
     <div className="border py-4 rounded-3xl border-gray-200 bg-white">
-      <div className="px-4 md:px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-xl font-semibold">Historique des Interventions</h1>
-        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+      <div className="px-4 md:px-5 pb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h1 className="text-xl font-semibold text-center md:text-left">Historique des Interventions</h1>
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
           <SearchInput
-            className="w-full sm:w-48 md:w-72"
+            className="w-full md:w-64 lg:w-72"
             placeholder="Rechercher par machine ou technicien..."
             value={searchTerm}
             onChange={handleSearch}
           />
           <button
-            className={`border p-2 rounded-lg flex flex-row gap-2 items-center justify-center transition-colors ${
+            className={`border p-2 rounded-lg min-w-[40px] flex flex-row gap-2 items-center justify-center transition-colors ${
               showFilters
                 ? "bg-blue-100 border-blue-300 text-blue-700"
-                : "border-gray-300 hover:bg-gray-50"
+                : "border-gray-300 hover:bg-gray-50 active:bg-gray-100"
             }`}
             onClick={() => setShowFilters(!showFilters)}
+            aria-label="Filtrer les interventions"
           >
             <Filter size={18} />
-            <span className="sm:inline">Filtrer</span>
+            <span className="md:inline hidden">Filtrer</span>
           </button>
         </div>
       </div>
@@ -546,12 +550,12 @@ const InterventionTable = () => {
       {showFilters && (
         <div className="px-4 md:px-5 pb-4 border-t border-gray-200 pt-4">
           <div className="flex flex-col md:flex-row flex-wrap gap-4 md:items-center">
-            <div className="flex flex-col gap-1 w-full sm:w-auto">
-              <label className="text-sm text-gray-600">
+            <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+              <label className="text-sm text-gray-600 font-medium">
                 Type d'intervention
               </label>
               <select
-                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
+                className="border border-gray-300 rounded-lg p-2.5 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={filters.type}
                 onChange={(e) =>
                   setFilters({ ...filters, type: e.target.value })
@@ -563,10 +567,10 @@ const InterventionTable = () => {
               </select>
             </div>
 
-            <div className="flex flex-col gap-1 w-full sm:w-auto">
-              <label className="text-sm text-gray-600">Technicien</label>
+            <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+              <label className="text-sm text-gray-600 font-medium">Technicien</label>
               <select
-                className="border border-gray-300 rounded-lg p-2 text-sm bg-white"
+                className="border border-gray-300 rounded-lg p-2.5 text-sm bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={filters.technicien}
                 onChange={(e) =>
                   setFilters({ ...filters, technicien: e.target.value })
@@ -583,8 +587,9 @@ const InterventionTable = () => {
 
             {isAnyFilterActive && (
               <button
-                className="flex items-center gap-1 text-sm text-red-600 hover:text-red-800 mt-2 md:mt-6"
+                className="flex items-center gap-1 text-sm text-red-600 hover:text-red-800 active:text-red-900 mt-2 md:mt-6 py-1.5 px-2 rounded-lg transition-colors hover:bg-red-50 active:bg-red-100 w-full md:w-auto justify-center md:justify-start"
                 onClick={resetFilters}
+                aria-label="Réinitialiser tous les filtres"
               >
                 <X size={14} />
                 Réinitialiser les filtres
@@ -597,7 +602,7 @@ const InterventionTable = () => {
       <div className="border-t border-gray-200 pt-6 pb-3 px-4 md:px-7">
         {loading ? (
           <div className="flex justify-center p-8">
-            <p>Chargement des données...</p>
+            <p className="text-gray-600 animate-pulse">Chargement des données...</p>
           </div>
         ) : error ? (
           <div className="flex justify-center p-8 text-red-500">
@@ -605,8 +610,8 @@ const InterventionTable = () => {
           </div>
         ) : (
           <>
-            {/* Desktop View - Table */}
-            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 bg-white">
+            {/* Desktop View - Table (visible only on large screens) */}
+            <div className="hidden lg:block overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="overflow-x-auto custom-scrollbar">
                 <table className="w-full">
                   <thead>
@@ -787,12 +792,14 @@ const InterventionTable = () => {
               </div>
             </div>
 
-            {/* Mobile View - Cards */}
-            <div className="md:hidden">
+            {/* Mobile and Tablet View - Cards */}
+            <div className="lg:hidden">
               {filteredInterventions.length > 0 ? (
-                filteredInterventions.map((intervention) =>
-                  renderInterventionCard(intervention)
-                )
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {filteredInterventions.map((intervention) =>
+                    renderInterventionCard(intervention)
+                  )}
+                </div>
               ) : (
                 <div className="p-6 text-center text-gray-500">
                   Aucune intervention trouvée avec les critères sélectionnés
@@ -800,34 +807,36 @@ const InterventionTable = () => {
               )}
             </div>
 
-            <div className="flex justify-between items-center mt-6">
-              <div className="text-sm text-gray-500">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-6 gap-3">
+              <div className="text-sm text-gray-500 text-center md:text-left">
                 Affichage de {filteredInterventions.length} sur{" "}
                 {pagination.totalInterventions} interventions
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
                 <button
                   onClick={() => handlePageChange(pagination.page - 1)}
                   disabled={pagination.page <= 1}
-                  className={`p-2 rounded-md ${
+                  className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
                     pagination.page <= 1
-                      ? "text-gray-300 cursor-not-allowed"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "text-gray-300 cursor-not-allowed bg-gray-50"
+                      : "text-gray-600 hover:bg-gray-100 active:bg-gray-200"
                   }`}
+                  aria-label="Page précédente"
                 >
                   <FiChevronLeft size={18} />
                 </button>
-                <span className="text-sm">
+                <span className="text-sm whitespace-nowrap px-2">
                   Page {pagination.page} sur {pagination.totalPages}
                 </span>
                 <button
                   onClick={() => handlePageChange(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages}
-                  className={`p-2 rounded-md ${
+                  className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
                     pagination.page >= pagination.totalPages
-                      ? "text-gray-300 cursor-not-allowed"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "text-gray-300 cursor-not-allowed bg-gray-50"
+                      : "text-gray-600 hover:bg-gray-100 active:bg-gray-200"
                   }`}
+                  aria-label="Page suivante"
                 >
                   <FiChevronRight size={18} />
                 </button>

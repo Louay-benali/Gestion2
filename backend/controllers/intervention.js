@@ -5,6 +5,62 @@ import logger from "../utils/logger.js";
 import mongoose from "mongoose";
 import { sendEmail } from "../services/email.service.js";
 
+// ✅ Mettre à jour le coût et la durée d'une intervention
+export const updateInterventionCostDuration = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { cost, duration } = req.body;
+
+    // Validation des données
+    if (cost === undefined && duration === undefined) {
+      logger.warn(`[INTERVENTION] Aucune donnée fournie pour la mise à jour du coût/durée`);
+      return res.status(400).json({ message: "Veuillez fournir au moins le coût ou la durée" });
+    }
+
+    // Vérifier que l'ID est valide
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      logger.warn(`[INTERVENTION] ID d'intervention invalide : ${id}`);
+      return res.status(400).json({ message: "ID d'intervention invalide" });
+    }
+
+    // Vérifier que l'intervention existe
+    const intervention = await Intervention.findById(id);
+    if (!intervention) {
+      logger.warn(`[INTERVENTION] Intervention non trouvée : ID ${id}`);
+      return res.status(404).json({ message: "Intervention non trouvée" });
+    }
+
+    // Préparer les données à mettre à jour
+    const updateData = {};
+    if (cost !== undefined) updateData.cost = cost;
+    if (duration !== undefined) updateData.duration = duration;
+
+    // Mettre à jour l'intervention
+    const updatedIntervention = await Intervention.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedIntervention) {
+      logger.warn(`[INTERVENTION] Échec de mise à jour du coût/durée : ID ${id}`);
+      return res.status(404).json({ message: "Échec de mise à jour de l'intervention" });
+    }
+
+    logger.info(`[INTERVENTION] Coût/durée mis à jour pour l'intervention : ${id}`);
+    res.status(200).json({
+      message: "Coût et durée mis à jour avec succès",
+      intervention: updatedIntervention
+    });
+  } catch (error) {
+    logger.error(`[INTERVENTION] Erreur lors de la mise à jour du coût/durée : ${error.message}`);
+    res.status(500).json({ 
+      message: "Erreur lors de la mise à jour du coût et de la durée", 
+      error: error.message 
+    });
+  }
+};
+
 // ✅ 1️⃣ Créer une nouvelle intervention
 export const creerIntervention = async (req, res) => {
   try {

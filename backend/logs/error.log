@@ -153,3 +153,4 @@
 [2025-05-25 01:03:32] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
 [2025-05-25 01:04:40] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
 [2025-05-25 01:04:40] ERROR: [GET_PROFILE] Erreur serveur: userId is not defined
+[2025-05-27 12:30:16] ERROR: [PANNE] Erreur mise à jour panne ID 682e12ba4bf76ec033add39d : Cast to ObjectId failed for value "" (type string) at path "_id" for model "Utilisateur"

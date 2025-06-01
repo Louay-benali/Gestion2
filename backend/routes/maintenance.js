@@ -9,7 +9,8 @@ import {
   changerStatut,
   deleteMaintenance,
   getHistoriqueInterventions,
-  getMaintenancesPlanifiees
+  getMaintenancesPlanifiees,
+  updateMaintenanceCostDuration,
 } from "../controllers/maintenance.js";
 import { authorize } from "../middleware/auth.js";
 
@@ -31,11 +32,15 @@ router.post("/", authorize(["responsable"]), createMaintenance);
 // Mettre à jour une maintenance (responsable ou technicien assigné)
 router.put("/:id", authorize(["responsable", "technicien"]), updateMaintenance);
 
+// Mettre à jour le coût et la durée d'une maintenance
+router.put("/:id/cost-duration", authorize(["responsable", "technicien"]), updateMaintenanceCostDuration);
+
 // Ajouter des pièces utilisées (technicien assigné)
 router.post("/:id/pieces", authorize(["technicien"]), ajouterPieces);
 
 // Changer le statut d'une maintenance (technicien assigné ou responsable)
 router.patch("/:id/statut", authorize(["technicien", "responsable"]), changerStatut);
+
 
 // Supprimer une maintenance (responsable uniquement)
 router.delete("/:id", authorize(["responsable"]), deleteMaintenance);

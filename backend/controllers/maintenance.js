@@ -2,6 +2,7 @@ import Maintenance from "../models/maintenance.js";
 import { Utilisateur } from "../models/user.js";
 import Machine from "../models/machine.js";
 import Piece from "../models/piece.js";
+import mongoose from "mongoose";
 
 // Obtenir toutes les maintenances avec pagination
 export const getAllMaintenances = async (req, res) => {
@@ -306,3 +307,53 @@ export const getMaintenancesPlanifiees = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }; 
+
+// Mettre à jour le coût et la durée d'une maintenance
+export const updateMaintenanceCostDuration = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { cost, duration } = req.body;
+
+    // Validation des données
+    if (cost === undefined && duration === undefined) {
+      return res.status(400).json({ message: "Veuillez fournir au moins le coût ou la durée" });
+    }
+
+    // Vérifier que l'ID est valide
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "ID de maintenance invalide" });
+    }
+
+    // Vérifier que la maintenance existe
+    const maintenance = await Maintenance.findById(id);
+    if (!maintenance) {
+      return res.status(404).json({ message: "Maintenance non trouvée" });
+    }
+
+    // Préparer les données à mettre à jour
+    const updateData = {};
+    if (cost !== undefined) updateData.cost = cost;
+    if (duration !== undefined) updateData.duration = duration;
+
+    // Mettre à jour la maintenance
+    const updatedMaintenance = await Maintenance.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedMaintenance) {
+      return res.status(404).json({ message: "Échec de mise à jour de la maintenance" });
+    }
+
+    res.status(200).json({
+      message: "Coût et durée mis à jour avec succès",
+      maintenance: updatedMaintenance
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      message: "Erreur lors de la mise à jour du coût et de la durée", 
+      error: error.message 
+    });
+  }
+};

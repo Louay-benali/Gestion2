@@ -33,6 +33,8 @@ const getInterventionTypeIcon = (type) => {
       return <Calendar size={16} className="text-blue-500" />;
     case "réparation":
       return <Wrench size={16} className="text-orange-500" />;
+    default:
+      return <Calendar size={16} className="text-gray-500" />;
   }
 };
 
@@ -235,357 +237,400 @@ const InterventionTable = () => {
     if (formattedType.toLowerCase() === "reparation") {
       return "Réparation";
     }
-
+    
     return formattedType;
   };
+  
+  useEffect(() => {
+    fetchInterventions();
+    fetchReferenceData();
+  }, [pagination.page, pagination.limit]);
 
-  // Render a card view for mobile displays
-  const renderMobileCard = (intervention) => {
-    return (
-      <div key={intervention._id} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4 border border-gray-200 dark:border-gray-700">
-        <div className="flex justify-between items-start mb-3">
-          <div className="text-xs text-gray-500 dark:text-gray-400">ID: {intervention._id}</div>
-          <p className={`${getStatusStyles(intervention.status)} inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium`}>
-            {mapInterventionStateToStatus(intervention.status)}
-          </p>
-        </div>
+// Les filteredInterventions sont calculés dans le composant principal
 
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Machine:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">{intervention.machineNom}</span>
-          </div>
-          
-          <div className="flex justify-between items-center">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Type:</span>
-            <div className="flex items-center gap-2">
-              {getInterventionTypeIcon(intervention.type)}
-              <span className="text-sm text-gray-800 dark:text-gray-200">
-                {formatTypeDisplay(intervention.type)}
-              </span>
-            </div>
-          </div>
-          
-          <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Technicien:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">{intervention.technicienNom}</span>
-          </div>
-          
-          <div className="flex justify-between">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Date:</span>
-            <span className="text-sm text-gray-800 dark:text-gray-200">{intervention.formattedDate}</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
+// Check if any filter is active
+useEffect(() => {
+  setIsAnyFilterActive(filters.type !== "" || filters.technicien !== "");
+}, [filters]);
 
+// Render a card view for mobile and tablet displays
+const renderMobileCard = (intervention) => {
   return (
-    <div className="border py-4 rounded-3xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-      <div className="px-4 sm:px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-lg sm:text-xl font-semibold dark:text-white">
-          Historique des Interventions
-        </h1>
-        <div className="flex gap-2 justify-between w-full sm:w-auto">
-          <SearchInput
-            className="flex-1 sm:w-48 md:w-72"
-            placeholder="Rechercher..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-          <button
-            className={`border p-2 rounded-lg sm:w-24 flex flex-row gap-1 items-center justify-center transition-colors ${
-              showFilters
-                ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
-                : "border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-200"
-            }`}
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            <Filter size={16} className="sm:block" />
-            <span className="hidden sm:block">Filtrer</span>
-          </button>
+    <div
+      key={intervention._id}
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
+    >
+      <div className="flex justify-between items-start mb-3">
+        <div className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[150px]">
+          ID: {intervention._id}
         </div>
+        <p
+          className={`${getStatusStyles(intervention.status)} inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium`}
+        >
+          {mapInterventionStateToStatus(intervention.status)}
+        </p>
       </div>
 
-      {/* Filter section */}
-      {showFilters && (
-        <div className="px-4 sm:px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center">
-            <div className="flex flex-col gap-1 w-full sm:w-auto sm:min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
-                Type d'intervention
-              </label>
-              <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white w-full"
-                value={filters.type}
-                onChange={(e) =>
-                  setFilters({ ...filters, type: e.target.value })
-                }
-              >
-                <option value="">Tous les types</option>
-                <option value="Maintenance">Maintenance</option>
-                <option value="Réparation">Réparation</option>
-              </select>
-            </div>
+      <div className="space-y-2">
+        <div className="flex flex-col md:flex-row md:justify-between">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+            Machine:
+          </span>
+          <span className="text-sm text-gray-800 dark:text-gray-200 break-words md:max-w-[60%] md:text-right">
+            {intervention.machineNom}
+          </span>
+        </div>
 
-            <div className="flex flex-col gap-1 w-full sm:w-auto sm:min-w-40">
-              <label className="text-sm text-gray-600 dark:text-gray-300">
-                Technicien
-              </label>
-              <select
-                className="border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm bg-white dark:bg-gray-700 dark:text-white w-full"
-                value={filters.technicien}
-                onChange={(e) =>
-                  setFilters({ ...filters, technicien: e.target.value })
-                }
-              >
-                <option value="">Tous les techniciens</option>
-                {techniciensList.map((tech) => (
-                  <option key={tech.id} value={tech.id}>
-                    {tech.nom}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {isAnyFilterActive && (
-              <button
-                className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 mt-2 sm:mt-6"
-                onClick={resetFilters}
-              >
-                <X size={14} />
-                Réinitialiser les filtres
-              </button>
-            )}
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+            Type:
+          </span>
+          <div className="flex items-center gap-2 md:justify-end">
+            {getInterventionTypeIcon(intervention.type)}
+            <span className="text-sm text-gray-800 dark:text-gray-200">
+              {formatTypeDisplay(intervention.type)}
+            </span>
           </div>
         </div>
-      )}
 
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-4 sm:pt-6 pb-3 px-4 sm:px-7">
-        {loading ? (
-          <div className="flex justify-center p-8">
-            <p className="dark:text-gray-300">Chargement des données...</p>
-          </div>
-        ) : error ? (
-          <div className="flex justify-center p-8 text-red-500">
-            <p>{error}</p>
-          </div>
-        ) : (
-          <>
-            {/* Mobile view with cards (shown on small screens) */}
-            <div className="md:hidden">
-              {filteredInterventions.length > 0 ? (
-                filteredInterventions.map((intervention) => renderMobileCard(intervention))
-              ) : (
-                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                  Aucune intervention trouvée avec les critères sélectionnés
-                </div>
-              )}
-            </div>
+        <div className="flex flex-col md:flex-row md:justify-between">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+            Technicien:
+          </span>
+          <span className="text-sm text-gray-800 dark:text-gray-200 break-words md:max-w-[60%] md:text-right">
+            {intervention.technicienNom}
+          </span>
+        </div>
 
-            {/* Desktop view with table (hidden on small screens) */}
-            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <div className="overflow-x-auto custom-scrollbar">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-100 dark:border-gray-700">
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
-                        ID Intervention
-                      </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
-                        Machine
-                      </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
-                        Type
-                      </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
-                        Technicien
-                      </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
-                        Date
-                      </th>
-                      <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredInterventions.length > 0 ? (
-                      filteredInterventions.map((intervention) => (
-                        <tr
-                          key={intervention._id}
-                          className="border-b border-gray-100 dark:border-gray-700"
-                        >
-                          <td className="px-4 py-4 text-theme-xs dark:text-gray-300">
-                            {intervention._id}
-                          </td>
-                          <td className="px-4 py-4">
-                            {editingId === intervention._id ? (
-                              <select
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
-                                value={editValues.machine}
-                                onChange={(e) =>
-                                  setEditValues({
-                                    ...editValues,
-                                    machine: e.target.value,
-                                  })
-                                }
-                              >
-                                <option value="">
-                                  Sélectionner une machine
-                                </option>
-                                {machinesList.map((machine) => (
-                                  <option key={machine.id} value={machine.id}>
-                                    {machine.nom}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <div className="flex items-center gap-3">
-                                <span className="block text-theme-xs dark:text-gray-300">
-                                  {intervention.machineNom}
-                                </span>
-                              </div>
-                            )}
-                          </td>
-                          <td className="px-4 py-4">
-                            {editingId === intervention._id ? (
-                              <select
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
-                                value={editValues.type}
-                                onChange={(e) =>
-                                  setEditValues({
-                                    ...editValues,
-                                    type: e.target.value,
-                                  })
-                                }
-                              >
-                                <option value="Maintenance">Maintenance</option>
-                                <option value="Réparation">Réparation</option>
-                              </select>
-                            ) : (
-                              <div className="flex items-center gap-2">
-                                {getInterventionTypeIcon(intervention.type)}
-                                <span className="text-theme-sm dark:text-gray-300">
-                                  {formatTypeDisplay(intervention.type)}
-                                </span>
-                              </div>
-                            )}
-                          </td>
-                          <td className="px-4 py-4">
-                            {editingId === intervention._id ? (
-                              <select
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
-                                value={editValues.technicien}
-                                onChange={(e) =>
-                                  setEditValues({
-                                    ...editValues,
-                                    technicien: e.target.value,
-                                  })
-                                }
-                              >
-                                <option value="">
-                                  Sélectionner un technicien
-                                </option>
-                                {techniciensList.map((tech) => (
-                                  <option key={tech.id} value={tech.id}>
-                                    {tech.nom}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <span className="text-theme-sm dark:text-gray-300">
-                                {intervention.technicienNom}
-                              </span>
-                            )}
-                          </td>
-                          <td className="px-4 py-4 text-theme-sm dark:text-gray-300">
-                            {intervention.formattedDate}
-                          </td>
-                          <td className="px-4 py-4">
-                            {editingId === intervention._id ? (
-                              <select
-                                className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
-                                value={editValues.status}
-                                onChange={(e) =>
-                                  setEditValues({
-                                    ...editValues,
-                                    status: e.target.value,
-                                  })
-                                }
-                              >
-                                <option value="Completé">Completé</option>
-                                <option value="En cours">En cours</option>
-                                <option value="Reporté">Reporté</option>
-                              </select>
-                            ) : (
-                              <p
-                                className={`${getStatusStyles(
-                                  intervention.status
-                                )} inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium`}
-                              >
-                                {mapInterventionStateToStatus(
-                                  intervention.status
-                                )}
-                              </p>
-                            )}
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td
-                          colSpan="6"
-                          className="px-4 py-8 text-center text-gray-500 dark:text-gray-400"
-                        >
-                          Aucune intervention trouvée avec les critères
-                          sélectionnés
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 gap-3">
-              <div className="text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
-                Affichage de {filteredInterventions.length} sur{" "}
-                {pagination.totalInterventions} interventions
-              </div>
-              <div className="flex items-center justify-center sm:justify-end gap-2">
-                <button
-                  onClick={() => handlePageChange(pagination.page - 1)}
-                  disabled={pagination.page <= 1}
-                  className={`p-2 rounded-md ${
-                    pagination.page <= 1
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
-                >
-                  <FiChevronLeft size={18} />
-                </button>
-                <span className="text-sm dark:text-gray-300">
-                  Page {pagination.page} sur {pagination.totalPages}
-                </span>
-                <button
-                  onClick={() => handlePageChange(pagination.page + 1)}
-                  disabled={pagination.page >= pagination.totalPages}
-                  className={`p-2 rounded-md ${
-                    pagination.page >= pagination.totalPages
-                      ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  }`}
-                >
-                  <FiChevronRight size={18} />
-                </button>
-              </div>
-            </div>
-          </>
-        )}
+        <div className="flex flex-col md:flex-row md:justify-between">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+            Date:
+          </span>
+          <span className="text-sm text-gray-800 dark:text-gray-200 md:text-right">
+            {intervention.formattedDate}
+          </span>
+        </div>
       </div>
     </div>
   );
+};
+
+return (
+  <div className="border py-4 rounded-3xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <div className="px-4 sm:px-5 pb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <h1 className="text-lg sm:text-xl font-semibold dark:text-white text-center md:text-left">
+        Historique des Interventions
+      </h1>
+      <div className="flex gap-2 justify-between w-full md:w-auto">
+        <SearchInput
+          className="flex-1 md:w-64 lg:w-72"
+          placeholder="Rechercher..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        <button
+          className={`border p-2 rounded-lg min-w-[40px] flex flex-row gap-1 items-center justify-center transition-colors ${
+            showFilters
+              ? "bg-blue-100 border-blue-300 text-blue-700 dark:bg-blue-900 dark:border-blue-700 dark:text-blue-300"
+              : "border-gray-300 hover:bg-gray-50 active:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700 dark:active:bg-gray-600 dark:text-gray-200"
+          }`}
+          onClick={() => setShowFilters(!showFilters)}
+          aria-label="Filtrer les interventions"
+        >
+          <Filter size={16} />
+          <span className="hidden md:block">Filtrer</span>
+        </button>
+      </div>
+    </div>
+
+    {/* Filter section */}
+    {showFilters && (
+      <div className="px-4 sm:px-5 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <div className="flex flex-col md:flex-row flex-wrap gap-4 items-start md:items-center">
+          <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+            <label className="text-sm text-gray-600 dark:text-gray-300 font-medium">
+              Type d'intervention
+            </label>
+            <select
+              className="border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 text-sm bg-white dark:bg-gray-700 dark:text-white w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400 outline-none"
+              value={filters.type}
+              onChange={(e) =>
+                setFilters({ ...filters, type: e.target.value })
+              }
+            >
+              <option value="">Tous les types</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Réparation">Réparation</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+            <label className="text-sm text-gray-600 dark:text-gray-300 font-medium">
+              Technicien
+            </label>
+            <select
+              className="border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 text-sm bg-white dark:bg-gray-700 dark:text-white w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:focus:border-blue-400 dark:focus:ring-blue-400 outline-none"
+              value={filters.technicien}
+              onChange={(e) =>
+                setFilters({ ...filters, technicien: e.target.value })
+              }
+            >
+              <option value="">Tous les techniciens</option>
+              {techniciensList.map((tech) => (
+                <option key={tech.id} value={tech.id}>
+                  {tech.nom}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {isAnyFilterActive && (
+            <button
+              className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 active:text-red-900 dark:active:text-red-200 mt-2 md:mt-6 py-1.5 px-2 rounded-lg transition-colors hover:bg-red-50 active:bg-red-100 dark:hover:bg-red-900/20 dark:active:bg-red-900/30 w-full md:w-auto justify-center md:justify-start"
+              onClick={resetFilters}
+              aria-label="Réinitialiser tous les filtres"
+            >
+              <X size={14} />
+              Réinitialiser les filtres
+            </button>
+          )}
+        </div>
+      </div>
+    )}
+
+    <div className="border-t border-gray-200 dark:border-gray-700 pt-4 sm:pt-6 pb-3 px-4 sm:px-7">
+      {loading ? (
+        <div className="flex justify-center p-8">
+          <p className="dark:text-gray-300 animate-pulse">
+            Chargement des données...
+          </p>
+        </div>
+      ) : error ? (
+        <div className="flex justify-center p-8 text-red-500">
+          <p>{error}</p>
+        </div>
+      ) : (
+        <>
+          {/* Mobile and tablet view with cards (shown on small and medium screens) */}
+          <div className="lg:hidden">
+            {filteredInterventions.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {filteredInterventions.map((intervention) =>
+                  renderMobileCard(intervention)
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                Aucune intervention trouvée avec les critères sélectionnés
+              </div>
+            )}
+          </div>
+
+          {/* Desktop view with table (hidden on small and medium screens) */}
+          <div className="hidden lg:block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <div className="overflow-x-auto custom-scrollbar">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-100 dark:border-gray-700">
+                    <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      ID Intervention
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      Machine
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      Type
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      Technicien
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      Date
+                    </th>
+                    <th className="px-4 py-3 text-left text-gray-600 dark:text-gray-300 text-theme-xs">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredInterventions.length > 0 ? (
+                    filteredInterventions.map((intervention) => (
+                      <tr
+                        key={intervention._id}
+                        className="border-b border-gray-100 dark:border-gray-700"
+                      >
+                        <td className="px-4 py-4 text-theme-xs dark:text-gray-300">
+                          {intervention._id}
+                        </td>
+                        <td className="px-4 py-4">
+                          {editingId === intervention._id ? (
+                            <select
+                              className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                              value={editValues.machine}
+                              onChange={(e) =>
+                                setEditValues({
+                                  ...editValues,
+                                  machine: e.target.value,
+                                })
+                              }
+                            >
+                              <option value="">
+                                Sélectionner une machine
+                              </option>
+                              {machinesList.map((machine) => (
+                                <option key={machine.id} value={machine.id}>
+                                  {machine.nom}
+                                </option>
+                              ))}
+                            </select>
+                          ) : (
+                            <div className="flex items-center gap-3">
+                              <span className="block text-theme-xs dark:text-gray-300">
+                                {intervention.machineNom}
+                              </span>
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          {editingId === intervention._id ? (
+                            <select
+                              className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                              value={editValues.type}
+                              onChange={(e) =>
+                                setEditValues({
+                                  ...editValues,
+                                  type: e.target.value,
+                                })
+                              }
+                            >
+                              <option value="Maintenance">Maintenance</option>
+                              <option value="Réparation">Réparation</option>
+                            </select>
+                          ) : (
+                            <div className="flex items-center gap-2">
+                              {getInterventionTypeIcon(intervention.type)}
+                              <span className="text-theme-sm dark:text-gray-300">
+                                {formatTypeDisplay(intervention.type)}
+                              </span>
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          {editingId === intervention._id ? (
+                            <select
+                              className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                              value={editValues.technicien}
+                              onChange={(e) =>
+                                setEditValues({
+                                  ...editValues,
+                                  technicien: e.target.value,
+                                })
+                              }
+                            >
+                              <option value="">
+                                Sélectionner un technicien
+                              </option>
+                              {techniciensList.map((tech) => (
+                                <option key={tech.id} value={tech.id}>
+                                  {tech.nom}
+                                </option>
+                              ))}
+                            </select>
+                          ) : (
+                            <span className="text-theme-sm dark:text-gray-300">
+                              {intervention.technicienNom}
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-4 py-4 text-theme-sm dark:text-gray-300">
+                          {intervention.formattedDate}
+                        </td>
+                        <td className="px-4 py-4">
+                          {editingId === intervention._id ? (
+                            <select
+                              className="border border-gray-300 dark:border-gray-600 rounded p-1 text-sm bg-white dark:bg-gray-700 dark:text-gray-200 w-full"
+                              value={editValues.status}
+                              onChange={(e) =>
+                                setEditValues({
+                                  ...editValues,
+                                  status: e.target.value,
+                                })
+                              }
+                            >
+                              <option value="Completé">Completé</option>
+                              <option value="En cours">En cours</option>
+                              <option value="Reporté">Reporté</option>
+                            </select>
+                          ) : (
+                            <p
+                              className={`${getStatusStyles(
+                                intervention.status
+                              )} inline-block rounded-full px-2 py-0.5 text-theme-xs font-medium`}
+                            >
+                              {mapInterventionStateToStatus(
+                                intervention.status
+                              )}
+                            </p>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="6"
+                        className="px-4 py-8 text-center text-gray-500 dark:text-gray-400"
+                      >
+                        Aucune intervention trouvée avec les critères
+                        sélectionnés
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-6 gap-3">
+            <div className="text-sm text-gray-500 dark:text-gray-400 text-center md:text-left">
+              Affichage de {filteredInterventions.length} sur{" "}
+              {pagination.totalInterventions} interventions
+            </div>
+            <div className="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
+              <button
+                onClick={() => handlePageChange(pagination.page - 1)}
+                disabled={pagination.page <= 1}
+                className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
+                  pagination.page <= 1
+                    ? "text-gray-300 dark:text-gray-600 cursor-not-allowed bg-gray-50 dark:bg-gray-800"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"
+                }`}
+                aria-label="Page précédente"
+              >
+                <FiChevronLeft size={18} />
+              </button>
+              <span className="text-sm dark:text-gray-300 whitespace-nowrap px-2">
+                Page {pagination.page} sur {pagination.totalPages}
+              </span>
+              <button
+                onClick={() => handlePageChange(pagination.page + 1)}
+                disabled={pagination.page >= pagination.totalPages}
+                className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
+                  pagination.page >= pagination.totalPages
+                    ? "text-gray-300 dark:text-gray-600 cursor-not-allowed bg-gray-50 dark:bg-gray-800"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 active:bg-gray-200 dark:active:bg-gray-600"
+                }`}
+                aria-label="Page suivante"
+              >
+                <FiChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+);
 };
 
 export default InterventionTable;

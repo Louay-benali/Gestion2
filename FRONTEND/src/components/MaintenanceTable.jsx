@@ -228,7 +228,7 @@ const MaintenanceTable = () => {
     return date.toLocaleDateString("fr-FR");
   };
 
-  // Render a card view for mobile displays
+  // Render a card view for mobile and tablet displays
   const renderMobileCard = (maintenance) => {
     const status = mapMaintenanceStatusToDisplay(maintenance.statut);
 
@@ -239,18 +239,20 @@ const MaintenanceTable = () => {
           className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-gray-200"
         >
           <div className="flex justify-between items-start mb-3">
-            <div className="text-xs text-gray-500">ID: {maintenance._id}</div>
+            <div className="text-xs text-gray-500 truncate max-w-[150px]">
+              ID: {maintenance._id}
+            </div>
             <div className="flex gap-2">
               <button
                 onClick={() => saveEdit(maintenance._id)}
-                className="p-1 rounded bg-green-100 text-green-600 hover:bg-green-200"
+                className="p-1.5 rounded bg-green-100 text-green-600 hover:bg-green-200 active:bg-green-300 transition-colors"
                 title="Enregistrer"
               >
                 <Save size={16} />
               </button>
               <button
                 onClick={cancelEdit}
-                className="p-1 rounded bg-red-100 text-red-600 hover:bg-red-200"
+                className="p-1.5 rounded bg-red-100 text-red-600 hover:bg-red-200 active:bg-red-300 transition-colors"
                 title="Annuler"
               >
                 <XCircle size={16} />
@@ -312,10 +314,12 @@ const MaintenanceTable = () => {
     return (
       <div
         key={maintenance._id}
-        className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-gray-200"
+        className="bg-white rounded-lg shadow-sm p-4 mb-4 border border-gray-200 hover:shadow-md transition-shadow"
       >
         <div className="flex justify-between items-start mb-3">
-          <div className="text-xs text-gray-500">ID: {maintenance._id}</div>
+          <div className="text-xs text-gray-500 truncate max-w-[150px]">
+            ID: {maintenance._id}
+          </div>
           <div className="flex items-center gap-2">
             <p
               className={`${getStatusStyles(
@@ -326,7 +330,7 @@ const MaintenanceTable = () => {
             </p>
             <button
               onClick={() => startEdit(maintenance)}
-              className="p-1 rounded bg-blue-100 text-blue-600 hover:bg-blue-200"
+              className="p-1.5 rounded bg-blue-100 text-blue-600 hover:bg-blue-200 active:bg-blue-300 transition-colors"
               title="Modifier"
             >
               <MdEdit size={18} />
@@ -335,32 +339,32 @@ const MaintenanceTable = () => {
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row md:justify-between">
             <span className="text-sm font-medium text-gray-600">Titre:</span>
-            <span className="text-sm text-gray-800">{maintenance.titre}</span>
+            <span className="text-sm text-gray-800 break-words md:max-w-[60%] md:text-right">{maintenance.titre}</span>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row md:justify-between">
             <span className="text-sm font-medium text-gray-600">Type:</span>
-            <span className="text-sm text-gray-800">
+            <span className="text-sm text-gray-800 md:text-right">
               {maintenance.typeIntervention}
             </span>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row md:justify-between">
             <span className="text-sm font-medium text-gray-600">
               Date planifiée:
             </span>
-            <span className="text-sm text-gray-800">
+            <span className="text-sm text-gray-800 md:text-right">
               {formatDate(maintenance.datePlanifiee)}
             </span>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row md:justify-between">
             <span className="text-sm font-medium text-gray-600">
               Technicien:
             </span>
-            <span className="text-sm text-gray-800">
+            <span className="text-sm text-gray-800 md:text-right">
               {maintenance.technicien
                 ? `${maintenance.technicien.nom} ${maintenance.technicien.prenom}`
                 : "-"}
@@ -373,27 +377,28 @@ const MaintenanceTable = () => {
 
   return (
     <div className="border py-4 rounded-3xl border-gray-200 bg-white">
-      <div className="px-4 sm:px-5 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-lg sm:text-xl font-semibold">
+      <div className="px-4 sm:px-5 pb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h1 className="text-lg sm:text-xl font-semibold text-center md:text-left">
           Tableau des Maintenances
         </h1>
-        <div className="flex gap-2 justify-between w-full sm:w-auto">
+        <div className="flex gap-2 justify-between w-full md:w-auto">
           <SearchInput
-            className="flex-1 sm:w-48 md:w-72"
+            className="flex-1 md:w-64 lg:w-72"
             placeholder="Rechercher par titre..."
             value={searchTerm}
             onChange={handleSearch}
           />
           <button
-            className={`border p-2 rounded-lg sm:w-24 flex flex-row gap-1 items-center justify-center transition-colors ${
+            className={`border p-2 rounded-lg min-w-[40px] flex flex-row gap-1 items-center justify-center transition-colors ${
               showFilters
                 ? "bg-blue-100 border-blue-300 text-blue-700"
-                : "border-gray-300 hover:bg-gray-50"
+                : "border-gray-300 hover:bg-gray-50 active:bg-gray-100"
             }`}
             onClick={() => setShowFilters(!showFilters)}
+            aria-label="Filtrer"
           >
-            <Filter size={16} className="sm:block" />
-            <span className="hidden sm:block">Filtrer</span>
+            <Filter size={16} />
+            <span className="hidden md:block">Filtrer</span>
           </button>
         </div>
       </div>
@@ -401,11 +406,11 @@ const MaintenanceTable = () => {
       {/* Filter section */}
       {showFilters && (
         <div className="px-4 sm:px-5 pb-4 border-t border-gray-200 pt-4">
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center">
-            <div className="flex flex-col gap-1 w-full sm:w-auto sm:min-w-40">
-              <label className="text-sm text-gray-600">Statut</label>
+          <div className="flex flex-col md:flex-row flex-wrap gap-4 items-start md:items-center">
+            <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+              <label className="text-sm text-gray-600 font-medium">Statut</label>
               <select
-                className="border border-gray-300 rounded-lg p-2 text-sm bg-white w-full"
+                className="border border-gray-300 rounded-lg p-2.5 text-sm bg-white w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={statusFilter}
                 onChange={(e) => handleStatusFilter(e.target.value)}
               >
@@ -418,12 +423,12 @@ const MaintenanceTable = () => {
               </select>
             </div>
 
-            <div className="flex flex-col gap-1 w-full sm:w-auto sm:min-w-40">
-              <label className="text-sm text-gray-600">
+            <div className="flex flex-col gap-1 w-full md:w-auto md:min-w-48">
+              <label className="text-sm text-gray-600 font-medium">
                 Type d'intervention
               </label>
               <select
-                className="border border-gray-300 rounded-lg p-2 text-sm bg-white w-full"
+                className="border border-gray-300 rounded-lg p-2.5 text-sm bg-white w-full focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
                 value={typeFilter}
                 onChange={(e) => handleTypeFilter(e.target.value)}
               >
@@ -438,7 +443,7 @@ const MaintenanceTable = () => {
 
             {isAnyFilterActive && (
               <button
-                className="flex items-center gap-1 text-sm text-red-600 hover:text-red-800 mt-2 sm:mt-6"
+                className="flex items-center gap-1 text-sm text-red-600 hover:text-red-800 active:text-red-900 mt-2 md:mt-6 py-1.5 px-2 rounded-lg transition-colors hover:bg-red-50 active:bg-red-100 w-full md:w-auto justify-center md:justify-start"
                 onClick={resetFilters}
               >
                 <X size={14} />
@@ -452,35 +457,38 @@ const MaintenanceTable = () => {
       {/* Display active filters */}
       {isAnyFilterActive && !showFilters && (
         <div className="px-4 sm:px-5 pb-4 flex flex-wrap items-center gap-2">
-          <span className="text-sm text-gray-500">Filtres actifs:</span>
+          <span className="text-sm text-gray-500 mr-1 mb-1 w-full md:w-auto">Filtres actifs:</span>
           {searchTerm && (
-            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1">
-              <span>Titre: {searchTerm}</span>
+            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1 mb-1">
+              <span className="truncate max-w-[150px]">Titre: {searchTerm}</span>
               <button
                 onClick={() => setSearchTerm("")}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 active:text-gray-900 p-0.5 rounded-full"
+                aria-label="Supprimer le filtre de titre"
               >
                 <X size={14} />
               </button>
             </div>
           )}
           {statusFilter && (
-            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1">
+            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1 mb-1">
               <span>Statut: {statusFilter}</span>
               <button
                 onClick={() => setStatusFilter("")}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 active:text-gray-900 p-0.5 rounded-full"
+                aria-label="Supprimer le filtre de statut"
               >
                 <X size={14} />
               </button>
             </div>
           )}
           {typeFilter && (
-            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1">
+            <div className="bg-gray-100 rounded-full px-3 py-1 text-sm flex items-center gap-1 mb-1">
               <span>Type: {typeFilter}</span>
               <button
                 onClick={() => setTypeFilter("")}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 active:text-gray-900 p-0.5 rounded-full"
+                aria-label="Supprimer le filtre de type"
               >
                 <X size={14} />
               </button>
@@ -492,7 +500,7 @@ const MaintenanceTable = () => {
       <div className="border-t border-gray-200 pt-4 sm:pt-6 pb-3 px-4 sm:px-7">
         {loading ? (
           <div className="flex justify-center p-8">
-            <p>Chargement des données...</p>
+            <p className="text-gray-600 animate-pulse">Chargement des données...</p>
           </div>
         ) : error ? (
           <div className="flex justify-center p-8 text-red-500">
@@ -500,12 +508,14 @@ const MaintenanceTable = () => {
           </div>
         ) : (
           <>
-            {/* Mobile view with cards (shown on small screens) */}
-            <div className="md:hidden">
+            {/* Mobile and tablet view with cards (shown on small and medium screens) */}
+            <div className="lg:hidden">
               {filteredMaintenances.length > 0 ? (
-                filteredMaintenances.map((maintenance) =>
-                  renderMobileCard(maintenance)
-                )
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {filteredMaintenances.map((maintenance) =>
+                    renderMobileCard(maintenance)
+                  )}
+                </div>
               ) : (
                 <div className="text-center py-8 text-gray-500">
                   Aucune maintenance ne correspond aux critères de recherche
@@ -513,8 +523,8 @@ const MaintenanceTable = () => {
               )}
             </div>
 
-            {/* Desktop view with table (hidden on small screens) */}
-            <div className="hidden md:block overflow-hidden rounded-xl border border-gray-200 bg-white">
+            {/* Desktop view with table (hidden on small and medium screens) */}
+            <div className="hidden lg:block overflow-hidden rounded-xl border border-gray-200 bg-white">
               <div className="overflow-x-auto custom-scrollbar">
                 <table className="w-full">
                   <thead>
@@ -667,34 +677,36 @@ const MaintenanceTable = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 gap-3">
-              <div className="text-sm text-gray-500 text-center sm:text-left">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-6 gap-3">
+              <div className="text-sm text-gray-500 text-center md:text-left">
                 Affichage de {filteredMaintenances.length} sur{" "}
                 {pagination.totalMaintenances} maintenances
               </div>
-              <div className="flex items-center justify-center sm:justify-end gap-2">
+              <div className="flex items-center justify-center md:justify-end gap-2 w-full md:w-auto">
                 <button
                   onClick={() => handlePageChange(pagination.page - 1)}
                   disabled={pagination.page <= 1}
-                  className={`p-2 rounded-md ${
+                  className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
                     pagination.page <= 1
-                      ? "text-gray-300 cursor-not-allowed"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "text-gray-300 cursor-not-allowed bg-gray-50"
+                      : "text-gray-600 hover:bg-gray-100 active:bg-gray-200"
                   }`}
+                  aria-label="Page précédente"
                 >
                   <FiChevronLeft size={18} />
                 </button>
-                <span className="text-sm">
+                <span className="text-sm whitespace-nowrap px-2">
                   Page {pagination.page} sur {pagination.totalPages}
                 </span>
                 <button
                   onClick={() => handlePageChange(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages}
-                  className={`p-2 rounded-md ${
+                  className={`p-2 rounded-md flex-1 md:flex-none flex justify-center ${
                     pagination.page >= pagination.totalPages
-                      ? "text-gray-300 cursor-not-allowed"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "text-gray-300 cursor-not-allowed bg-gray-50"
+                      : "text-gray-600 hover:bg-gray-100 active:bg-gray-200"
                   }`}
+                  aria-label="Page suivante"
                 >
                   <FiChevronRight size={18} />
                 </button>

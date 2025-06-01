@@ -92,7 +92,7 @@ export const createUser = async (req, res) => {
 // 📌 Mettre à jour un utilisateur
 export const updateUser = async (req, res) => {
   try {
-    const { nom, prenom, email, motDePasse, role } = req.body;
+    const { nom, prenom, email, motDePasse, role, telephone, adresse } = req.body;
 
     const user = await Utilisateur.findById(req.params.id);
     if (!user) {
@@ -100,19 +100,36 @@ export const updateUser = async (req, res) => {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
 
+    // Mise à jour des champs si fournis
     if (nom) user.nom = nom;
     if (prenom) user.prenom = prenom;
     if (email) user.email = email;
     if (role) user.role = role;
+    if (telephone) user.telephone = telephone;
+    if (adresse) user.adresse = adresse;
 
+    // Mise à jour du mot de passe si fourni
     if (motDePasse) {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(motDePasse, salt);
+      user.motDePasse = hashedPassword; // Assigner le mot de passe haché à l'utilisateur
     }
 
     await user.save();
     logger.info(`[PUT] /users/${req.params.id} → Utilisateur mis à jour`);
-    res.status(200).json({ message: "Utilisateur mis à jour avec succès" });
+    res.status(200).json({ 
+      message: "Utilisateur mis à jour avec succès",
+      user: {
+        id: user._id,
+        nom: user.nom,
+        prenom: user.prenom,
+        email: user.email,
+        role: user.role,
+        telephone: user.telephone,
+        adresse: user.adresse,
+        profileImage: user.profileImage
+      }
+    });
   } catch (error) {
     logger.error(`[PUT] /users/${req.params.id} → ${error.message}`);
     res.status(500).json({ message: "Erreur serveur" });

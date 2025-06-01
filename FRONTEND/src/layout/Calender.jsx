@@ -122,6 +122,10 @@ const Calendar = () => {
 
   // Add state for intervention ID
   const [selectedIntervention, setSelectedIntervention] = useState("");
+  
+  // Add state for selected event details modal
+  const [showEventDetailsModal, setShowEventDetailsModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   // Fetch interventions from the backend
   useEffect(() => {
@@ -502,8 +506,23 @@ const Calendar = () => {
             style: {
               backgroundColor: "white",
               height: "120px",
+              cursor: "pointer"
             },
           })}
+          onSelectEvent={(event) => {
+            setSelectedEvent(event);
+            setShowEventDetailsModal(true);
+          }}
+          onSelectSlot={(slotInfo) => {
+            // Préparer un nouvel événement avec la date sélectionnée
+            setNewEvent({
+              ...newEvent,
+              start: format(slotInfo.start, "yyyy-MM-dd'T'HH:mm"),
+              end: format(new Date(slotInfo.end.getTime() + 60 * 60 * 1000), "yyyy-MM-dd'T'HH:mm")
+            });
+            setShowModal(true);
+          }}
+          selectable={true}
         />
 
         {/* Event Modal */}
@@ -622,6 +641,107 @@ const Calendar = () => {
                     {loading ? "Traitement..." : "Planifier"}
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Event Details Modal */}
+        {showEventDetailsModal && selectedEvent && (
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-xl p-4 w-full max-w-md">
+              <div className="flex justify-between items-center mb-3">
+                <h2 className="text-lg font-bold text-gray-800">
+                  Détails de l'Intervention
+                </h2>
+                <button
+                  onClick={() => setShowEventDetailsModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="space-y-2 text-sm">
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <p className="text-xs text-gray-500">Type</p>
+                      <p className="font-medium">
+                        <span className={`inline-flex items-center ${selectedEvent.type === 'danger' ? 'text-red-600' : 'text-blue-600'}`}>
+                          {selectedEvent.type === 'danger' ? (
+                            <>
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                              </svg>
+                              Réparation
+                            </>
+                          ) : (
+                            <>
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                              </svg>
+                              Maintenance
+                            </>
+                          )}
+                        </span>
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">ID</p>
+                      <p className="font-medium text-xs">{selectedEvent.id}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-gray-50 p-2 rounded-lg">
+                    <p className="text-xs text-gray-500">Machine</p>
+                    <p className="font-medium">{selectedEvent.resource?.machineNom || "N/A"}</p>
+                  </div>
+
+                  <div className="bg-gray-50 p-2 rounded-lg">
+                    <p className="text-xs text-gray-500">Technicien</p>
+                    <p className="font-medium">{selectedEvent.resource?.technicienNom || "N/A"}</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-gray-50 p-2 rounded-lg">
+                    <p className="text-xs text-gray-500">Date planifiée</p>
+                    <p className="font-medium">{format(selectedEvent.start, "dd/MM/yyyy HH:mm")}</p>
+                  </div>
+
+                  <div className="bg-gray-50 p-2 rounded-lg">
+                    <p className="text-xs text-gray-500">Statut</p>
+                    <p className="font-medium">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${selectedEvent.resource?.status === 'En attente' ? 'bg-yellow-100 text-yellow-800' : selectedEvent.resource?.status === 'Terminé' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                        {selectedEvent.resource?.status || "En attente"}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end mt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowEventDetailsModal(false)}
+                  className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none text-sm"
+                >
+                  Fermer
+                </button>
               </div>
             </div>
           </div>

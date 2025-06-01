@@ -140,7 +140,7 @@ const Profile = ({ Name, Bio, City, Id }) => {
           </div>
         </div>
       </div>
-      <ToastContainer position="bottom-center"/>
+      <ToastContainer position="bottom-center" />
     </div>
   );
 };

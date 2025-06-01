@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdEdit, MdDeleteForever, MdWarning } from "react-icons/md";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useWindowSize from "../hooks/useWindowSize";
 
 // Mapping des états de pièces
 const EtatPieceEnum = {
@@ -22,6 +24,11 @@ const PiecesManagement = () => {
     totalPages: 1,
     totalPieces: 0,
   });
+  
+  // Utilisation du hook useWindowSize pour détecter les écrans mobiles et tablettes
+  const windowSize = useWindowSize();
+  const isMobile = windowSize.width <= 640;
+  const isTablet = windowSize.width > 640 && windowSize.width <= 1023;
 
   // État des modales
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -84,6 +91,17 @@ const PiecesManagement = () => {
   useEffect(() => {
     fetchPieces();
   }, [pagination.page, pagination.limit]);
+  
+  // Ajuster la limite de pagination en fonction de la taille de l'écran
+  useEffect(() => {
+    if (isMobile) {
+      setPagination(prev => ({ ...prev, limit: 3 }));
+    } else if (isTablet) {
+      setPagination(prev => ({ ...prev, limit: 4 }));
+    } else {
+      setPagination(prev => ({ ...prev, limit: 5 }));
+    }
+  }, [isMobile, isTablet]);
 
   // Gérer les changements dans le formulaire
   const handleInputChange = (e) => {
@@ -213,18 +231,59 @@ const PiecesManagement = () => {
     }
   };
 
+  // Rendu d'une carte pour l'affichage mobile
+  const renderMobileCard = (piece) => {
+    return (
+      <div key={piece._id} className="bg-white rounded-lg shadow-sm p-3 mb-3 border border-gray-200 transition-all duration-200 hover:shadow-md">
+        <div className="flex justify-between items-start mb-2">
+          <span className="font-medium text-gray-800">{piece.nomPiece}</span>
+          <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(piece.etat)}`}>
+            {piece.etat}
+          </span>
+        </div>
+        
+        <div className="mt-2 text-gray-500">
+          <span>Quantité: {piece.quantite}</span>
+        </div>
+        
+        <div className="flex justify-end space-x-2 mt-3 pt-2 border-t border-gray-100">
+          <button
+            onClick={() => {
+              setCurrentPiece(piece);
+              setIsEditModalOpen(true);
+            }}
+            className="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
+            title="Modifier"
+          >
+            <MdEdit size={isMobile ? 22 : 20} />
+          </button>
+          <button
+            onClick={() => {
+              setCurrentPiece(piece);
+              setIsDeleteModalOpen(true);
+            }}
+            className="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50"
+            title="Supprimer"
+          >
+            <MdDeleteForever size={isMobile ? 22 : 20} />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
       <ToastContainer position="top-right" autoClose={3000} />
       
       {/* En-tête */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Gestion des Pièces</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Gestion des Pièces</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto justify-center sm:justify-start"
         >
-          <IoMdAdd className="mr-2" /> Ajouter une Pièce
+          <IoMdAdd className="mr-1 sm:mr-2" /> {isMobile ? "Ajouter" : "Ajouter une Pièce"}
         </button>
       </div>
 
@@ -235,126 +294,167 @@ const PiecesManagement = () => {
         </div>
       )}
 
-      {/* Tableau des pièces */}
+      {/* Affichage des pièces */}
       {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="flex justify-center items-center h-48 sm:h-64">
+          <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       ) : (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nom de la Pièce
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Quantité
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  État
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {pieces.length > 0 ? (
-                pieces.map((piece) => (
-                  <tr key={piece._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="font-medium">{piece.nomPiece}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-gray-500">{piece.quantite}</span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(piece.etat)}`}>
-                        {piece.etat}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => {
-                            setCurrentPiece(piece);
-                            setIsEditModalOpen(true);
-                          }}
-                          className="text-blue-600 hover:text-blue-900"
-                          title="Modifier"
-                        >
-                          <MdEdit size={20} />
-                        </button>
-                        <button
-                          onClick={() => {
-                            setCurrentPiece(piece);
-                            setIsDeleteModalOpen(true);
-                          }}
-                          className="text-red-600 hover:text-red-900"
-                          title="Supprimer"
-                        >
-                          <MdDeleteForever size={20} />
-                        </button>
-                      </div>
-                    </td>
+        <>
+          {/* Vue mobile avec cartes (affichée sur petits écrans) */}
+          <div className="md:hidden space-y-1 sm:space-y-2">
+            {pieces.length > 0 ? (
+              pieces.map((piece) => renderMobileCard(piece))
+            ) : (
+              <div className="text-center py-6 text-gray-500 bg-white rounded-lg shadow-sm">
+                Aucune pièce trouvée
+              </div>
+            )}
+          </div>
+          
+          {/* Vue desktop avec tableau (cachée sur petits écrans) */}
+          <div className="hidden md:block bg-white shadow-md rounded-lg overflow-hidden">
+            <div className="overflow-x-auto custom-scrollbar">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nom de la Pièce
+                    </th>
+                    <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Quantité
+                    </th>
+                    <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      État
+                    </th>
+                    <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Actions
+                    </th>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
-                    Aucune pièce trouvée
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {pieces.length > 0 ? (
+                    pieces.map((piece) => (
+                      <tr key={piece._id} className="hover:bg-gray-50 transition-colors duration-150">
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                          <span className="font-medium">{piece.nomPiece}</span>
+                        </td>
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                          <span className="text-gray-500">{piece.quantite}</span>
+                        </td>
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                          <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(piece.etat)}`}>
+                            {piece.etat}
+                          </span>
+                        </td>
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => {
+                                setCurrentPiece(piece);
+                                setIsEditModalOpen(true);
+                              }}
+                              className="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50 transition-colors duration-150"
+                              title="Modifier"
+                            >
+                              <MdEdit size={20} />
+                            </button>
+                            <button
+                              onClick={() => {
+                                setCurrentPiece(piece);
+                                setIsDeleteModalOpen(true);
+                              }}
+                              className="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50 transition-colors duration-150"
+                              title="Supprimer"
+                            >
+                              <MdDeleteForever size={20} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4" className="px-4 sm:px-6 py-4 text-center text-gray-500">
+                        Aucune pièce trouvée
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
       )}
 
       {/* Pagination */}
-      <div className="flex justify-between items-center mt-6">
-        <div className="text-sm text-gray-700">
-          Affichage de{" "}
-          <span className="font-medium">
-            {pieces.length > 0 ? (pagination.page - 1) * pagination.limit + 1 : 0}
-          </span>{" "}
-          à{" "}
-          <span className="font-medium">
-            {Math.min(pagination.page * pagination.limit, pagination.totalPieces)}
-          </span>{" "}
-          sur <span className="font-medium">{pagination.totalPieces}</span> pièces
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-4 sm:mt-6 gap-2 sm:gap-3">
+        <div className="text-xs sm:text-sm text-gray-700 text-center sm:text-left">
+          {pieces.length > 0 ? (
+            <>
+              Affichage de{" "}
+              <span className="font-medium">
+                {(pagination.page - 1) * pagination.limit + 1}
+              </span>{" "}
+              à{" "}
+              <span className="font-medium">
+                {Math.min(pagination.page * pagination.limit, pagination.totalPieces)}
+              </span>{" "}
+              sur <span className="font-medium">{pagination.totalPieces}</span> pièces
+            </>
+          ) : (
+            "Aucune pièce disponible"
+          )}
         </div>
-        <div className="flex space-x-2">
+        <div className="flex items-center justify-center sm:justify-end gap-1 sm:gap-2 bg-gray-50 sm:bg-transparent p-2 rounded-lg sm:p-0">
           <button
             onClick={() => handlePageChange(pagination.page - 1)}
             disabled={pagination.page === 1}
-            className={`px-3 py-1 rounded-md ${
+            className={`p-1 sm:p-2 rounded-md flex items-center justify-center ${
               pagination.page === 1
-                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                : "bg-blue-600 text-white hover:bg-blue-700"
-            }`}
+                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800"
+            } transition-colors duration-150`}
+            aria-label="Page précédente"
           >
-            Précédent
+            {isMobile ? (
+              <FiChevronLeft size={20} />
+            ) : (
+              <>
+                <FiChevronLeft size={16} className="mr-1" />
+                <span>Précédent</span>
+              </>
+            )}
           </button>
+          <span className="text-xs sm:text-sm font-medium">
+            {isMobile ? `${pagination.page}/${pagination.totalPages}` : `Page ${pagination.page} sur ${pagination.totalPages}`}
+          </span>
           <button
             onClick={() => handlePageChange(pagination.page + 1)}
             disabled={pagination.page === pagination.totalPages}
-            className={`px-3 py-1 rounded-md ${
+            className={`p-1 sm:p-2 rounded-md flex items-center justify-center ${
               pagination.page === pagination.totalPages
-                ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                : "bg-blue-600 text-white hover:bg-blue-700"
-            }`}
+                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800"
+            } transition-colors duration-150`}
+            aria-label="Page suivante"
           >
-            Suivant
+            {isMobile ? (
+              <FiChevronRight size={20} />
+            ) : (
+              <>
+                <span>Suivant</span>
+                <FiChevronRight size={16} className="ml-1" />
+              </>
+            )}
           </button>
         </div>
       </div>
 
       {/* Modal pour ajouter une pièce */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-0">
+          <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-md w-full">
             <h2 className="text-xl font-bold mb-4">Ajouter une Pièce</h2>
             <div className="space-y-4">
               <div>
@@ -420,8 +520,8 @@ const PiecesManagement = () => {
 
       {/* Modal pour modifier une pièce */}
       {isEditModalOpen && currentPiece && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-0">
+          <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-md w-full">
             <h2 className="text-xl font-bold mb-4">Modifier la Pièce</h2>
             <div className="space-y-4">
               <div>
@@ -487,8 +587,8 @@ const PiecesManagement = () => {
 
       {/* Modal pour supprimer une pièce */}
       {isDeleteModalOpen && currentPiece && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-0">
+          <div className="bg-white rounded-lg p-4 sm:p-6 md:p-8 max-w-md w-full">
             <div className="flex items-center text-red-600 mb-4">
               <MdWarning size={24} className="mr-2" />
               <h2 className="text-xl font-bold">Confirmer la suppression</h2>

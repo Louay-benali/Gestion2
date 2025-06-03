@@ -1,24 +1,211 @@
-/* Styles pour le mode sombre */
+/* Dark mode variables - Matching the first screenshot */
 .dark-mode {
-  --bg-primary: #1a202c;
-  --bg-secondary: #2d3748;
-  --text-primary: #f7fafc;
-  --text-secondary: #e2e8f0;
-  --border-color: #4a5568;
+  --bg-primary: #1a2234;
+  --bg-secondary: #232b3e;
+  --card-bg: #232b3e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --border-color: #1d2939;
+  --input-bg: #2d3748;
+  --input-text: #e2e8f0;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --hover-bg: #2d3748;
+  --accent-blue: #3182ce;
+  --accent-green: #38a169;
+  --accent-red: #e53e3e;
+  --accent-orange: #dd6b20;
+  --accent-purple: #805ad5;
 }
 
-/* Styles pour le mode clair (par défaut) */
+/* Light mode variables */
 :root {
   --bg-primary: #ffffff;
   --bg-secondary: #f7fafc;
+  --card-bg: #ffffff;
   --text-primary: #1a202c;
   --text-secondary: #4a5568;
   --border-color: #e2e8f0;
+  --input-bg: #edf2f7;
+  --input-text: #2d3748;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --hover-bg: #f7fafc;
+  --accent-blue: #4299e1;
+  --accent-green: #48bb78;
+  --accent-red: #f56565;
+  --accent-orange: #ed8936;
+  --accent-purple: #9f7aea;
 }
 
-/* Appliquer les variables CSS aux éléments */
+/* Apply variables to elements */
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header and navbar */
+header {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+/* Cards and containers */
+.bg-white, .card {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+/* Dashboard cards */
+.dashboard-card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+/* Stats cards with colored indicators */
+.stat-card-blue {
+  border-left-color: var(--accent-blue);
+}
+
+.stat-card-green {
+  border-left-color: var(--accent-green);
+}
+
+.stat-card-red {
+  border-left-color: var(--accent-red);
+}
+
+.stat-card-purple {
+  border-left-color: var(--accent-purple);
+}
+
+/* Tables */
+table {
+  color: var(--text-primary);
+}
+
+table th {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+table td {
+  border-color: var(--border-color);
+}
+
+/* Inputs and form elements */
+input, select, textarea {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border-color: var(--border-color);
+}
+
+/* Charts and graphs */
+.chart-container {
+  background-color: var(--card-bg);
+}
+
+/* Specific dark mode overrides for Tailwind classes */
+.dark .dark\:bg-\[\#1a2234\] {
+  background-color: #1a2234;
+}
+
+.dark .dark\:text-white {
+  color: #ffffff;
+}
+
+.dark .dark\:border-gray-700 {
+  border-color: #2d3748;
+}
+
+/* Apply dark mode to main element */
+.dark-mode main {
+  background-color: #1c2232;
+}
+
+/* Headings in dark mode */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4 {
+  color: #ffffff;
+}
+
+/* Sidebar spans in dark mode */
+.dark-mode .sidebar-container span {
+  color: #d0d5dd;
+}
+
+/* StatisticsSection spans in dark mode */
+.dark-mode .bg-white span.text-gray-900 {
+  color: #ffffff;
+}
+
+.dark-mode .bg-white span:not(.text-green-600):not(.text-red-600):not(.bg-green-50):not(.bg-red-50) {
+  color: #d0d5dd;
+}
+
+/* Sidebar in dark mode */
+.dark-mode .sidebar-container {
+  background-color: #0f172a;
+  border-color: #1d2939;
+}
+
+/* Menu text in sidebar */
+.dark-mode .sidebar-container p.text-xs.font-medium.text-gray-500 {
+  color: #64748b;
+}
+
+/* Active item in sidebar */
+.dark-mode .sidebar-container a.text-blue-500,
+.dark-mode .sidebar-container .text-blue-500 {
+  color: #38bdf8 !important;
+}
+
+/* Active item background in sidebar */
+.dark-mode .sidebar-container a.bg-gray-100,
+.dark-mode .sidebar-container a.bg-blue-100 {
+  background-color: #1e293b !important;
+}
+
+/* Hover state for sidebar items */
+.dark-mode .sidebar-container a:hover,
+.dark-mode .sidebar-container button:hover {
+  background-color: #1e293b !important;
+}
+
+/* Normal text color for sidebar items */
+.dark-mode .sidebar-container a .text-gray-500,
+.dark-mode .sidebar-container a .text-gray-600,
+.dark-mode .sidebar-container button .text-gray-500,
+.dark-mode .sidebar-container button .text-gray-600,
+.dark-mode .sidebar-container span.text-gray-600 {
+  color: #94a3b8 !important;
+}
+
+.dark-mode td {
+  color: #d0d5dd;
+}
+
+.dark-mode .rbc-day-bg {
+  background-color: #1c2232;
+}
+
+.dark-mode p {
+  color: #d0d5dd;
+}
+
+.dark-mode label {
+  color: rgb(179, 177, 177);
+}
+
+.dark-mode .rbc-day-bg {
+  background-color: #1c2232;
 }

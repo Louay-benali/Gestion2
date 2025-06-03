@@ -17,80 +17,90 @@ import EmailVerificationPage from "./pages/EmailVerificationPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RedirectIfAuthenticated from "./components/RedirectIfAuthenticated";
 import ProfilePage from "./pages/ProfilePage";
+import "./styles/darkMode.css";
 
 function App() {
   return (
     <AuthProvider>
-      <ToastContainer />
-      <Router>
-        <Routes>
-          {/* Public routes that redirect if already authenticated */}
-          <Route path="/" element={
-            <RedirectIfAuthenticated>
-              <AuthPage />
-            </RedirectIfAuthenticated>
-          } />
-          <Route path="/email-verification" element={<EmailVerificationPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          
-          {/* Profile route accessible to all authenticated users */}
-          <Route 
-            path="/profile" 
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            } 
-          />
-          
-          {/* Protected Routes with role-based access */}
-          <Route 
-            path="/operateur-dashboard" 
-            element={
-              <ProtectedRoute allowedRoles={["operateur"]}>
-                <OperateurDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/responsable-dashboard" 
-            element={
-              <ProtectedRoute allowedRoles={["responsable"]}>
-                <ResponsableDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/technicien-dashboard" 
-            element={
-              <ProtectedRoute allowedRoles={["technicien"]}>
-                <TechnicienDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/magasinier-dashboard" 
-            element={
-              <ProtectedRoute allowedRoles={["magasinier"]}>
-                <MagasinierDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/admin-dashboard" 
-            element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } 
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Router>
+      <ThemeProvider>
+        <ToastContainer theme="colored" position="top-right" />
+        <Router>
+          <Routes>
+            {/* Public routes that redirect if already authenticated */}
+            <Route
+              path="/"
+              element={
+                <RedirectIfAuthenticated>
+                  <AuthPage />
+                </RedirectIfAuthenticated>
+              }
+            />
+            <Route
+              path="/email-verification"
+              element={<EmailVerificationPage />}
+            />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+            {/* Profile route accessible to all authenticated users */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Protected Routes with role-based access */}
+            <Route
+              path="/operateur-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["operateur"]}>
+                  <OperateurDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/responsable-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["responsable"]}>
+                  <ResponsableDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/technicien-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["technicien"]}>
+                  <TechnicienDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/magasinier-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["magasinier"]}>
+                  <MagasinierDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin-dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

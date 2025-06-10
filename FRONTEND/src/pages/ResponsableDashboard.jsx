@@ -7,14 +7,18 @@ import RevenueCard from "../components/RevenueCard";
 import Calendar from "../layout/Calender.jsx";
 import MachineTable from "../components/MachineTable";
 import InterventionTable from "../components/InterventionTable";
-import MaintenanceTable from "../components/MaintenanceTable";
+// Supprimer cette ligne ci-dessous
+// import MaintenanceTable from "../components/MaintenanceTable";
+import PannTable from "../components/PanneTable.jsx";
 import UserProfile from "../layout/UserProfile.jsx";
 import RapportGeneral from "../components/RapportGeneral";
 import DemandesValRejTable from "../components/DemandesValRejTable.jsx";
 import CreateTaskForm from "../components/CreateTaskForm.jsx";
-import CreateMaintenanceForm from "../components/CreateMaintenanceForm.jsx";
+// Supprimer cette ligne ci-dessous
+// import CreateMaintenanceForm from "../components/CreateMaintenanceForm.jsx";
 import CreateInterventionForm from "../components/CreateInterventionForm.jsx";
 import CostDurationManagement from "../components/CostDurationManagement.jsx";
+
 
 import {
   MdDashboard,
@@ -39,7 +43,8 @@ const ResponsableDashboard = () => {
     { label: "Dashboard", icon: <MdDashboard size={24} /> },
     { label: "Calendar", icon: <BsCalendarEvent size={24} /> },
     { label: "Créer Tâche", icon: <MdAddTask size={24} /> },
-    { label: "Planifier Maintenance", icon: <MdEngineering size={24} /> },
+    // Supprimer cette ligne ci-dessous
+    // { label: "Planifier Maintenance", icon: <MdEngineering size={24} /> },
     { label: "Créer Intervention", icon: <MdBuild size={24} /> },
     { label: "Valider demandes", icon: <MdCheckCircle size={24} /> },
     { label: "Rapport Général", icon: <MdAssessment size={24} /> },
@@ -50,7 +55,9 @@ const ResponsableDashboard = () => {
   const tableMenuItems = [
     { label: "Machine Table", icon: <MdTableChart size={24} /> },
     { label: "Intervention Table", icon: <MdTableChart size={24} /> },
-    { label: "Maintenance Table", icon: <MdTableChart size={24} /> },
+    // Supprimer cette ligne ci-dessous
+    // { label: "Maintenance Table", icon: <MdTableChart size={24} /> },
+    { label: "Panne Table", icon: <MdTableChart size={24} /> },
     { label: "Gestion Coûts", icon: <MdTableChart size={24} /> },
   ];
 
@@ -79,8 +86,9 @@ const ResponsableDashboard = () => {
         );
       case "Créer Tâche":
         return <CreateTaskForm />;
-      case "Planifier Maintenance":
-        return <CreateMaintenanceForm />;
+      // Supprimer ce cas ci-dessous
+      // case "Planifier Maintenance":
+      //   return <CreateMaintenanceForm />;
       case "Créer Intervention":
         return <CreateInterventionForm />;
       case "Gestion Coûts":
@@ -91,8 +99,11 @@ const ResponsableDashboard = () => {
         return <MachineTable />;
       case "Intervention Table":
         return <InterventionTable />;
-      case "Maintenance Table":
-        return <MaintenanceTable />;
+      // Supprimer ce cas ci-dessous
+      // case "Maintenance Table":
+      //   return <MaintenanceTable />;
+      case "Panne Table":
+        return <PannTable />;
       case "User Profile":
         return <UserProfile />;
       case "Rapport Général":

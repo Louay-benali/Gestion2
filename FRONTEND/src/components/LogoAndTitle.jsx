@@ -18,8 +18,8 @@ const LogoAndTitle = ({ collapsed = false }) => {
       
       {!collapsed && (
         <div>
-          <h1 className="font-semibold text-lg">MaintenancePro</h1>
-          <p className="text-xs text-gray-500">Gestion des équipements</p>
+          <h1 className="font-semibold text-lg">Emka MaintSmart </h1>
+          <p className="text-xs text-gray-500">Gestion de maintenance</p>
         </div>
       )}
     </div>

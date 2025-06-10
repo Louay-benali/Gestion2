@@ -5,7 +5,7 @@ import QuickStats from "../components/QuickStats";
 import StatisticsSection from "../components/StatisticsSection";
 import CommandeTable from "../components/CommandeTable";
 import UserProfile from "../layout/UserProfile.jsx";
-import DemandesValRejTable from "../components/DemandesValRejTable.jsx";
+import DemandesValRejTable from "../components/DemandesValideesMagasinier.jsx";
 import PasserCommandeForm from "../components/PasserCommandeForm.jsx";
 import RevenueCard from "../components/RevenueCard.jsx";
 import StockManagement from "../components/StockManagement.jsx";

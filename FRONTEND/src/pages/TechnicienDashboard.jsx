@@ -68,10 +68,7 @@ const TechnicienDashboard = () => {
       icon: <MdTableChart size={24} />,
       label: "Intervention Table",
     },
-    {
-      icon: <MdTableChart size={24} />,
-      label: "Maintenance Table",
-    },
+,
     {
       icon: <MdTableChart size={24} />,
       label: "Panne Table",
@@ -116,8 +113,7 @@ const TechnicienDashboard = () => {
         return <MachineTable />;
       case "Intervention Table":
         return <InterventionTech />;
-      case "Maintenance Table":
-        return <MaintenanceTable />;
+
       case "Creer Rapport":
         return <CreerRapportIntervention />;
       case "Task":

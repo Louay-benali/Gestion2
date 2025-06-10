@@ -14,7 +14,7 @@ import { authorize } from "../middleware/auth.js";
 const router = express.Router();
 
 router.post("/",authorize(["operateur","technicien"]) , createPanne); // Corrected syntax for authorize
-router.get("/",authorize(["technicien"]), getPannes);
+router.get("/",authorize(["technicien","responsable"]), getPannes);
 router.get("/:idPanne", getPanneById);
 router.put("/:idPanne",authorize(["technicien"]), updatePanne);
 router.delete("/:idPanne", deletePanne);

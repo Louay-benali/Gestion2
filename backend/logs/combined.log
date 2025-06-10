@@ -15757,3 +15757,341 @@
 [2025-06-02 01:25:53] INFO: GET /auth/profile 304 - 3ms
 [2025-06-03 01:13:41] INFO: 🚀 Serveur lancé sur http://localhost:3001
 [2025-06-03 01:13:41] INFO: ✅ Connecté à MongoDB
+[2025-06-03 13:16:52] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-06-03 13:16:52] INFO: ✅ Connecté à MongoDB
+[2025-06-03 13:17:12] INFO: GET /auth/profile 200 - 17ms
+[2025-06-03 13:17:12] INFO: GET /auth/profile 304 - 2ms
+[2025-06-03 13:17:19] INFO: GET /user 200 - 11ms
+[2025-06-03 13:17:19] INFO: GET /user 304 - 6ms
+[2025-06-03 13:17:19] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 13:17:19] INFO: GET /machine 304 - 11ms
+[2025-06-03 13:17:19] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 13:17:19] INFO: GET /machine 304 - 8ms
+[2025-06-03 13:46:48] INFO: [PANNE] Alerte envoyée pour la panne déclarée sur la machine : MachineB
+[2025-06-03 13:46:48] INFO: [PANNE] Nouvelle panne déclarée : 683ee0a7e643b62e052951a8
+[2025-06-03 13:46:48] INFO: POST /panne 201 - 1647ms
+[2025-06-03 14:01:58] INFO: GET /auth/profile 304 - 4ms
+[2025-06-03 14:01:58] INFO: GET /auth/profile 304 - 3ms
+[2025-06-03 14:02:52] INFO: GET /user 304 - 8ms
+[2025-06-03 14:02:52] INFO: GET /user 304 - 5ms
+[2025-06-03 14:02:52] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 14:02:52] INFO: GET /machine 304 - 7ms
+[2025-06-03 14:02:52] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 14:02:52] INFO: GET /machine 304 - 5ms
+[2025-06-03 14:05:09] INFO: [PANNE] Alerte envoyée pour la panne déclarée sur la machine : MachineC
+[2025-06-03 14:05:09] INFO: [PANNE] Nouvelle panne déclarée : 683ee4f1e643b62e052951b9
+[2025-06-03 14:05:09] INFO: POST /panne 201 - 3111ms
+[2025-06-03 14:07:58] INFO: GET /auth/google 302 - 2ms
+[2025-06-03 14:07:59] INFO: GET /auth/google/callback?code=4%2F0AUJR-x7p2io5SgDfkUsZjEf1JF0GYU6F2Zf75W-IXuEsBUtcKg7mPq6fmzkzCnNrGRD8qQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=none 200 - 484ms
+[2025-06-03 14:07:59] INFO: GET /auth/profile 304 - 3ms
+[2025-06-03 14:07:59] INFO: GET /auth/profile 304 - 7ms
+[2025-06-03 14:07:59] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 3ms
+[2025-06-03 14:15:47] INFO: GET /panne?page=1&limit=5 403 - 7ms
+[2025-06-03 14:15:47] INFO: GET /panne?page=1&limit=5 403 - 6ms
+[2025-06-03 14:15:47] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 14:15:47] INFO: GET /machine 200 - 16ms
+[2025-06-03 14:15:47] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 14:15:47] INFO: GET /machine 304 - 7ms
+[2025-06-03 14:18:34] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-06-03 14:18:34] INFO: ✅ Connecté à MongoDB
+[2025-06-03 14:18:37] INFO: GET /auth/profile 304 - 20ms
+[2025-06-03 14:18:37] INFO: GET /auth/profile 304 - 2ms
+[2025-06-03 14:18:37] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 2ms
+[2025-06-03 14:18:41] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 14:18:41] INFO: GET /machine 304 - 31ms
+[2025-06-03 14:18:41] INFO: GET /panne?page=1&limit=5 200 - 43ms
+[2025-06-03 14:18:41] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-03 14:18:41] INFO: GET /machine 304 - 12ms
+[2025-06-03 14:18:41] INFO: GET /panne?page=1&limit=5 304 - 17ms
+[2025-06-03 16:07:46] INFO: GET /auth/profile 304 - 26ms
+[2025-06-03 16:07:46] INFO: GET /auth/profile 304 - 3ms
+[2025-06-03 16:07:46] INFO: GET /auth/profile 304 - 3ms
+[2025-06-03 16:07:46] INFO: GET /auth/profile 304 - 3ms
+[2025-06-03 16:07:46] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 1ms
+[2025-06-04 01:39:39] INFO: GET /auth/profile 304 - 6ms
+[2025-06-04 01:39:39] INFO: GET /auth/profile 304 - 4ms
+[2025-06-04 01:39:39] INFO: GET /auth/profile 304 - 4ms
+[2025-06-04 01:39:39] INFO: GET /auth/profile 304 - 5ms
+[2025-06-04 01:39:39] INFO: GET /uploads/profile-682db0b0a122ae0297a405d9-1748169888601-83110500.png 304 - 2ms
+[2025-06-04 01:40:12] INFO: GET /auth/profile 200 - 4ms
+[2025-06-04 01:40:12] INFO: GET /auth/profile 304 - 3ms
+[2025-06-04 01:41:13] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-04 01:41:13] INFO: GET /machine 304 - 13ms
+[2025-06-04 01:41:13] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-04 01:41:13] INFO: GET /machine 304 - 12ms
+[2025-06-04 01:41:13] INFO: GET /maintenance 304 - 28ms
+[2025-06-04 01:41:13] INFO: GET /maintenance 304 - 10ms
+[2025-06-04 01:41:21] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-04 01:41:21] INFO: GET /machine 304 - 9ms
+[2025-06-04 01:41:21] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-04 01:41:21] INFO: GET /machine 304 - 10ms
+[2025-06-04 01:41:21] INFO: GET /user 200 - 7ms
+[2025-06-04 01:41:21] INFO: GET /user 304 - 4ms
+[2025-06-04 01:41:28] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-04 01:41:28] INFO: GET /machine 304 - 11ms
+[2025-06-04 01:41:28] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-04 01:41:28] INFO: GET /machine 304 - 11ms
+[2025-06-04 01:41:28] INFO: GET /user 304 - 5ms
+[2025-06-04 01:41:28] INFO: GET /user 304 - 3ms
+[2025-06-09 13:01:49] INFO: 🚀 Serveur lancé sur http://localhost:3001
+[2025-06-09 13:01:49] INFO: ✅ Connecté à MongoDB
+[2025-06-09 13:02:13] INFO: [LOGIN] Connexion réussie: louaybenali133@gmail.com
+[2025-06-09 13:02:13] INFO: POST /auth/login 200 - 134ms
+[2025-06-09 13:07:40] INFO: GET /auth/profile 304 - 7ms
+[2025-06-09 13:07:40] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:07:43] INFO: GET /auth/profile 304 - 4ms
+[2025-06-09 13:07:43] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:08:50] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:08:50] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:08:57] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:08:57] INFO: GET /auth/profile 304 - 4ms
+[2025-06-09 13:09:04] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:09:04] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:09:07] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:09:07] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:09:14] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:09:14] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:09:15] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:09:15] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:09:26] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:09:26] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:11:24] INFO: GET /auth/profile 304 - 4ms
+[2025-06-09 13:11:24] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:14:17] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:14:17] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:57:15] INFO: GET /auth/profile 304 - 5ms
+[2025-06-09 13:57:15] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:30] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:30] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:32] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:32] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:57:34] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:57:34] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:55] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:57:55] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:57] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:57:57] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:58:00] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 13:58:00] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:58:02] INFO: GET /auth/profile 304 - 1ms
+[2025-06-09 13:58:02] INFO: GET /auth/profile 304 - 1ms
+[2025-06-09 13:58:04] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 13:58:04] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 14:31:16] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 14:31:16] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 15:07:54] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 15:07:54] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:07:56] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:07:56] INFO: GET /auth/profile 304 - 4ms
+[2025-06-09 15:13:47] INFO: GET /auth/profile 200 - 4ms
+[2025-06-09 15:13:47] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:13:49] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 15:13:49] INFO: GET /piece?page=1&limit=5 200 - 22ms
+[2025-06-09 15:13:49] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 15:13:49] INFO: GET /piece?page=1&limit=5 304 - 6ms
+[2025-06-09 15:13:52] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:13:52] INFO: GET /demande?page=1&limit=5 304 - 36ms
+[2025-06-09 15:13:52] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:13:52] INFO: GET /demande?page=1&limit=5 304 - 9ms
+[2025-06-09 15:14:02] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:14:02] INFO: GET /demande?page=2&limit=5 304 - 12ms
+[2025-06-09 15:14:05] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:14:05] INFO: GET /demande?page=3&limit=5 304 - 13ms
+[2025-06-09 15:14:25] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:14:25] INFO: GET /demande?page=4&limit=5 304 - 12ms
+[2025-06-09 15:14:26] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:14:26] INFO: GET /demande?page=5&limit=5 304 - 15ms
+[2025-06-09 15:14:28] INFO: [DEMANDE] Demande rejetée : 682dd3754968a820d9efb13c
+[2025-06-09 15:14:28] INFO: PUT /demande/682dd3754968a820d9efb13c/rejeter 200 - 9ms
+[2025-06-09 15:14:28] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:14:28] INFO: GET /demande?page=5&limit=5 200 - 11ms
+[2025-06-09 15:38:17] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:38:17] INFO: GET /auth/profile 304 - 1ms
+[2025-06-09 15:38:23] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:38:23] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 200 - 10ms
+[2025-06-09 15:38:23] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:38:23] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 7ms
+[2025-06-09 15:38:30] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:38:30] INFO: GET /demande?page=2&limit=5&status=Valid%C3%A9e 200 - 13ms
+[2025-06-09 15:38:45] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:38:45] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 15:40:10] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:40:10] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:40:14] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:40:14] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 15:40:15] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:40:15] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 15:50:26] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 15:50:26] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:50:29] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:50:29] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 15ms
+[2025-06-09 15:50:29] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:50:29] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 15:50:56] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:50:56] INFO: GET /demande?page=2&limit=5&status=Valid%C3%A9e 304 - 11ms
+[2025-06-09 15:55:09] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:55:09] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 11ms
+[2025-06-09 15:55:09] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:55:09] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 11ms
+[2025-06-09 15:58:26] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 15:58:26] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 15:58:28] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:58:28] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 13ms
+[2025-06-09 15:58:28] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:58:28] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 8ms
+[2025-06-09 15:58:37] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 15:58:37] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 15:58:40] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:58:40] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 12ms
+[2025-06-09 15:58:40] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 15:58:40] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 17:01:48] INFO: GET /auth/profile 304 - 9ms
+[2025-06-09 17:01:48] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 17:01:54] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 17:01:54] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 12ms
+[2025-06-09 17:01:54] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 17:01:54] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 17:03:18] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 17:03:18] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 17:03:24] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 17:03:24] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 12ms
+[2025-06-09 17:03:24] INFO: [DEMANDE] Récupération de toutes les demandes (5) avec pagination
+[2025-06-09 17:03:24] INFO: GET /demande?page=1&limit=5&status=Valid%C3%A9e 304 - 9ms
+[2025-06-09 17:11:21] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:11:21] INFO: GET /piece 200 - 7ms
+[2025-06-09 17:11:21] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:11:21] INFO: GET /piece 304 - 5ms
+[2025-06-09 17:12:32] INFO: [COMMANDE] Nouvelle commande créée par 6838dde991c95aececbef6f3
+[2025-06-09 17:12:32] INFO: POST /commande 201 - 33ms
+[2025-06-09 17:22:26] INFO: GET /auth/profile 200 - 3ms
+[2025-06-09 17:22:26] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 17:22:28] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:28] INFO: GET /machine 304 - 8ms
+[2025-06-09 17:22:28] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:28] INFO: GET /machine 304 - 7ms
+[2025-06-09 17:22:28] INFO: GET /user 200 - 6ms
+[2025-06-09 17:22:28] INFO: GET /user 304 - 3ms
+[2025-06-09 17:22:34] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:34] INFO: GET /machine 304 - 8ms
+[2025-06-09 17:22:34] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:34] INFO: GET /machine 304 - 13ms
+[2025-06-09 17:22:34] INFO: GET /user 304 - 7ms
+[2025-06-09 17:22:34] INFO: GET /user 304 - 3ms
+[2025-06-09 17:22:38] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:38] INFO: GET /machine 304 - 17ms
+[2025-06-09 17:22:38] INFO: GET /user 304 - 6ms
+[2025-06-09 17:22:38] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:38] INFO: GET /machine 304 - 9ms
+[2025-06-09 17:22:38] INFO: GET /user 304 - 5ms
+[2025-06-09 17:22:41] INFO: GET /user 304 - 24ms
+[2025-06-09 17:22:41] INFO: GET /user 304 - 10ms
+[2025-06-09 17:22:41] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:22:41] INFO: GET /intervention 304 - 43ms
+[2025-06-09 17:22:41] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:41] INFO: GET /machine 304 - 18ms
+[2025-06-09 17:22:41] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:22:41] INFO: GET /intervention 304 - 15ms
+[2025-06-09 17:22:41] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:41] INFO: GET /machine 304 - 7ms
+[2025-06-09 17:22:51] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:51] INFO: GET /machine 304 - 8ms
+[2025-06-09 17:22:51] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:22:51] INFO: GET /machine 304 - 9ms
+[2025-06-09 17:22:51] INFO: GET /user 304 - 6ms
+[2025-06-09 17:22:51] INFO: GET /user 304 - 3ms
+[2025-06-09 17:23:11] INFO: GET /user 304 - 7ms
+[2025-06-09 17:23:11] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:23:11] INFO: GET /intervention 304 - 15ms
+[2025-06-09 17:23:11] INFO: GET /user 304 - 4ms
+[2025-06-09 17:23:11] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:23:11] INFO: GET /intervention 304 - 12ms
+[2025-06-09 17:23:11] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:23:11] INFO: GET /machine 304 - 6ms
+[2025-06-09 17:23:11] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:23:11] INFO: GET /machine 304 - 5ms
+[2025-06-09 17:30:38] INFO: GET /maintenance?page=1&limit=5 304 - 17ms
+[2025-06-09 17:30:38] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-06-09 17:33:32] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 17:33:32] INFO: GET /auth/profile 304 - 4ms
+[2025-06-09 17:36:05] INFO: GET /user 304 - 9ms
+[2025-06-09 17:36:05] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:36:05] INFO: GET /intervention?page=1&limit=5 304 - 18ms
+[2025-06-09 17:36:05] INFO: GET /user 304 - 8ms
+[2025-06-09 17:36:05] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:05] INFO: GET /machine 304 - 10ms
+[2025-06-09 17:36:05] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:36:05] INFO: GET /intervention?page=1&limit=5 304 - 15ms
+[2025-06-09 17:36:05] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:05] INFO: GET /machine 304 - 7ms
+[2025-06-09 17:36:09] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:09] INFO: GET /machine 304 - 19ms
+[2025-06-09 17:36:09] INFO: GET /panne?page=1&limit=5 200 - 24ms
+[2025-06-09 17:36:09] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:09] INFO: GET /machine 304 - 11ms
+[2025-06-09 17:36:09] INFO: GET /panne?page=1&limit=5 304 - 7ms
+[2025-06-09 17:36:12] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:36:12] INFO: GET /intervention 304 - 12ms
+[2025-06-09 17:36:12] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:36:12] INFO: GET /intervention 304 - 9ms
+[2025-06-09 17:36:24] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:24] INFO: GET /machine 304 - 6ms
+[2025-06-09 17:36:24] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:24] INFO: GET /machine 304 - 9ms
+[2025-06-09 17:36:24] INFO: GET /maintenance 304 - 11ms
+[2025-06-09 17:36:24] INFO: GET /maintenance 304 - 9ms
+[2025-06-09 17:36:46] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:46] INFO: GET /machine 304 - 8ms
+[2025-06-09 17:36:46] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:36:46] INFO: GET /machine 304 - 10ms
+[2025-06-09 17:36:46] INFO: GET /user 304 - 7ms
+[2025-06-09 17:36:46] INFO: GET /user 304 - 4ms
+[2025-06-09 17:41:23] INFO: GET /auth/profile 200 - 3ms
+[2025-06-09 17:41:23] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 17:41:25] INFO: GET /user 200 - 5ms
+[2025-06-09 17:41:25] INFO: GET /user 304 - 4ms
+[2025-06-09 17:41:25] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:41:25] INFO: GET /machine 304 - 7ms
+[2025-06-09 17:41:25] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:41:25] INFO: GET /machine 304 - 5ms
+[2025-06-09 17:41:28] INFO: GET /tache/technicien?page=1&limit=5 200 - 12ms
+[2025-06-09 17:41:28] INFO: GET /tache/technicien?page=1&limit=5 304 - 7ms
+[2025-06-09 17:41:30] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:41:30] INFO: GET /piece 304 - 7ms
+[2025-06-09 17:41:30] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:41:30] INFO: GET /piece 304 - 6ms
+[2025-06-09 17:41:33] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:41:33] INFO: GET /piece 304 - 10ms
+[2025-06-09 17:41:33] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:41:33] INFO: GET /piece 304 - 9ms
+[2025-06-09 17:41:35] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:41:35] INFO: GET /piece 304 - 10ms
+[2025-06-09 17:41:35] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:41:35] INFO: GET /piece 304 - 10ms
+[2025-06-09 17:41:39] INFO: GET /maintenance?page=1&limit=5 304 - 14ms
+[2025-06-09 17:41:39] INFO: GET /maintenance?page=1&limit=5 304 - 9ms
+[2025-06-09 17:54:22] INFO: GET /auth/profile 304 - 3ms
+[2025-06-09 17:54:22] INFO: GET /auth/profile 304 - 2ms
+[2025-06-09 17:54:26] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:54:26] INFO: GET /piece?page=1&limit=5 304 - 9ms
+[2025-06-09 17:54:26] INFO: [PIECE] Récupération de toutes les pièces (3) avec pagination
+[2025-06-09 17:54:26] INFO: GET /piece?page=1&limit=5 304 - 8ms
+[2025-06-09 17:54:29] INFO: [DEMANDE] Récupération des demandes du technicien 6838dde991c95aececbef6f3 (0) avec pagination
+[2025-06-09 17:54:29] INFO: GET /demande/technicien/demandes?page=1&limit=5 200 - 12ms
+[2025-06-09 17:54:29] INFO: [DEMANDE] Récupération des demandes du technicien 6838dde991c95aececbef6f3 (0) avec pagination
+[2025-06-09 17:54:29] INFO: GET /demande/technicien/demandes?page=1&limit=5 304 - 8ms
+[2025-06-09 17:54:33] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:54:33] INFO: GET /machine?page=1&limit=5 200 - 8ms
+[2025-06-09 17:54:33] INFO: [MACHINE] Machines filtrées : 3 résultats
+[2025-06-09 17:54:33] INFO: GET /machine?page=1&limit=5 304 - 7ms
+[2025-06-09 17:54:35] INFO: GET /user 304 - 7ms
+[2025-06-09 17:54:35] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:54:35] INFO: GET /intervention?page=1&limit=5 304 - 14ms
+[2025-06-09 17:54:35] INFO: GET /user 304 - 7ms
+[2025-06-09 17:54:35] INFO: GET /user 304 - 5ms
+[2025-06-09 17:54:35] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:54:35] INFO: GET /intervention?page=1&limit=5 304 - 12ms
+[2025-06-09 17:54:35] INFO: GET /user 304 - 6ms
+[2025-06-09 17:54:35] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:54:35] INFO: GET /intervention?page=1&limit=5 304 - 11ms
+[2025-06-09 17:54:35] INFO: [INTERVENTION] Récupération de toutes les interventions (5) avec pagination
+[2025-06-09 17:54:35] INFO: GET /intervention?page=1&limit=5 304 - 10ms
